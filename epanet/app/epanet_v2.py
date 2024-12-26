@@ -28,14 +28,13 @@ def get_zones(en: epanet) -> set:
 
 def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
     try:
-        clients = {
-            zone: ModbusTcpClient(host=f'plc-{zone}', port=502) for zone in zones
-        }
+        # clients = {
+        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502) for zone in zones
+        # }
         # TEST
-        #clients = {
-        #    zone: ModbusTcpClient(host='127.0.0.1', port=502 + i)
-        #    for i, zone in enumerate(zones)
-        #}
+        clients = {
+           zone: ModbusTcpClient(host='127.0.0.1', port=502 + i) for i, zone in enumerate(zones)
+        }
         for zone, client in clients.items():
             while not client.connect():
                 time.sleep(1)
@@ -52,6 +51,20 @@ def setup_epanet(inp_file: str) -> epanet:
         return en
     except Exception as e:
         print(f"ERROR in setup_epanet: {e}")
+        sys.exit(1)
+
+def get_controls(clients: dict[str, ModbusTcpClient]) -> dict:
+    try:
+        ...
+    except Exception as e:
+        print(f"ERROR in get_controls: {e}")
+        sys.exit(1)
+
+def set_controls(en: epanet, controls: dict) -> None:
+    try:
+        ...
+    except Exception as e:
+        print(f"ERROR in set_controls: {e}")
         sys.exit(1)
 
 def read_data(en: epanet) -> dict:
@@ -112,12 +125,12 @@ def main():
         while True:
             en.setTimeSimulationDuration(en.getTimeSimulationDuration() + en.getTimeHydraulicStep()) # this way the duration is set to infinite.
 
-            # controls = get_controls(client)
-            # set_controls(en, controls)
+            controls = get_controls(clients)
+            set_controls(en, controls)
 
             en.runHydraulicAnalysis()
 
-            data = read_data(en)
+            data = read_data(en); print(data)
             write_data(clients, data)
 
             en.nextHydraulicAnalysisStep()
