@@ -31,10 +31,11 @@ def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
         # clients = {
         #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502) for zone in zones
         # }
-        # TEST
+        ### CODE FOR LOCAL TESTING
         clients = {
            zone: ModbusTcpClient(host='127.0.0.1', port=502 + i) for i, zone in enumerate(zones)
         }
+        ### END
         for zone, client in clients.items():
             while not client.connect():
                 time.sleep(1)
@@ -105,7 +106,7 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
                 for k, value in values.items():
                     registers = client.convert_to_registers(float(value), client.DATATYPE.FLOAT32)
                     client.write_registers(address, registers)
-                    # TEST
+                    ### TEST
                     # print(f"writing value {value} (converted to registers: {registers}) from {zone} -> {element} -> {k} to register address {address}")
     except Exception as e:
         print(f"ERROR in write_data: {e}")
@@ -132,8 +133,8 @@ def main():
             data = read_data(en)
             # write_data(clients, data)
 
-            # TEST
-            import json; print(json.dumps(data, indent=4))
+            ### TEST
+            import json; print(json.dumps(data, indent=4, sort_keys=True))
 
             en.nextHydraulicAnalysisStep()
 
