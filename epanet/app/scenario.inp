@@ -298,7 +298,7 @@
  146             	zone2-node20    	zone2-junction04	1000        	12          	100         	0           	Open  	;
  147             	zone2-junction04	zone2-node19    	1000        	12          	100         	0           	Open  	;
  148             	zone2-junction04	zone2-node18    	1000        	12          	100         	0           	Open  	;
- base-reservoir  	zone0-reservoir1	zone0-junction01	1000        	1500        	100         	0           	Open  	;
+ 1               	zone0-reservoir1	zone0-junction01	1000        	1500        	100         	0           	Open  	;
  2               	zone3-junction01	zone3-junction03	1000        	300         	100         	0           	Open  	;
  3               	zone3-junction04	zone3-junction03	1000        	300         	100         	0           	Open  	;
  4               	zone1-junction01	zone1-junction02	1000        	300         	100         	0           	Open  	;
