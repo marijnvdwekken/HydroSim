@@ -8,15 +8,17 @@ from pyModbusTCP.server import ModbusServer
 def start_server(host, port):
     try:
         server = ModbusServer(host=host, port=port, no_block=True)
+        server.data_bank.set_holding_registers(0, [0]*100)
+        
         server.start()
 
         if server.is_run:
-            # print(f"{host}:{port} -> \033[92mRunning\033[0m")
-            server.data_bank.set_holding_registers(0, [0]*100)
+            print(f"{host}:{port} -> \033[92mRunning\033[0m")
+            time.sleep(1)
 
             while True:
-                hr = server.data_bank.get_holding_registers(0, 10)
-                print(f"hr ({port}): {hr}")
+                hr = server.data_bank.get_holding_registers(0, 100)
+                print(f"\nhr ({port}): {hr}")
                 time.sleep(3)
     except Exception as e:
         print(f"ERROR on server {port}: {e}")
@@ -30,7 +32,9 @@ def main():
         servers_config = [
             ('127.0.0.1', 502),
             ('127.0.0.1', 503),
-            ('127.0.0.1', 504)
+            ('127.0.0.1', 504),
+            ('127.0.0.1', 505),
+            ('127.0.0.1', 506),
         ]
 
         threads = []
