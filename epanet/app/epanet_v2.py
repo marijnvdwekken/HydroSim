@@ -81,11 +81,11 @@ def read_data(en: epanet) -> dict:
             if element not in data[zone]:
                 data[zone][element] = {}
 
-            if name_id in en.getNodeNameID():
-                data[zone][element]['hydraulic_head'] = en.getNodeHydraulicHead(en.getNodeIndex(name_id))
+            # if name_id in en.getNodeNameID():
+            #     data[zone][element]['hydraulic_head'] = en.getNodeHydraulicHead(en.getNodeIndex(name_id))
 
-            if name_id in en.getLinkNameID():
-                data[zone][element]['pump_power'] = en.getLinkPumpPower(en.getLinkIndex(name_id))
+            # if name_id in en.getLinkNameID():
+            #     data[zone][element]['pump_power'] = en.getLinkPumpPower(en.getLinkIndex(name_id))
 
         return data
     except Exception as e:
@@ -106,7 +106,7 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
                     registers = client.convert_to_registers(float(value), client.DATATYPE.FLOAT32)
                     client.write_registers(address, registers)
                     # TEST
-                    #print(f"writing value {value} (converted to registers: {registers}) from {zone} -> {element} -> {k} to register address {address}")
+                    # print(f"writing value {value} (converted to registers: {registers}) from {zone} -> {element} -> {k} to register address {address}")
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
@@ -116,8 +116,7 @@ def main():
 
     try:
         en = setup_epanet(inp_file)
-        zones = get_zones(en)
-        clients = setup_clients(zones)
+        clients = setup_clients(get_zones(en))
 
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
@@ -125,13 +124,16 @@ def main():
         while True:
             en.setTimeSimulationDuration(en.getTimeSimulationDuration() + en.getTimeHydraulicStep()) # this way the duration is set to infinite.
 
-            controls = get_controls(clients)
-            set_controls(en, controls)
+            # controls = get_controls(clients)
+            # set_controls(en, controls)
 
             en.runHydraulicAnalysis()
 
-            data = read_data(en); print(data)
-            write_data(clients, data)
+            data = read_data(en)
+            # write_data(clients, data)
+
+            # TEST
+            import json; print(json.dumps(data, indent=4))
 
             en.nextHydraulicAnalysisStep()
 
