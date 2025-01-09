@@ -56,14 +56,16 @@ def setup_epanet(inp_file: str) -> epanet:
 
 def get_controls(clients: dict[str, ModbusTcpClient]) -> dict:
     try:
-        ...
+        ### TODO
+        pass
     except Exception as e:
         print(f"ERROR in get_controls: {e}")
         sys.exit(1)
 
 def set_controls(en: epanet, controls: dict) -> None:
     try:
-        ...
+        ### TODO
+        pass
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         sys.exit(1)
@@ -82,12 +84,34 @@ def read_data(en: epanet) -> dict:
             if element not in data[zone]:
                 data[zone][element] = {}
 
-            # if name_id in en.getNodeNameID():
-            #     data[zone][element]['hydraulic_head'] = en.getNodeHydraulicHead(en.getNodeIndex(name_id))
+            if name_id in en.getNodeNameID(): 
+                node_index = en.getNodeIndex(name_id)
 
-            # if name_id in en.getLinkNameID():
-            #     data[zone][element]['pump_power'] = en.getLinkPumpPower(en.getLinkIndex(name_id))
+                data[zone][element]['hydraulic_head'] = en.getNodeHydraulicHead(node_index)
+                
+                node_type = en.getNodeType(node_index)
+                match node_type: # read values based on node type. 
+                    case 'JUNCTION':
+                        data[zone][element]['pressure'] = en.getNodePressure(node_index)
+                    case 'RESERVOIR':
+                        pass
+                    case 'TANK':
+                        data[zone][element]['pressure'] = en.getNodePressure(node_index)
+                    case _:
+                        pass
 
+            if name_id in en.getLinkNameID():
+                link_index = en.getLinkIndex(name_id)
+
+                link_type = en.getLinkType(link_index)
+                match link_type: # read values based on link type. 
+                    case 'PIPE':
+                        pass
+                    case 'PUMP':
+                        data[zone][element]['pump_power'] = en.getLinkPumpPower(en.getLinkIndex(name_id))
+                    case _: # default case to handle all valve types. 
+                        pass
+                    
         return data
     except Exception as e:
         print(f"ERROR in read_data: {e}")
