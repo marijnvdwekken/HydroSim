@@ -14,9 +14,9 @@ def parse_arguments() -> str:
     return sys.argv[1]
 
 
-def get_zones(en: epanet) -> set:
+def get_zones(en: epanet) -> set[str]:
     try:
-        zones = set()
+        zones: set[str] = set()
 
         for name_id in en.getNodeNameID() + en.getLinkNameID():
             if "-" not in name_id:
@@ -31,11 +31,12 @@ def get_zones(en: epanet) -> set:
 
 def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
     try:
-        # clients = {
-        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502) for zone in zones
+        # clients: dict[str, ModbusTcpClient] = {
+        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502) 
+        #     for zone in zones
         # }
         ### TEST (CODE FOR LOCAL TESTING)
-        clients = {
+        clients: dict[str, ModbusTcpClient] = {
             zone: ModbusTcpClient(host="127.0.0.1", port=502 + i)
             for i, zone in enumerate(zones)
         }
@@ -51,7 +52,7 @@ def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
 
 def setup_epanet(inp_file: str) -> epanet:
     try:
-        en = epanet(inp_file)
+        en: epanet = epanet(inp_file)
         en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
         en.setTimeHydraulicStep(1)
         return en
@@ -80,7 +81,7 @@ def set_controls(en: epanet, controls: dict) -> None:
 
 def read_data(en: epanet) -> dict:
     try:
-        data = {}
+        data: dict = {}
 
         for name_id in en.getNodeNameID() + en.getLinkNameID():
             if "-" not in name_id:
@@ -88,10 +89,10 @@ def read_data(en: epanet) -> dict:
             zone, element = name_id.split("-", 1)
             data.setdefault(zone, {}).setdefault(element, {})
 
-            e = data[zone][element]  # holds entry point for specific element.
+            e: dict = data[zone][element]  # holds entry point for specific element.
 
             if name_id in en.getNodeNameID():
-                node_index = en.getNodeIndex(name_id)
+                node_index: int = en.getNodeIndex(name_id)
 
                 e["index"] = str(node_index)
                 e["hydraulic_head"] = str(
@@ -125,7 +126,7 @@ def read_data(en: epanet) -> dict:
                     )
 
             if name_id in en.getLinkNameID():
-                link_index = en.getLinkIndex(name_id)
+                link_index: int = en.getLinkIndex(name_id)
 
                 e["index"] = str(link_index)
                 e["status"] = str(
