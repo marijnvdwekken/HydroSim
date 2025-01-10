@@ -174,8 +174,8 @@ def main():
             # write_data(clients, data)
 
             ### TEST
-            import json; print(json.dumps(data, indent=4))
-            # import json; print(json.dumps(data, indent=4, sort_keys=True))
+            import json; data_json = json.dumps(data, indent=4)
+            print(data_json)
 
             en.nextHydraulicAnalysisStep()
 
