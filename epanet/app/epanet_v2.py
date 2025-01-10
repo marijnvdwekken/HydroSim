@@ -61,13 +61,48 @@ def setup_epanet(inp_file: str) -> epanet:
         sys.exit(1)
 
 
-def get_controls(clients: dict[str, ModbusTcpClient]) -> dict:
+def get_controls(en: epanet, clients: dict[str, ModbusTcpClient]) -> dict:
     try:
-        ### TODO
-        pass
+        controls = {}
+
+        for zone, client in clients.items():
+            # Count pumps in the zone
+            pump_count = sum(1 for link in en.getLinkNameID() if link.lower().startswith(f"{zone.lower()}-pump"))
+
+            if pump_count == 0:
+                print(f"No pumps found in zone {zone}")
+                continue
+
+            # Read control registers from Modbus (Assuming control data starts at address 1000)
+            pump_controls = client.read_holding_registers(1000, pump_count * 2)
+            
+            if not pump_controls.isError():
+                # Convert the Modbus registers to float32 values
+                converted_pump_controls = []
+                for i in range(0, len(pump_controls.registers), 2):
+                    if i + 1 < len(pump_controls.registers):
+                        # Convert each pair of registers into a float32 value
+                        converted_value = client.convert_from_registers(
+                            pump_controls.registers[i:i+2],
+                            client.DATATYPE.FLOAT32
+                        )
+                        converted_pump_controls.append(converted_value)
+
+                if converted_pump_controls:
+                    # Create a dictionary for zone with pump controls
+                    zone_controls = {f"pump{i+1}": value for i, value in enumerate(converted_pump_controls)}
+                    controls[zone] = zone_controls
+                else:
+                    print(f"Error converting pump controls for zone {zone}")
+            else:
+                print(f"Error reading Modbus registers for zone {zone}")
+        
+        return controls
+
     except Exception as e:
         print(f"ERROR in get_controls: {e}")
         sys.exit(1)
+
 
 
 def set_controls(en: epanet, controls: dict) -> None:
