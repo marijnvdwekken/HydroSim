@@ -34,9 +34,9 @@ def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
         # clients = {
         #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502) for zone in zones
         # }
-        ### CODE FOR LOCAL TESTING
+        ### TEST (CODE FOR LOCAL TESTING)
         clients = {
-            zone: ModbusTcpClient(host="127.0.0.1", port=502 + i) 
+            zone: ModbusTcpClient(host="127.0.0.1", port=502 + i)
             for i, zone in enumerate(zones)
         }
         ### END
@@ -94,32 +94,64 @@ def read_data(en: epanet) -> dict:
                 node_index = en.getNodeIndex(name_id)
 
                 e["index"] = str(node_index)
-                e["hydraulic_head"] = str(en.getNodeHydraulicHead(node_index))
-                e["pressure"] = str(en.getNodePressure(node_index))
-                e["elevation"] = str(en.getNodeElevations(node_index))
+                e["hydraulic_head"] = str(
+                    en.getNodeHydraulicHead(node_index)
+                )
+                e["pressure"] = str(
+                    en.getNodePressure(node_index)
+                )
+                e["elevation"] = str(
+                    en.getNodeElevations(node_index)
+                )
 
                 if en.getNodeType(node_index) == "TANK":
-                    e["minimum_water_level"] = str(en.getNodeTankMinimumWaterLevel(node_index))
-                    e["maximum_water_level"] = str(en.getNodeTankMaximumWaterLevel(node_index))
-                    e["initial_level"] = str(en.getNodeTankInitialLevel(node_index))
-                    e["maximum_water_volume"] = str(en.getNodeTankMinimumWaterVolume(node_index))
+                    e["minimum_water_level"] = str(
+                        en.getNodeTankMinimumWaterLevel(node_index)
+                    )
+                    e["maximum_water_level"] = str(
+                        en.getNodeTankMaximumWaterLevel(node_index)
+                    )
+                    e["initial_water_level"] = str(
+                        en.getNodeTankInitialLevel(node_index)
+                    )
+                    e["minimum_water_volume"] = str(
+                        en.getNodeTankMinimumWaterVolume(node_index)
+                    )
+                    e["maximum_water_volume"] = str(
+                        en.getNodeTankMaximumWaterVolume(node_index)
+                    )
+                    e["initial_water_volume"] = str(
+                        en.getNodeTankInitialWaterVolume(node_index)
+                    )
 
             if name_id in en.getLinkNameID():
                 link_index = en.getLinkIndex(name_id)
 
                 e["index"] = str(link_index)
-                e["status"] = str(en.getLinkStatus(link_index))
-                e["flow_rate"] = str(en.getLinkFlows(link_index))
+                e["status"] = str(
+                    en.getLinkStatus(link_index)
+                )
+                e["flow_rate"] = str(
+                    en.getLinkFlows(link_index)
+                )
 
                 match en.getLinkType(link_index):  # read values based on link type.
                     case "PIPE":
                         pass
                     case "PUMP":
-                        e["power"] = str(en.getLinkPumpPower(link_index))
-                        e["speed"] = str(en.getLinkSettings(link_index))
-                        e["energy_usage"] = str(en.getLinkEnergy(link_index))
+                        e["power"] = str(
+                            en.getLinkPumpPower(link_index)
+                        )
+                        e["speed"] = str(
+                            en.getLinkSettings(link_index)
+                        )
+                        e["energy_usage"] = str(
+                            en.getLinkEnergy(link_index)
+                        )
                     case _:  # default case to handle all valve types.
-                        e["setting"] = str(en.getLinkSettings(link_index))  # i'm not sure where this is used for...
+                        e["setting"] = str(
+                            en.getLinkSettings(link_index)
+                        )  # i'm not sure where this is used for...
 
         return data
     except Exception as e:
@@ -130,29 +162,41 @@ def read_data(en: epanet) -> dict:
 def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
     try:
         for zone, elements in data.items():
-            # if zone not in clients:
-                # continue
-            client = clients[zone]
+            client: ModbusTcpClient = clients[zone]
+            offset: int = 0
 
-            for i, (element, values) in enumerate(elements.items()):
-                address = i * 2
+            for element, values in elements.items():
+                for i, (k, value) in enumerate(values.items()):
+                    address: int = offset + i * 2
+                    value: float = round(float(value), 4)
+                    registers: list[int] = client.convert_to_registers(
+                        value, client.DATATYPE.FLOAT32
+                    )
 
-                for k, value in values.items():
-                    registers = client.convert_to_registers(float(value), client.DATATYPE.FLOAT32)
                     client.write_registers(address, registers)
-                    ### TEST
-                    # print(f"writing value {value} (converted to registers: {registers}) from {zone} -> {element} -> {k} to register address {address}")
+
+                    ### TEST (LOGGING)
+                    print(
+                        f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<20}, "
+                        f"registers: {str(registers):<20}, address: {address}"
+                    )
+
+                offset += len(values) * 2
+
+                print()  # blank lines for separating log entries.
+            print()
+            print()
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
 
 
 def main():
-    inp_file = parse_arguments()
+    inp_file: str = parse_arguments()
 
     try:
-        en = setup_epanet(inp_file)
-        clients = setup_clients(
+        en: epanet = setup_epanet(inp_file)
+        clients: dict[str, ModbusTcpClient] = setup_clients(
             get_zones(en)
         )
         en.openHydraulicAnalysis()
@@ -163,16 +207,18 @@ def main():
                 en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
             )  # this way the duration is set to infinite.
 
-            # controls = get_controls(clients)
+            # controls: dict = get_controls(clients)
             # set_controls(en, controls)
 
             en.runHydraulicAnalysis()
 
-            data = read_data(en)
-            # write_data(clients, data)
+            data: dict = read_data(en)
+            write_data(clients, data)
 
-            ### TEST
-            import json; j = json.dumps(data, indent=4); print(j)
+            ### TEST (LOGGING)
+            # import json; print(
+            #     json.dumps(data, indent=4)
+            # )
 
             en.nextHydraulicAnalysisStep()
 
