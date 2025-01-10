@@ -177,16 +177,16 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
                     client.write_registers(address, registers)
 
                     ### TEST (LOGGING)
-                    print(
-                        f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<20}, "
-                        f"registers: {str(registers):<20}, address: {address}"
-                    )
+                    # print(
+                    #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<20}, "
+                    #     f"registers: {str(registers):<20}, address: {address}"
+                    # )
 
                 offset += len(values) * 2
 
-                print()  # blank lines for separating log entries.
-            print()
-            print()
+                # print()  # blank lines for separating log entries.
+            # print()
+            # print()
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
