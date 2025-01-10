@@ -172,8 +172,7 @@ def main():
             # write_data(clients, data)
 
             ### TEST
-            import json; data_json = json.dumps(data, indent=4)
-            print(data_json)
+            import json; j = json.dumps(data, indent=4); print(j)
 
             en.nextHydraulicAnalysisStep()
 
