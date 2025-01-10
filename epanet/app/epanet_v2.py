@@ -152,11 +152,9 @@ def main():
 
     try:
         en = setup_epanet(inp_file)
-
         clients = setup_clients(
             get_zones(en)
         )
-
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
 
