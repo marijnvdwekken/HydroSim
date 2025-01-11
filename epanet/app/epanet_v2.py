@@ -123,8 +123,14 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
 
 def set_controls(en: epanet, controls: dict) -> None:
     try:
-        ### TODO
-        pass
+        for zone, elements in controls.items():
+            for element, control in elements.items():
+                link_index: int = en.getLinkIndex(f"{zone}-{element}")
+                if "speed" in control:
+                    en.setLinkSettings(link_index, control["speed"])
+                if "setting" in control:
+                    en.setLinkSettings(link_index, control["setting"])
+
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         sys.exit(1)
@@ -204,16 +210,15 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
             for element, values in elements.items():
                 for i, (k, value) in enumerate(values.items()):
                     address: int = offset + i * 2
-                    value: float = round(float(value), 4)
                     registers: list[int] = client.convert_to_registers(
-                        value, client.DATATYPE.FLOAT32
+                        float(value), client.DATATYPE.FLOAT32
                     )
 
                     client.write_registers(address, registers)
 
                     ### TEST (LOGGING)
                     # print(
-                    #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<20}, "
+                    #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
                     #     f"registers: {str(registers):<20}, address: {address}"
                     # )
 
@@ -242,7 +247,7 @@ def main():
             )  # this way the duration is set to infinite.
 
             controls: dict = get_controls(clients, en)
-            # set_controls(en, controls)
+            set_controls(en, controls)
 
             en.runHydraulicAnalysis()
 
@@ -251,7 +256,7 @@ def main():
 
             ### TEST (LOGGING)
             # import json; print(
-            #     json.dumps(data, indent=4)
+            # json.dumps(data, indent=4)
             # )
 
             en.nextHydraulicAnalysisStep()
