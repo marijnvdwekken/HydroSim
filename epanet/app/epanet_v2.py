@@ -32,7 +32,7 @@ def get_zones(en: epanet) -> set[str]:
 def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
     try:
         # clients: dict[str, ModbusTcpClient] = {
-        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502) 
+        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
         #     for zone in zones
         # }
         ### TEST (CODE FOR LOCAL TESTING)
@@ -53,7 +53,9 @@ def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
 def setup_epanet(inp_file: str) -> epanet:
     try:
         en: epanet = epanet(inp_file)
-        en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
+        en.setTimeSimulationDuration(
+            10
+        )  # initial setup; duration will be set to infinite in main function.
         en.setTimeHydraulicStep(1)
         return en
     except Exception as e:
@@ -61,48 +63,62 @@ def setup_epanet(inp_file: str) -> epanet:
         sys.exit(1)
 
 
-def get_controls(en: epanet, clients: dict[str, ModbusTcpClient]) -> dict:
+def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
     try:
-        controls = {}
+        controls: dict = {}
+
+        for name_id in en.getNodeNameID() + en.getLinkNameID():
+            if "-" not in name_id:
+                continue
+            zone, element = name_id.split("-", 1)
+            controls.setdefault(zone, {})
+
+            if name_id in en.getLinkNameID():
+                link_index: int = en.getLinkIndex(name_id)
+
+                match en.getLinkType(link_index):
+                    case "PIPE":
+                        pass
+                    case "PUMP":
+                        controls[zone].setdefault(element, {})
+                        controls[zone][element]["speed"] = None
+                    case _:
+                        controls[zone].setdefault(element, {})
+                        controls[zone][element]["setting"] = None
 
         for zone, client in clients.items():
-            # Count pumps in the zone
-            pump_count = sum(1 for link in en.getLinkNameID() if link.lower().startswith(f"{zone.lower()}-pump"))
+            pump_count = sum(
+                1 for element in controls[zone] if "speed" in controls[zone][element]
+            )
+            pump_registers = client.read_holding_registers(
+                1000, pump_count * 2
+            ).registers
+            for i, element in enumerate(
+                e for e in controls[zone] if "speed" in controls[zone][e]
+            ):
+                converted_value = client.convert_from_registers(
+                    pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+                )
+                controls[zone][element]["speed"] = converted_value
 
-            if pump_count == 0:
-                print(f"No pumps found in zone {zone}")
-                continue
+            valve_count = sum(
+                1 for element in controls[zone] if "setting" in controls[zone][element]
+            )
+            valve_registers = client.read_holding_registers(
+                2000, valve_count * 2
+            ).registers
+            for i, element in enumerate(
+                e for e in controls[zone] if "setting" in controls[zone][e]
+            ):
+                converted_value = client.convert_from_registers(
+                    valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+                )
+                controls[zone][element]["setting"] = converted_value
 
-            # Read control registers from Modbus (Assuming control data starts at address 1000)
-            pump_controls = client.read_holding_registers(1000, pump_count * 2)
-            
-            if not pump_controls.isError():
-                # Convert the Modbus registers to float32 values
-                converted_pump_controls = []
-                for i in range(0, len(pump_controls.registers), 2):
-                    if i + 1 < len(pump_controls.registers):
-                        # Convert each pair of registers into a float32 value
-                        converted_value = client.convert_from_registers(
-                            pump_controls.registers[i:i+2],
-                            client.DATATYPE.FLOAT32
-                        )
-                        converted_pump_controls.append(converted_value)
-
-                if converted_pump_controls:
-                    # Create a dictionary for zone with pump controls
-                    zone_controls = {f"pump{i+1}": value for i, value in enumerate(converted_pump_controls)}
-                    controls[zone] = zone_controls
-                else:
-                    print(f"Error converting pump controls for zone {zone}")
-            else:
-                print(f"Error reading Modbus registers for zone {zone}")
-        
         return controls
-
     except Exception as e:
-        print(f"ERROR in get_controls: {e}")
+        print(f"Error in get_controls: {e}")
         sys.exit(1)
-
 
 
 def set_controls(en: epanet, controls: dict) -> None:
@@ -130,15 +146,9 @@ def read_data(en: epanet) -> dict:
                 node_index: int = en.getNodeIndex(name_id)
 
                 e["index"] = str(node_index)
-                e["hydraulic_head"] = str(
-                    en.getNodeHydraulicHead(node_index)
-                )
-                e["pressure"] = str(
-                    en.getNodePressure(node_index)
-                )
-                e["elevation"] = str(
-                    en.getNodeElevations(node_index)
-                )
+                e["hydraulic_head"] = str(en.getNodeHydraulicHead(node_index))
+                e["pressure"] = str(en.getNodePressure(node_index))
+                e["elevation"] = str(en.getNodeElevations(node_index))
 
                 if en.getNodeType(node_index) == "TANK":
                     e["minimum_water_level"] = str(
@@ -164,26 +174,16 @@ def read_data(en: epanet) -> dict:
                 link_index: int = en.getLinkIndex(name_id)
 
                 e["index"] = str(link_index)
-                e["status"] = str(
-                    en.getLinkStatus(link_index)
-                )
-                e["flow_rate"] = str(
-                    en.getLinkFlows(link_index)
-                )
+                e["status"] = str(en.getLinkStatus(link_index))
+                e["flow_rate"] = str(en.getLinkFlows(link_index))
 
                 match en.getLinkType(link_index):  # read values based on link type.
                     case "PIPE":
                         pass
                     case "PUMP":
-                        e["power"] = str(
-                            en.getLinkPumpPower(link_index)
-                        )
-                        e["speed"] = str(
-                            en.getLinkSettings(link_index)
-                        )
-                        e["energy_usage"] = str(
-                            en.getLinkEnergy(link_index)
-                        )
+                        e["power"] = str(en.getLinkPumpPower(link_index))
+                        e["speed"] = str(en.getLinkSettings(link_index))
+                        e["energy_usage"] = str(en.getLinkEnergy(link_index))
                     case _:  # default case to handle all valve types.
                         e["setting"] = str(
                             en.getLinkSettings(link_index)
@@ -232,9 +232,7 @@ def main():
 
     try:
         en: epanet = setup_epanet(inp_file)
-        clients: dict[str, ModbusTcpClient] = setup_clients(
-            get_zones(en)
-        )
+        clients: dict[str, ModbusTcpClient] = setup_clients(get_zones(en))
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
 
@@ -243,7 +241,7 @@ def main():
                 en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
             )  # this way the duration is set to infinite.
 
-            # controls: dict = get_controls(clients)
+            controls: dict = get_controls(clients, en)
             # set_controls(en, controls)
 
             en.runHydraulicAnalysis()
