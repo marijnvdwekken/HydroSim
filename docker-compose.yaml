@@ -17,9 +17,9 @@ services:
   # Central systems
   webserver:
     container_name: webserver
-      build:
-        context: ./webserver/. 
-        dockerfile: Dockerfile
+    build:
+      context: ./webserver/. 
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     volumes:
