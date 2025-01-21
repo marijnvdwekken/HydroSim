@@ -18,7 +18,7 @@ COPY vulnerable.sh /usr/lib/cgi-bin/vulnerable.sh
 
 COPY passwords.txt /
 
-RUN chmod +rx /usr/lib/cgi-bin/vulnerable.sh
+RUN chmod +rx /usr/lib/cgi-bin/vulnerable.sh && \
     chmod -r /passwords.txt
 
 # Expose WordPress on port 80
