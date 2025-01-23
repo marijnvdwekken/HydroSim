@@ -237,7 +237,8 @@ def main():
 
     try:
         en: epanet = setup_epanet(inp_file)
-        clients: dict[str, ModbusTcpClient] = setup_clients(get_zones(en))
+        zones = get_zones(en)
+        clients: dict[str, ModbusTcpClient] = setup_clients(zones)
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
 
@@ -245,7 +246,7 @@ def main():
             en.setTimeSimulationDuration(
                 en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
             )  # this way the duration is set to infinite.
-
+            print(f"KKRKRKRKRKRK {zones}")
             controls: dict = get_controls(clients, en)
             set_controls(en, controls)
 
@@ -253,8 +254,6 @@ def main():
 
             data: dict = read_data(en)
             write_data(clients, data)
-
-            print("zones:", get_zones(en))
 
             ### TEST (LOGGING)
             # import json; print(
