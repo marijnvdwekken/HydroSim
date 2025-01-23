@@ -251,7 +251,7 @@ def main():
 
             en.runHydraulicAnalysis()
 
-            data: dict = read_data(en)
+            data: dict = read_data(en); print(data)
             write_data(clients, data)
 
             ### TEST (LOGGING)
