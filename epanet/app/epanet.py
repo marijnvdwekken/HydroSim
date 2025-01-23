@@ -32,7 +32,8 @@ def get_zones(en: epanet) -> set[str]:
 def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
     try:
         clients: dict[str, ModbusTcpClient] = {
-            zone: ModbusTcpClient(host=f"plc-{zone}", port=502) for zone in zones
+            zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
+            for zone in zones
         }
         ### TEST (CODE FOR LOCAL TESTING)
         # clients: dict[str, ModbusTcpClient] = {
@@ -63,73 +64,77 @@ def setup_epanet(inp_file: str) -> epanet:
         sys.exit(1)
 
 
-def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
-    try:
-        controls: dict = {}
+# def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
+#     try:
+#         controls: dict = {}
 
-        for name_id in en.getNodeNameID() + en.getLinkNameID():
-            if "-" not in name_id:
-                continue
-            zone, element = name_id.split("-", 1)
-            controls.setdefault(zone, {})
+#         for name_id in en.getNodeNameID() + en.getLinkNameID():
+#             if "-" not in name_id:
+#                 continue
+#             zone, element = name_id.split("-", 1)
+#             controls.setdefault(zone, {})
 
-            if name_id in en.getLinkNameID():
-                link_index: int = en.getLinkIndex(name_id)
+#             if name_id in en.getLinkNameID():
+#                 link_index: int = en.getLinkIndex(name_id)
 
-                match en.getLinkType(link_index):
-                    case "PIPE":
-                        pass
-                    case "PUMP":
-                        controls[zone].setdefault(element, {})
-                        controls[zone][element]["speed"] = None
-                    case _:
-                        controls[zone].setdefault(element, {})
-                        controls[zone][element]["setting"] = None
+#                 match en.getLinkType(link_index):
+#                     case "PIPE":
+#                         pass
+#                     case "PUMP":
+#                         controls[zone].setdefault(element, {})
+#                         controls[zone][element]["speed"] = None
+#                     case _:
+#                         controls[zone].setdefault(element, {})
+#                         controls[zone][element]["setting"] = None
 
-        for zone, client in clients.items():
-            pump_count = sum(
-                1 for element in controls[zone] if "speed" in controls[zone][element]
-            )
-            pump_registers = client.read_holding_registers(1000, pump_count * 2)
-            for i, element in enumerate(
-                e for e in controls[zone] if "speed" in controls[zone][e]
-            ):
-                converted_value = client.convert_from_registers(
-                    pump_registers.registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
-                )
-                controls[zone][element]["speed"] = converted_value
+#         for zone, client in clients.items():
+#             pump_count = sum(
+#                 1 for element in controls[zone] if "speed" in controls[zone][element]
+#             )
+#             pump_registers = client.read_holding_registers(
+#                 1000, pump_count * 2
+#             ).registers
+#             for i, element in enumerate(
+#                 e for e in controls[zone] if "speed" in controls[zone][e]
+#             ):
+#                 converted_value = client.convert_from_registers(
+#                     pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+#                 )
+#                 controls[zone][element]["speed"] = converted_value
 
-            valve_count = sum(
-                1 for element in controls[zone] if "setting" in controls[zone][element]
-            )
-            valve_registers = client.read_holding_registers(2000, valve_count * 2)
-            for i, element in enumerate(
-                e for e in controls[zone] if "setting" in controls[zone][e]
-            ):
-                converted_value = client.convert_from_registers(
-                    valve_registers.registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
-                )
-                controls[zone][element]["setting"] = converted_value
+#             valve_count = sum(
+#                 1 for element in controls[zone] if "setting" in controls[zone][element]
+#             )
+#             valve_registers = client.read_holding_registers(
+#                 2000, valve_count * 2
+#             ).registers
+#             for i, element in enumerate(
+#                 e for e in controls[zone] if "setting" in controls[zone][e]
+#             ):
+#                 converted_value = client.convert_from_registers(
+#                     valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+#                 )
+#                 controls[zone][element]["setting"] = converted_value
 
-        return controls
-    except Exception as e:
-        print(f"Error in get_controls: {e}")
-        sys.exit(1)
+#         return controls
+#     except Exception as e:
+#         print(f"Error in get_controls: {e}")
+#         sys.exit(1)
 
 
-def set_controls(en: epanet, controls: dict) -> None:
-    try:
-        for zone, elements in controls.items():
-            for element, control in elements.items():
-                link_index: int = en.getLinkIndex(f"{zone}-{element}")
-                if "speed" in control:
-                    en.setLinkSettings(link_index, control["speed"])
-                if "setting" in control:
-                    en.setLinkSettings(link_index, control["setting"])
+# def set_controls(en: epanet, controls: dict) -> None:
+#     try:
+#         for zone, elements in controls.items():
+#             for element, control in elements.items():
+#                 link_index: int = en.getLinkIndex(f"{zone}-{element}")
+#                 if "speed" in control:
+#                     en.setLinkSettings(link_index, control["speed"])
+#                 if "setting" in control:
+#                     en.setLinkSettings(link_index, control["setting"])
 
-    except Exception as e:
-        print(f"ERROR in set_controls: {e}")
-        sys.exit(1)
+#     except Exception as e:
+#         print(f"ERROR in set_controls: {e}")
+#         sys.exit(1)
 
 
 def read_data(en: epanet) -> dict:
@@ -242,8 +247,8 @@ def main():
                 en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
             )  # this way the duration is set to infinite.
 
-            controls: dict = get_controls(clients, en)
-            set_controls(en, controls)
+            # controls: dict = get_controls(clients, en)
+            # set_controls(en, controls)
 
             en.runHydraulicAnalysis()
 
