@@ -23,7 +23,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./wordpress:/var/www/html
+      - ./webserver/wordpress:/var/www/html
     networks:
       - intranet
 
