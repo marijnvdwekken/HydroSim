@@ -150,6 +150,7 @@ def read_data(en: epanet) -> dict:
 
             if name_id in en.getNodeNameID():
                 node_index: int = en.getNodeIndex(name_id)
+                print(node_index)
 
                 e["index"] = str(node_index)
                 e["hydraulic_head"] = str(en.getNodeHydraulicHead(node_index))
@@ -237,8 +238,7 @@ def main():
 
     try:
         en: epanet = setup_epanet(inp_file)
-        zones = get_zones(en)
-        clients: dict[str, ModbusTcpClient] = setup_clients(zones)
+        clients: dict[str, ModbusTcpClient] = setup_clients(get_zones(en))
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
 
@@ -246,7 +246,7 @@ def main():
             en.setTimeSimulationDuration(
                 en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
             )  # this way the duration is set to infinite.
-            print(f"KKRKRKRKRKRK {zones}")
+
             controls: dict = get_controls(clients, en)
             set_controls(en, controls)
 
