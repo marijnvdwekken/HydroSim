@@ -241,8 +241,6 @@ def main():
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
 
-        print(en.getNodeHydraulicHead())
-
         while True:
             en.setTimeSimulationDuration(
                 en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
