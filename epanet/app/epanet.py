@@ -201,62 +201,32 @@ def read_data(en: epanet) -> dict:
         sys.exit(1)
 
 
-# def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
-#     try:
-#         for zone, elements in data.items():
-#             client: ModbusTcpClient = clients[zone]
-#             offset: int = 0
-
-#             for element, values in elements.items():
-#                 for i, (k, value) in enumerate(values.items()):
-#                     address: int = offset + i * 2
-#                     registers: list[int] = client.convert_to_registers(
-#                         float(value), client.DATATYPE.FLOAT32
-#                     )
-
-#                     client.write_registers(address, registers)
-
-#                     ### TEST (LOGGING)
-#                     # print(
-#                     #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
-#                     #     f"registers: {str(registers):<20}, address: {address}"
-#                     # )
-
-#                 offset += len(values) * 2
-
-#                 # print()  # blank lines for separating log entries.
-#             # print()
-#             # print()
-#     except Exception as e:
-#         print(f"ERROR in write_data: {e}")
-#         sys.exit(1)
-
-
 def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
     try:
-        with open("test.txt", "a") as log_file:
-            for zone, elements in data.items():
-                client: ModbusTcpClient = clients[zone]
-                offset: int = 0
+        for zone, elements in data.items():
+            client: ModbusTcpClient = clients[zone]
+            offset: int = 0
 
-                for element, values in elements.items():
-                    for i, (k, value) in enumerate(values.items()):
-                        address: int = offset + i * 2
-                        registers: list[int] = client.convert_to_registers(
-                            float(value), client.DATATYPE.FLOAT32
-                        )
+            for element, values in elements.items():
+                for i, (k, value) in enumerate(values.items()):
+                    address: int = offset + i * 2
+                    registers: list[int] = client.convert_to_registers(
+                        float(value), client.DATATYPE.FLOAT32
+                    )
 
-                        client.write_registers(address, registers)
+                    client.write_registers(address, registers)
 
-                        log_file.write(
-                            f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
-                            f"registers: {str(registers):<20}, address: {address}\n"
-                        )
+                    ### TEST (LOGGING)
+                    print(
+                        f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
+                        f"registers: {str(registers):<20}, address: {address}"
+                    )
 
-                    offset += len(values) * 2
+                offset += len(values) * 2
 
-                    log_file.write("\n")  # blank lines for separating log entries.
-                log_file.write("\n\n")
+                print()  # blank lines for separating log entries.
+            print()
+            print()
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
