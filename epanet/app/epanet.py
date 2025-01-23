@@ -251,8 +251,10 @@ def main():
 
             en.runHydraulicAnalysis()
 
-            data: dict = read_data(en); print(data)
+            data: dict = read_data(en)
             write_data(clients, data)
+
+            print("zones:", get_zones(en))
 
             ### TEST (LOGGING)
             # import json; print(
