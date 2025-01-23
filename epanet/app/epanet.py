@@ -150,7 +150,6 @@ def read_data(en: epanet) -> dict:
 
             if name_id in en.getNodeNameID():
                 node_index: int = en.getNodeIndex(name_id)
-                print(node_index)
 
                 e["index"] = str(node_index)
                 e["hydraulic_head"] = str(en.getNodeHydraulicHead(node_index))
@@ -241,6 +240,8 @@ def main():
         clients: dict[str, ModbusTcpClient] = setup_clients(get_zones(en))
         en.openHydraulicAnalysis()
         en.initializeHydraulicAnalysis()
+
+        print(en.getNodeHydraulicHead())
 
         while True:
             en.setTimeSimulationDuration(
