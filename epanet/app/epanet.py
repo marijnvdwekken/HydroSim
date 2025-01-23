@@ -91,7 +91,7 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
                 1 for element in controls[zone] if "speed" in controls[zone][element]
             )
             pump_registers = client.read_holding_registers(
-                1000, pump_count * 2
+                1000, (pump_count * 2)
             ).registers
             for i, element in enumerate(
                 e for e in controls[zone] if "speed" in controls[zone][e]
@@ -105,7 +105,7 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
                 1 for element in controls[zone] if "setting" in controls[zone][element]
             )
             valve_registers = client.read_holding_registers(
-                2000, valve_count * 2
+                2000, (valve_count * 2)
             ).registers
             for i, element in enumerate(
                 e for e in controls[zone] if "setting" in controls[zone][e]
