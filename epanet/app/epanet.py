@@ -14,6 +14,17 @@ def parse_arguments() -> str:
     return sys.argv[1]
 
 
+def setup_epanet(inp_file: str) -> epanet:
+    try:
+        en: epanet = epanet(inp_file)
+        en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
+        en.setTimeHydraulicStep(1)
+        return en
+    except Exception as e:
+        print(f"ERROR in setup_epanet: {e}")
+        sys.exit(1)
+
+
 def get_zones(en: epanet) -> set[str]:
     try:
         zones: set[str] = set()
@@ -45,17 +56,6 @@ def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
         return clients
     except Exception as e:
         print(f"ERROR in setup_clients: {e}")
-        sys.exit(1)
-
-
-def setup_epanet(inp_file: str) -> epanet:
-    try:
-        en: epanet = epanet(inp_file)
-        en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
-        en.setTimeHydraulicStep(1)
-        return en
-    except Exception as e:
-        print(f"ERROR in setup_epanet: {e}")
         sys.exit(1)
 
 
