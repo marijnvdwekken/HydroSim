@@ -86,7 +86,7 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
             pump_count = sum(1 for element in controls[zone] if "speed" in controls[zone][element])
 
             if pump_count > 0: 
-                pump_registers = client.read_holding_registers(address=1000, count=pump_count * 2).registers  # has to be address=... and count=... weird as fuck.
+                pump_registers = client.read_holding_registers(address=1000, count=pump_count * 2).registers  # this function caused a weird error on the server only, but defining the function parameters this way, the error was solved :)
 
             for i, element in enumerate(e for e in controls[zone] if "speed" in controls[zone][e]):
                 converted_value = client.convert_from_registers(
@@ -97,7 +97,7 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
             valve_count = sum(1 for element in controls[zone] if "setting" in controls[zone][element])
 
             if valve_count > 0: 
-                valve_registers = client.read_holding_registers(address=2000, count=valve_count * 2).registers  # has to be address=... and count=... weird as fuck.
+                valve_registers = client.read_holding_registers(address=2000, count=valve_count * 2).registers  # same applies here...
 
             for i, element in enumerate(e for e in controls[zone] if "setting" in controls[zone][e]):
                 converted_value = client.convert_from_registers(
