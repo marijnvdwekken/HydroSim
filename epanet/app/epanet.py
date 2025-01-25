@@ -84,28 +84,28 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
 
         for zone, client in clients.items():
             pump_count = sum(1 for element in controls[zone] if "speed" in controls[zone][element])
-            print(pump_count)
             pump_test = int(pump_count * 2)
-            print(pump_test)
-            # pump_registers = client.read_holding_registers(address=1000, count=pump_test).registers
+            if pump_test > 0: 
+                pump_registers = client.read_holding_registers(address=1000, count=pump_test).registers
+                print(f"pump reg: {pump_registers}")
 
-            # for i, element in enumerate(e for e in controls[zone] if "speed" in controls[zone][e]):
-            #     converted_value = client.convert_from_registers(
-            #         pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
-            #     )
-            #     controls[zone][element]["speed"] = converted_value
+            for i, element in enumerate(e for e in controls[zone] if "speed" in controls[zone][e]):
+                converted_value = client.convert_from_registers(
+                    pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+                )
+                controls[zone][element]["speed"] = converted_value
 
             valve_count = sum(1 for element in controls[zone] if "setting" in controls[zone][element])
-            print(valve_count)
             valve_test = int(valve_count * 2)
-            print(valve_test)
-            # valve_registers = client.read_holding_registers(address=2000, count=valve_test).registers
+            if valve_test > 0: 
+                valve_registers = client.read_holding_registers(address=2000, count=valve_test).registers
+                print(f"valve reg: {valve_registers}")
 
-            # for i, element in enumerate(e for e in controls[zone] if "setting" in controls[zone][e]):
-            #     converted_value = client.convert_from_registers(
-            #         valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
-            #     )
-            #     controls[zone][element]["setting"] = converted_value
+            for i, element in enumerate(e for e in controls[zone] if "setting" in controls[zone][e]):
+                converted_value = client.convert_from_registers(
+                    valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+                )
+                controls[zone][element]["setting"] = converted_value
 
         return controls
     except Exception as e:
