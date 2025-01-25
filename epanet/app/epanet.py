@@ -84,7 +84,8 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
 
         for zone, client in clients.items():
             pump_count = sum(1 for element in controls[zone] if "speed" in controls[zone][element])
-            pump_registers = client.read_holding_registers(1000, pump_count * 2).registers
+            pump_test = int(pump_count * 2)
+            pump_registers = client.read_holding_registers(1000, pump_test).registers
 
             for i, element in enumerate(e for e in controls[zone] if "speed" in controls[zone][e]):
                 converted_value = client.convert_from_registers(
@@ -93,7 +94,8 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
                 controls[zone][element]["speed"] = converted_value
 
             valve_count = sum(1 for element in controls[zone] if "setting" in controls[zone][element])
-            valve_registers = client.read_holding_registers(2000, valve_count * 2).registers
+            valve_test = int(valve_count * 2)
+            valve_registers = client.read_holding_registers(2000, valve_test).registers
 
             for i, element in enumerate(e for e in controls[zone] if "setting" in controls[zone][e]):
                 converted_value = client.convert_from_registers(
