@@ -130,7 +130,7 @@ def set_controls(en: epanet, controls: dict) -> None:
                     # print(f"{zone:<15} -> {element:<15} -> register: {offset_setting:<15} control: setting")
                     # offset_setting += 2
 
-            # print()  # blank line for separating log entries.
+            # print()
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         sys.exit(1)
