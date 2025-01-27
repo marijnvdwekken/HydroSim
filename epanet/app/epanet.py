@@ -236,7 +236,6 @@ def main():
             )  # this way the duration is set to infinite.
 
             controls: dict = get_controls(clients, en)
-            # import json; print(json.dumps(controls, indent=4))
             set_controls(en, controls)
 
             en.runHydraulicAnalysis()
