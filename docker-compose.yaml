@@ -215,4 +215,3 @@ networks:
   plc_network:
   database:
   opensearch-net:
-    driver: bridge
