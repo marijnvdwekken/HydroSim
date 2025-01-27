@@ -188,6 +188,24 @@ services:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200"]'
     networks:
       - opensearch-net
+  fluent-bit:
+    container_name: fluent-bit
+    image: docker.io/fluent/fluent-bit
+    volumes:
+      - ./opensearch/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./opensearch/test.log:/var/log/test.log
+    networks:
+      - opensearch-net
+  data-prepper:
+    image: opensearchproject/data-prepper:2
+    container_name: data-prepper
+    volumes:
+      - ./opensearch/log_pipeline.yaml:/usr/share/data-prepper/pipelines/log_pipeline.yaml
+      - ./data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
+    ports:
+      - 2021:2021
+    networks:
+    - opensearch-net
 
 volumes:
   opensearch-data1:
@@ -197,3 +215,4 @@ networks:
   plc_network:
   database:
   opensearch-net:
+    driver: bridge
