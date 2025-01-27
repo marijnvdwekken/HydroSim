@@ -22,8 +22,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
-    volumes:
-      - ./webserver/wordpress:/var/www/html
     networks:
       - intranet
 
