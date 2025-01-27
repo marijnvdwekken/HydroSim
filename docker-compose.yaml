@@ -201,7 +201,7 @@ services:
     container_name: data-prepper
     volumes:
       - ./opensearch/log_pipeline.yaml:/usr/share/data-prepper/pipelines/log_pipeline.yaml
-      - ./data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
+      - ./opensearch/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
     ports:
       - 2021:2021
     networks:
