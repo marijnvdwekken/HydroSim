@@ -17,8 +17,8 @@ def parse_arguments() -> str:
 def setup_epanet(inp_file: str) -> epanet:
     try:
         en: epanet = epanet(inp_file)
-        en.setTimeSimulationDuration(60 * 60 * 24)  # initial setup; duration will be set to infinite in main function.
-        en.setTimeHydraulicStep(60 * 60)
+        en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
+        en.setTimeHydraulicStep(1)
         return en
     except Exception as e:
         print(f"ERROR in setup_epanet: {e}")
@@ -122,12 +122,12 @@ def set_controls(en: epanet, controls: dict) -> None:
 
                 if "speed" in control:
                     en.setLinkSettings(link_index, control["speed"])
-                    # print(f"speed   {zone:>15} -> {element:<15} register: {offset_speed:<15}")
+                    # print(f"{zone:<15} -> {element:<15} -> register: {offset_speed:<15} control: speed")
                     # offset_speed += 2
 
                 if "setting" in control:
                     en.setLinkSettings(link_index, control["setting"])
-                    # print(f"setting {zone:>15} -> {element:<15} register: {offset_setting:<15}")
+                    # print(f"{zone:<15} -> {element:<15} -> register: {offset_setting:<15} control: setting")
                     # offset_setting += 2
 
             # print()  # blank line for separating log entries.
@@ -236,6 +236,7 @@ def main():
             )  # this way the duration is set to infinite.
 
             controls: dict = get_controls(clients, en)
+            # import json; print(json.dumps(controls, indent=4))
             set_controls(en, controls)
 
             en.runHydraulicAnalysis()
