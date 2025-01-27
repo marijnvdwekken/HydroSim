@@ -17,8 +17,8 @@ def parse_arguments() -> str:
 def setup_epanet(inp_file: str) -> epanet:
     try:
         en: epanet = epanet(inp_file)
-        en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
-        en.setTimeHydraulicStep(1)
+        en.setTimeSimulationDuration(60 * 60 * 24)  # initial setup; duration will be set to infinite in main function.
+        en.setTimeHydraulicStep(60 * 60)
         return en
     except Exception as e:
         print(f"ERROR in setup_epanet: {e}")
@@ -42,14 +42,14 @@ def get_zones(en: epanet) -> set[str]:
 
 def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
     try:
-        clients: dict[str, ModbusTcpClient] = {
-            zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
-            for zone in zones
-        }
         # clients: dict[str, ModbusTcpClient] = {
-        #     zone: ModbusTcpClient(host="127.0.0.1", port=502 + i) 
-        #     for i, zone in enumerate(zones)
+        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
+        #     for zone in zones
         # }
+        clients: dict[str, ModbusTcpClient] = {
+            zone: ModbusTcpClient(host="127.0.0.1", port=502 + i) 
+            for i, zone in enumerate(zones)
+        }
         for _, client in clients.items():
             while not client.connect():
                 time.sleep(1)
@@ -192,16 +192,16 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
 
                     client.write_registers(address, registers)
 
-                    # print(
-                    #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
-                    #     f"registers: {str(registers):<20}, address: {address}"
-                    # )
+                    print(
+                        f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
+                        f"registers: {str(registers):<20}, address: {address}"
+                    )
 
                 offset += len(values) * 2
 
-                # print()  # blank lines for separating log entries.
-            # print()
-            # print()
+                print()  # blank lines for separating log entries.
+            print()
+            print()
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
