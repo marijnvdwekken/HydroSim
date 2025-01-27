@@ -113,14 +113,24 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
 
 def set_controls(en: epanet, controls: dict) -> None:
     try:
+        # offset_speed = 1000
+        # offset_setting = 2000
+        
         for zone, elements in controls.items():
             for element, control in elements.items():
                 link_index: int = en.getLinkIndex(f"{zone}-{element}")
 
                 if "speed" in control:
                     en.setLinkSettings(link_index, control["speed"])
+                    # print(f"speed   {zone:>15} -> {element:<15} register: {offset_speed:<15}")
+                    # offset_speed += 2
+
                 if "setting" in control:
                     en.setLinkSettings(link_index, control["setting"])
+                    # print(f"setting {zone:>15} -> {element:<15} register: {offset_setting:<15}")
+                    # offset_setting += 2
+
+            # print()  # blank line for separating log entries.
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         sys.exit(1)
@@ -192,16 +202,16 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
 
                     client.write_registers(address, registers)
 
-                    print(
-                        f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
-                        f"registers: {str(registers):<20}, address: {address}"
-                    )
+                    # print(
+                    #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
+                    #     f"registers: {str(registers):<20}, address: {address}"
+                    # )
 
                 offset += len(values) * 2
 
-                print()  # blank lines for separating log entries.
-            print()
-            print()
+                # print()  # blank lines for separating log entries.
+            # print()
+            # print()
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
