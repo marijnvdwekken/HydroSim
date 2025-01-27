@@ -2,7 +2,7 @@ from opensearchpy import OpenSearch
 
 host = 'localhost'
 port = 9200
-auth = ('admin', '@Hydro420') # For testing only. Don't store credentials in code.
+auth = ('admin', 'Patat123!') # For testing only. Don't store credentials in code.
 
 # Create the client with SSL/TLS enabled, but hostname verification disabled.
 client = OpenSearch(
