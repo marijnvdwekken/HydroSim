@@ -41,13 +41,13 @@ The ladder logic program uses holding registers to communicate with ScadaLTS. Th
 Below are the key variables used in the ladder logic:
 
 - **PumpSpeed**: Located at `%QW1000` in EPANET.
-- **Other Variables**: (Add descriptions of other variables if applicable).
+- **StartButton**: Isn't located in epanet but is an functional button within ScadaLTS.
 
 ## Logic Explanation
 The ladder logic program performs the following tasks:
 1. Reads the pump speed from ScadaLTS.
 2. Writes the pump speed to `%QW1000` for EPANET simulation.
-3. (Add more details about the logic if necessary).
+3. This turns the pump on and makes the water flow through
 
 ## Screenshots
 Below are screenshots of the ladder logic program and variable mappings:
