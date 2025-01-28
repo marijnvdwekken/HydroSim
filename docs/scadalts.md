@@ -1,6 +1,12 @@
-# ScadaLTS Configuration
+# ScadaLTS
 
 **ScadaLTS** will serve as the **HMI (Human-Machine Interface)** for this simulation. It provides capabilities to manipulate the simulation and monitor the status of the water network in real time.
+
+
+# PLEASE ADD PART ABOUT HOW TO BUILD HMI etc.
+
+
+---
 
 ## Automatic Configuration
 
