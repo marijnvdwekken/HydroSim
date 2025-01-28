@@ -3,8 +3,18 @@ OpenSearch is an open-source dashboard that we use to [automatically ingest](htt
 
 ![](https://opensearch.org/docs/latest/images/la.png)
 
+## Monitoring
+For the monitoring of the web server and Scada-LTS
+Multiple log files can be ingested but currently only `webserver/log/apache2/access.log` is being 
+
+access.log
+![](https://github.com/user-attachments/assets/4616222a-3eeb-4fc8-a8e8-b2597e3ab44a)
+
+OpenSearch
+![](https://github.com/user-attachments/assets/d1907fe0-043b-4e40-afd2-7fc72525f5fd)
+
 ## Setup
-With `docker compose up` OpenSearch should be set up and configured properly. It comprises of the following containers:
+It comprises of the following containers:
 - `opensearch-node`
 - `opensearch-dashboards`
 For log ingestion it also requires:
