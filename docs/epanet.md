@@ -306,11 +306,11 @@ This function iterates through the control settings dictionary and applies them 
 3. If the control is a "speed" (for pumps), it sets the link setting using setLinkSettings.
 4. If the control is a "setting" (for valves), it also uses setLinkSettings to apply the value.
 
-The commented-out code is for logging/debugging to print out the register offsets and control types, which could be useful for troubleshooting or verifying the control application process.
+The commented-out code is for logging/debugging to print out the register offsets and control types. This is especially useful when we want to know to which register we have to write to.
 
 If any error occurs during this process, the function prints an error message and exits the program.
 
-Below is an example of the logging/debugging process. This is specially useful when we want to know to which register we have to write.
+Below is an example of the logging/debugging process.
 
 ```
 zone0           -> valve1          -> register: 2000            control: setting
@@ -617,7 +617,7 @@ Formatted with JSON (snippet):
 
 - `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
 
-The `write_data` function ...
+The `write_data` function writes the data from the EPANET simulation back to the Modbus PLCs for each zone.
 
 Function:
 
@@ -652,9 +652,21 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
         sys.exit(1)
 ```
 
-Something here...
+This function performs the following tasks:
 
-Snippet...
+1. It iterates through each zone and its elements in the data dictionary.
+2. For each zone, it retrieves the corresponding Modbus client.
+3. It then loops through all the values for each element in the zone:
+    - Calculates the Modbus register address based on an offset.
+    - Converts the float value to Modbus registers using the FLOAT32 data type.
+    - Writes the registers to the PLC using the calculated address.
+4. The offset is updated after processing each element to ensure unique addresses for all data points.
+
+The commented-out code is for logging/debugging and prints each write operation, making it easy to see exactly where each value is written to (address).
+
+If any error occurs during this process, the function prints an error message and exits the program.
+
+Below is an example of the logging/debugging process (snippet).
 
 ```
 [---TRUNCATED---]
