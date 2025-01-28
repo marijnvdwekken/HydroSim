@@ -21,10 +21,12 @@ For log ingestion it also requires:
 - `fluent-bit` - Log collector that collects log data and sends it to Data Prepper
 - `data-prepper` - Receives and transforms the log data into a structure format and indexes it OpenSearch
 
-**Data flow**
+### Data flow diagram
+This diagram shows the log ingestion workflow before it can be visualized in the OpenSearch Dashboard.
 
 ![](https://opensearch.org/docs/latest/images/la.png)
 
+### Credentials
 The credentials for the OpenSearch dashboard are set in `opensearch/opensearch.env`, in our case `admin:Patat123!`. Note that it requires at least a lowercase character, a uppercase character, a number and a symbol otherwise OpenSearch will not accepted it and refuse to run.
 
 ## Index pattern
