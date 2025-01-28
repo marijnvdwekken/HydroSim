@@ -15,6 +15,11 @@ Acts as the programmable logic controller, interfacing with the EPANET simulatio
 ### ScadaLTS
 Provides the human-machine interface (HMI) for visualization and interaction with the simulated system.
 
+### Opensearch
+Retreives logs from the 2 webservers: 
+1. Wordpress with RCE vulnerability
+2. ScadaLTS with privesc and RCE
+
 ## Features
 
 - Realistic simulation of water network behavior
