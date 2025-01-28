@@ -29,6 +29,42 @@ plc-zone*:
   networks:
     - plc_network
 ```
-![image](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
+
+# Ladder Logic for ScadaLTS Integration
+
+This repository contains the ladder logic program designed to interact with ScadaLTS via holding registers. The program controls a pump's speed and interacts with EPANET for simulation purposes.
+
+## Overview
+The ladder logic program uses holding registers to communicate with ScadaLTS. The `PumpSpeed` variable is mapped to `%QW1000`, which corresponds to the pump speed in EPANET.
+
+## Variables
+Below are the key variables used in the ladder logic:
+
+- **PumpSpeed**: Located at `%QW1000` in EPANET.
+- **Other Variables**: (Add descriptions of other variables if applicable).
+
+## Logic Explanation
+The ladder logic program performs the following tasks:
+1. Reads the pump speed from ScadaLTS.
+2. Writes the pump speed to `%QW1000` for EPANET simulation.
+3. (Add more details about the logic if necessary).
+
+## Screenshots
+Below are screenshots of the ladder logic program and variable mappings:
+
+- **Ladder Logic Diagram**:
+  ![Ladder Logic](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
+
+- **Variable Mappings**:
+  ![Variables](https://github.com/user-attachments/assets/63f969ae-d920-4357-b2a3-0673219d9663)
+
+- **EPANET Integration**:
+  ![EPANET](https://github.com/user-attachments/assets/6e044bd1-9854-4733-b9de-a7f583981b74)
+  ![EPANET](https://github.com/user-attachments/assets/06fdcd69-9845-4811-b343-fcb45621689d)
+
+
+
+
+
 
 
