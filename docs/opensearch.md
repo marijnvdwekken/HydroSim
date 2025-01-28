@@ -41,7 +41,52 @@ The log file paths are defined in the `docker-compose.yaml`. For example The `/v
 ## Testing
 When visiting the (WordPress) web server on http://127.0.0.1/80 the `access.log` will be updated and should be automatically ingested to the OpenSearch dashboard.
 
-This can also be manually tested by adding a line to the log file. If might require using `sudo nano` instead if it requires elevated access, since the log files are supposed to be read-only.
+This can also be manually tested by adding a line to the log file. This will require first elevating to root with `sudo su` or otherwise editing with `sudo nano`, since the log files are supposed to be read-only.
 ```
 echo '63.173.168.120 - - [04/Nov/2021:15:07:25 -0500] "GET /search/tag/list HTTP/1.0" 200 5003' >> ./webserver/log/apache2/access.log
+```
+
+The OpenSearch API also allows querying raw documents which can be used to troubleshoot the connection.
+```sh
+curl -X GET -u 'admin:Patat123!' -k 'https://localhost:9200/apache_logs/_search?pretty&size=1'
+```
+Which should return the following JSON response.
+```json
+{
+  "took" : 966,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 114,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "apache_logs",
+        "_id" : "-i6brZQBbBx_deTvrVwS",
+        "_score" : 1.0,
+        "_source" : {
+          "date" : 1.738079443556357E9,
+          "log" : "172.25.0.1 - - [28/Jan/2025:15:50:43 +0000] \"GET / HTTP/1.1\" 302 286 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0\"",
+          "request" : "/",
+          "auth" : "-",
+          "ident" : "-",
+          "response" : "302",
+          "bytes" : "286",
+          "clientip" : "172.25.0.1",
+          "verb" : "GET",
+          "httpversion" : "1.1",
+          "timestamp" : "28/Jan/2025:15:50:43 +0000"
+        }
+      }
+    ]
+  }
+}
 ```
