@@ -12,15 +12,8 @@ The configuration is uploaded and applied using a mechanism described in the fol
 
 This process is integrated into the `docker-compose.yaml` file, ensuring seamless setup without manual intervention.
 
----
-
-## Manual Configuration Steps
-
-If manual configuration is required, follow these steps to log in, upload the configuration file, and import the project.
-
-### 1. Login to ScadaLTS
-
-Use the following `curl` command to log in as the **admin user**:
-
 ```bash
 curl -d "username=admin&password=admin&submit=Login" -c cookies http://localhost:8080/ScadaBR/login.htm
+curl -b cookies -v -F importFile=/config.zip http://localhost:8080/ScadaBR/import_project.htm
+curl 'http://localhost:8080/ScadaBR/dwr/call/plaincall/EmportDwr.loadProject.dwr' -X POST -b cookies --data-raw $'callCount=1\npage=/ScadaBR/import_project.htm\nhttpSessionId=\nscriptSessionId=D15BC242A0E69D4251D5585A07806324697\nc0-scriptName=EmportDwr\nc0-methodName=loadProject\nc0-id=0\nbatchId=5\n
+```
