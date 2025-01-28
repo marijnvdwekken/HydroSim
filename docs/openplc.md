@@ -42,12 +42,13 @@ Below are the primary variables used in the ladder logic:
 
 - **PumpSpeed**: Located at `%QW1000` in EPANET.
 - **StartButton**: A functional button within ScadaLTS. Can be assigned between `%QX0.0 – %QX99.7`.  
-- **Reference**:
-For additional details on Modbus addressing, visit `https://autonomylogic.com/docs/2-5-modbus-addressing/`.
+- **Reference**: For additional details on Modbus addressing, visit [OpenPLC-Adressing](https://autonomylogic.com/docs/2-5-modbus-addressing/).
 
-## Make the contacts, blocks, coils for the ladder logic
+## Components
+-  Contacts: Represent inputs such as StartButton.
+-  Coils: Control outputs like pump activation.
+-  Blocks: Handle logic operations and data manipulation.
 ![image](https://github.com/user-attachments/assets/0828e940-8322-4564-b009-0e4f83d1a172)
-
 
 ## Logic Explanation
 The ladder logic program performs the following tasks:
@@ -55,8 +56,15 @@ The ladder logic program performs the following tasks:
 2. Writes the pump speed to `%QW1000` for EPANET simulation.
 3. This turns the pump on and makes the water flow through
 
+## Upload ST file to openplc program
+1.  Export the Ladder logic
+-  Save it as an NameOfProgram.ST 
+   ![image](https://github.com/user-attachments/assets/fbb6ffa1-ad0d-471b-9e1d-2ff7a7eec240)
 
+2.  Then open the running Openplc   
+ ![Openplc_Program](https://github.com/user-attachments/assets/1568d343-1398-47ff-90f6-0d79c6cff920)
 
+ 
 
 ## Screenshots
 Below are screenshots of the ladder logic program and variable mappings:
@@ -72,8 +80,7 @@ Below are screenshots of the ladder logic program and variable mappings:
 - **EPANET Integration**:
   ![EPANET](https://github.com/user-attachments/assets/6e044bd1-9854-4733-b9de-a7f583981b74)
   ![EPANET](https://github.com/user-attachments/assets/06fdcd69-9845-4811-b343-fcb45621689d)
-
-
+ 
 
 
 
