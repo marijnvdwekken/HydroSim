@@ -35,7 +35,7 @@ plc-zone*:
 This repository contains the ladder logic program designed to interact with ScadaLTS via holding registers. The program controls a pump's speed and interacts with EPANET for simulation purposes.
 
 Download to the openplc editor to make the ladderlogic:
-- [OpenPLC-Adressing](https://autonomylogic.com/download/).
+- [Openplc-editor](https://autonomylogic.com/download/).
 
 ## Overview
 The ladder logic program uses holding registers to communicate with ScadaLTS. The `PumpSpeed` variable is mapped to `%QW1000`, which corresponds to the pump speed in EPANET.
