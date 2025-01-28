@@ -42,14 +42,14 @@ def get_zones(en: epanet) -> set[str]:
 
 def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
     try:
-        # clients: dict[str, ModbusTcpClient] = {
-        #     zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
-        #     for zone in zones
-        # }
         clients: dict[str, ModbusTcpClient] = {
-            zone: ModbusTcpClient(host="127.0.0.1", port=502 + i) 
-            for i, zone in enumerate(zones)
+            zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
+            for zone in zones
         }
+        # clients: dict[str, ModbusTcpClient] = {
+        #     zone: ModbusTcpClient(host="127.0.0.1", port=502 + i) 
+        #     for i, zone in enumerate(zones)
+        # }
         for _, client in clients.items():
             while not client.connect():
                 time.sleep(1)
