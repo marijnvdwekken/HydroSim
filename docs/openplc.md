@@ -53,7 +53,7 @@ Below are the primary variables used in the ladder logic:
 
 ## Logic Explanation
 The ladder logic program performs the following tasks:
-1. Reads the pump speed from ScadaLTS.
+1. Reads the start button from ScadaLTS.
 2. Writes the pump speed to `%QW1000` for EPANET simulation.
 3. This turns the pump on and makes the water flow through.
 
