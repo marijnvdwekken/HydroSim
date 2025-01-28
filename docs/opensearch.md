@@ -4,7 +4,11 @@ OpenSearch is an open-source dashboard that we use to [automatically ingest](htt
 ## Screenshots
 For example, the `webserver/log/apache2/access.log` log file is read and then visualized in our OpenSearch dashboard through a log ingestion workflow.
 
+- The access.log file
+
 ![](https://github.com/user-attachments/assets/4616222a-3eeb-4fc8-a8e8-b2597e3ab44a)
+
+- The ingested log file visualization in OpenSearch Dashboard
 
 ![](https://github.com/user-attachments/assets/d1907fe0-043b-4e40-afd2-7fc72525f5fd)
 
@@ -22,6 +26,11 @@ For log ingestion it also requires:
 ![](https://opensearch.org/docs/latest/images/la.png)
 
 The credentials for the OpenSearch dashboard are set in `opensearch/opensearch.env`, in our case `admin:Patat123!`. Note that it requires at least a lowercase character, a uppercase character, a number and a symbol otherwise OpenSearch will not accepted it and refuse to run.
+
+## Index pattern
+Before the log files can be ingested in OpenSearch Dashboard they need to be indexed first, which requires adding an [index pattern](https://opensearch.org/docs/latest/dashboards/management/index-patterns/). This can be done via `Discovery -> Create index pattern` and adding the  `apache*` index pattern.
+
+![](https://github.com/user-attachments/assets/21962c37-8774-4c5b-a84e-af197924fb68)
 
 ## Log ingestion workflow
 The log file paths are defined in the `docker-compose.yaml`. For example The `/var/log/apache2` folder in the webserver container is mapped to `./webserver/log/apache2` on the host machine, which then allows the fluent-bit container to ingest the `./webserver/log/apache2/access.log` log file to `/var/log/test.log` in the OpenSearch container.
@@ -41,7 +50,7 @@ The log file paths are defined in the `docker-compose.yaml`. For example The `/v
 ## Testing
 When visiting the (WordPress) web server on http://127.0.0.1/80 the `access.log` will be updated and should be automatically ingested to the OpenSearch dashboard.
 
-This can also be manually tested by adding a line to the log file. This will require first elevating to root with `sudo su` or otherwise editing with `sudo nano`, since the log files are supposed to be read-only.
+This can also be manually tested by adding a line to the log file, which should show in the dashboard when refreshing it. This will require first elevating to root with `sudo su` or otherwise editing with `sudo nano`, since the log files are supposed to be read-only.
 ```
 echo '63.173.168.120 - - [04/Nov/2021:15:07:25 -0500] "GET /search/tag/list HTTP/1.0" 200 5003' >> ./webserver/log/apache2/access.log
 ```
