@@ -27,7 +27,7 @@ This diagram shows the log ingestion workflow before it can be visualized in the
 ![](https://opensearch.org/docs/latest/images/la.png)
 
 ### Credentials
-The credentials for the OpenSearch dashboard are set in `opensearch/opensearch.env`, in our case `admin:Patat123!`. Note that it requires at least a lowercase character, a uppercase character, a number and a symbol otherwise OpenSearch will not accepted it and refuse to run.
+The credentials for the OpenSearch dashboard are set in `opensearch/opensearch.env`, in our case `admin:Patat123!`. Note that when setting one it requires at least a lowercase character, an uppercase character, a number and a symbol, otherwise OpenSearch will refuse to run.
 
 ## Index pattern
 Before the log files can be ingested in OpenSearch Dashboard they need to be indexed first, which requires adding an [index pattern](https://opensearch.org/docs/latest/dashboards/management/index-patterns/). This can be done via `Discovery -> Create index pattern` and adding the  `apache*` index pattern.
