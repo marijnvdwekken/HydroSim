@@ -207,7 +207,7 @@ services:
     image: docker.io/fluent/fluent-bit
     volumes:
       - ./opensearch/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-      - ./opensearch/test.log:/var/log/test.log
+      - ./webserver/log/apache2/access.log:/var/log/test.log
     networks:
       - opensearch-net
   data-prepper:
