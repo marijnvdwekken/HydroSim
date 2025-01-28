@@ -57,7 +57,7 @@ Below are screenshots of the ladder logic program and variable mappings:
 - empty:
   ![Ladder Logic](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
 - made:
-  ![image](https://github.com/user-attachments/assets/dd2d0058-ab3c-4093-9e9c-d7191e3aa089)
+  ![Ladder Logic_leeg](https://github.com/user-attachments/assets/dd2d0058-ab3c-4093-9e9c-d7191e3aa089)
 - **Variable Mappings**:
   ![Variables](https://github.com/user-attachments/assets/63f969ae-d920-4357-b2a3-0673219d9663)
 
