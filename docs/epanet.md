@@ -1,45 +1,50 @@
 # EPANET Simulation with Modbus Controls
 
-This Python script runs an EPANET simulation with Modbus controls, allowing for real-time interaction between the EPANET model/network and external PLCs. The script reads control values from PLCs via Modbus, applies them to the EPANET simulation, and then writes the simulation results back to the PLCs.
+This Python script runs an EPANET simulation with Modbus controls, enabling real-time interaction between the EPANET model/network and external PLCs. The script reads control values from PLCs via Modbus, applies them to the EPANET simulation, and then writes the simulation results back to the PLCs.
 
-## Table of Contents
-- [Overview](#overview)
-- [Function Descriptions](#function-descriptions)
-  - [parse_arguments()](#parse_arguments)
-  - [setup_epanet(inp_file: str)](#setup_epanetinp_file-str)
-  - [get_zones(en: epanet)](#get_zonesen-epanet)
-  - [setup_clients(zones: set)](#setup_clientszones-set)
-  - [get_controls(clients: dict, en: epanet)](#get_controlsclients-dict-en-epanet)
-  - [set_controls(en: epanet, controls: dict)](#set_controlsen-epanet-controls-dict)
-  - [read_data(en: epanet)](#read_dataen-epanet)
-  - [write_data(clients: dict, data: dict)](#write_dataclients-dict-data-dict)
-  - [main()](#main)
-- [Data Flow](#data-flow)
-- [Modbus Register Mapping](#modbus-register-mapping)
+To achieve this, we have minimized the use of external modules, keeping the script as close as possible to default Python functionalities. The only packages/modules used are:
 
----
+- Python standard library: `sys`, `time`
+- Third-party libraries: `epyt`, `pymodbus`
 
-## Overview
+The script consists of the following functions:
 
-The script reads an EPANET network (.inp) file and then fetches calculated values from the EPANET network every second. It uses Modbus TCP communication for real-time control and monitoring of the water distribution network. The script continuously:
+- `parse_arguments() -> str`
+- `setup_epanet(inp_file: str) -> epanet`
+- `get_zones(en: epanet) -> set[str]`
+- `setup_clients(zones: set) -> dict[str, ModbusTcpClient]`
+- `get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict`
+- `set_controls(en: epanet, controls: dict) -> None`
+- `read_data(en: epanet) -> dict`
+- `write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None`
+- `main()`
 
-1. Reads control values from PLCs via Modbus.
-2. Updates the EPANET simulation based on these controls.
-3. Runs hydraulic analysis steps in EPANET every second to simulate a realistic scenario.
-4. Writes simulation results (e.g., hydraulic head, pressures) back to the PLCs.
+Below, we'll explain each function in depth and how they work under the hood.
 
----
+The `parse_arguments()` function is self-explanatory and has been designed for simplicity. It handles command-line arguments to ensure a valid .inp file is provided.
 
-## Function Descriptions
+Function:
 
-### parse_arguments()
-Handles command-line arguments to ensure a valid `.inp` file is provided.
+```python
+def parse_arguments() -> str:
+    if len(sys.argv) != 2 or not sys.argv[1].endswith(".inp"):
+        print("Run EPANET simulation with Modbus controls.")
+        print(f">>> python {sys.argv[0]} [network.inp]")
+        sys.exit(1)
+    return sys.argv[1]
+```
 
-- **Input**: Command-line arguments.
-- **Output**: String containing the path to the `.inp` file.
-- **Behavior**:
-  - If no valid `.inp` file is provided, the program exits with an error message.
+- Input: Path to the `.inp` file.
+- Output: String containing the path to the `.inp` file.
+- Behavior:
+  - If no valid `.inp` file is provided, the program exits and displays a message showing how to use the script.
 
+
+
+
+asdasddasdsdadasdasda
+asdasd
+asda
 ---
 
 ### setup_epanet(inp_file: str)
