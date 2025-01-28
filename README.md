@@ -39,11 +39,11 @@ docker compose up -d
 ```
 
 ## Documentation
-[Epanet](docs/epanet.md)
-[OpenPLC](docs/openplc.md)
-[Opensearch](docs/opensearch.md)
-[ScadaLTS](docs/scadalts.md)
-[Webserver](docs/webserver.md)
+- [Epanet](docs/epanet.md)
+- [OpenPLC](docs/openplc.md)
+- [Opensearch](docs/opensearch.md)
+- [ScadaLTS](docs/scadalts.md)
+- [Webserver](docs/webserver.md)
 
 ## Contributing
 
