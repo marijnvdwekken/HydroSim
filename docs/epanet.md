@@ -21,10 +21,10 @@ The script consists of the following functions:
 
 Below, we'll explain each function in depth and how they work under the hood.
 
-- #### `def parse_arguments() -> str:`
+1. `def parse_arguments() -> str:`
 
 The `parse_arguments` function is self-explanatory and has been designed for simplicity. It handles command-line arguments to ensure a valid `.inp` file is provided.
-
+2. sdsd
 Function:
 
 ```python
