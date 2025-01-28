@@ -29,3 +29,6 @@ plc-zone*:
   networks:
     - plc_network
 ```
+![image](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
+
+
