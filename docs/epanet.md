@@ -1,6 +1,6 @@
 # EPANET Simulation with Modbus Controls
 
-This documentation explains the Python script that integrates an EPANET simulation with Modbus communication to interact with external PLCs. The script reads control values (e.g., pump speeds, valve settings) from PLCs, applies them to the EPANET model, and writes simulation results back to the PLCs.
+This Python script runs an EPANET simulation with Modbus controls, allowing for real-time interaction between the EPANET model/network and external PLCs. The script reads control values from PLCs via Modbus, applies them to the EPANET simulation, and then writes the simulation results back to the PLCs.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -21,11 +21,12 @@ This documentation explains the Python script that integrates an EPANET simulati
 
 ## Overview
 
-The script integrates an EPANET simulation with Modbus TCP communication for real-time control and monitoring of water distribution networks. It continuously:
+The script reads an EPANET network (.inp) file and then fetches calculated values from the EPANET network every second. It uses Modbus TCP communication for real-time control and monitoring of the water distribution network. The script continuously:
+
 1. Reads control values from PLCs via Modbus.
 2. Updates the EPANET simulation based on these controls.
-3. Runs hydraulic analysis steps in EPANET.
-4. Writes simulation results (e.g., flow rates, pressures) back to the PLCs.
+3. Runs hydraulic analysis steps in EPANET every second to simulate a realistic scenario.
+4. Writes simulation results (e.g., hydraulic head, pressures) back to the PLCs.
 
 ---
 
