@@ -217,6 +217,29 @@ def set_controls(en: epanet, controls: dict) -> None:
 
 Something here...
 
+```
+zone0           -> valve1          -> register: 2000            control: setting
+zone0           -> valve2          -> register: 2002            control: setting
+zone0           -> valve3          -> register: 2004            control: setting
+zone0           -> valve4          -> register: 2006            control: setting
+
+zone3           -> pump1           -> register: 1000            control: speed
+zone3           -> pump2           -> register: 1002            control: speed
+zone3           -> pump3           -> register: 1004            control: speed
+
+zone1           -> pump1           -> register: 1006            control: speed
+zone1           -> pump2           -> register: 1008            control: speed
+zone1           -> pump3           -> register: 1010            control: speed
+
+zone4           -> pump2           -> register: 1012            control: speed
+zone4           -> pump3           -> register: 1014            control: speed
+zone4           -> pump1           -> register: 1016            control: speed
+
+zone2           -> pump2           -> register: 1018            control: speed
+zone2           -> pump3           -> register: 1020            control: speed
+zone2           -> pump1           -> register: 1022            control: speed
+```
+
 ---
 
 - `def read_data(en: epanet) -> dict:`
@@ -319,6 +342,47 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
 ```
 
 Something here...
+
+Snippet...
+
+```
+[---TRUNCATED---]
+zone3           -> junction1       -> index                         : 6                             , registers: [16576, 0]          , address: 0
+zone3           -> junction1       -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 2
+zone3           -> junction1       -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 4
+zone3           -> junction1       -> elevation                     : 0.0                           , registers: [0, 0]              , address: 6
+
+zone3           -> junction6       -> index                         : 34                            , registers: [16904, 0]          , address: 8
+zone3           -> junction6       -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 10
+zone3           -> junction6       -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 12
+zone3           -> junction6       -> elevation                     : 0.0                           , registers: [0, 0]              , address: 14
+
+zone3           -> junction2       -> index                         : 35                            , registers: [16908, 0]          , address: 16
+zone3           -> junction2       -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 18
+zone3           -> junction2       -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 20
+zone3           -> junction2       -> elevation                     : 0.0                           , registers: [0, 0]              , address: 22
+
+zone3           -> junction5       -> index                         : 36                            , registers: [16912, 0]          , address: 24
+zone3           -> junction5       -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 26
+zone3           -> junction5       -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 28
+zone3           -> junction5       -> elevation                     : 0.0                           , registers: [0, 0]              , address: 30
+
+zone3           -> junction3       -> index                         : 37                            , registers: [16916, 0]          , address: 32
+zone3           -> junction3       -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 34
+zone3           -> junction3       -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 36
+zone3           -> junction3       -> elevation                     : 0.0                           , registers: [0, 0]              , address: 38
+
+zone3           -> junction4       -> index                         : 38                            , registers: [16920, 0]          , address: 40
+zone3           -> junction4       -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 42
+zone3           -> junction4       -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 44
+zone3           -> junction4       -> elevation                     : 0.0                           , registers: [0, 0]              , address: 46
+
+zone3           -> node40          -> index                         : 39                            , registers: [16924, 0]          , address: 48
+zone3           -> node40          -> hydraulic_head                : 514.2538452148438             , registers: [17408, 36927]      , address: 50
+zone3           -> node40          -> pressure                      : 514.2538452148438             , registers: [17408, 36927]      , address: 52
+zone3           -> node40          -> elevation                     : 0.0                           , registers: [0, 0]              , address: 54
+[---TRUNCATED---]
+```
 
 ---
 
