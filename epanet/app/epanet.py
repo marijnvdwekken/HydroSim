@@ -104,6 +104,7 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
                     valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
                 )
                 controls[zone][element]["setting"] = converted_value
+            
 
         return controls
     except Exception as e:
@@ -113,8 +114,8 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
 
 def set_controls(en: epanet, controls: dict) -> None:
     try:
-        # offset_speed = 1000
-        # offset_setting = 2000
+        # offset_speed: int = 1000
+        # offset_setting: int = 2000
         
         for zone, elements in controls.items():
             for element, control in elements.items():
@@ -122,15 +123,15 @@ def set_controls(en: epanet, controls: dict) -> None:
 
                 if "speed" in control:
                     en.setLinkSettings(link_index, control["speed"])
-                    # print(f"{zone:<15} -> {element:<15} -> register: {offset_speed:<15} control: speed")
+                    # print(f"{zone:<15} -> {element:<15} -> speed        -> register: {offset_speed:<15}")
                     # offset_speed += 2
 
                 if "setting" in control:
                     en.setLinkSettings(link_index, control["setting"])
-                    # print(f"{zone:<15} -> {element:<15} -> register: {offset_setting:<15} control: setting")
+                    # print(f"{zone:<15} -> {element:<15} -> setting      -> register: {offset_setting:<15}")
                     # offset_setting += 2
 
-            # print()
+            # print()  # blank line for separating log entries.
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         sys.exit(1)
@@ -224,7 +225,7 @@ def main():
         en: epanet = setup_epanet(inp_file)
 
         zones: set[str] = get_zones(en)
-
+        
         clients: dict[str, ModbusTcpClient] = setup_clients(zones)
 
         en.openHydraulicAnalysis()
