@@ -10,12 +10,12 @@
 The main view of our HMI consists of the SCADA general overview of the water network. In this view, there are also nodes that link to the rest of the network and provide a general overview of how the network looks.
 
 **Figure 1: General Overview**  
-(*Upload your image here*)
+![image](https://github.com/user-attachments/assets/61053b09-f640-4c22-86e2-0b8ed44e998b)
 
 Our water network was developed from the beginning in an **EPANET file**. In this file, the initial water network was designed, and all values in this document originate from it. It is important to note that both **Figure 1** and **Figure 2** are based on this EPANET file.
 
 **Figure 2: Overview of the EPANET Water Network**  
-(*Upload your image here*)
+![image](https://github.com/user-attachments/assets/bd601fd8-99e8-4c13-a78c-44a215460bb9)
 
 ## Network Structure
 
@@ -23,12 +23,12 @@ The network is divided into two sections:
 1. **Water Reservoir**  
    Water is sent from the water reservoir—which we have decided, in this case, to be an infinite water supply—to the different networks.  
    **Figure 3: Overview of the Water Reservoir**  
-   (*Upload your image here*)
+   ![image](https://github.com/user-attachments/assets/06d042c5-ca6b-4ff4-882c-ce6c78fbb232)
 
 2. **Water Tanks**  
    Each water network corresponds to different water tanks.  
    **Figure 4: Overview of the Water Tanks**  
-   (*Upload your image here*)
+   ![image](https://github.com/user-attachments/assets/10eba404-bffc-4ac8-9b56-46423e11b07f)
 
 ---
 ## Networks Version 2
@@ -41,25 +41,24 @@ In the new HMIs, **PMManager** was used as SCADA software, and more suitable des
 
 ### Network 1 Version 2
 **Figure 5: Network 1 Version 2**  
-(*Upload your image here*)
+![image](https://github.com/user-attachments/assets/b2435a00-e23f-4a24-b595-bfac2fb8b230)
 
 ### Network 2 Version 2
 **Figure 6: Network 2 Version 2**  
-(*Upload your image here*)
+![image](https://github.com/user-attachments/assets/ebad50e1-c084-4b9f-9516-d302572c1ca8)
 
 ### Network 3 Version 2
 **Figure 7: Network 3 Version 2**  
-(*Upload your image here*)
+![image](https://github.com/user-attachments/assets/99c7f29f-e557-4923-aee0-bfc701bc45d7)
 
 ### Network 4 Version 2
 **Figure 8: Network 4 Version 2**  
-(*Upload your image here*)
+![image](https://github.com/user-attachments/assets/46053c1a-5c66-4fc6-8ab8-2da6d46f8a40)
+
 
 ---
 
-### Notes
-- Replace the placeholder text under each figure with the appropriate image of your choice.  
-- Make sure to maintain consistent formatting across your GitHub repository.
+
 
 
 
