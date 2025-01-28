@@ -21,5 +21,8 @@ COPY passwords.txt /
 RUN chmod +rx /usr/lib/cgi-bin/vulnerable.sh && \
     chmod -r /passwords.txt
 
+# Unlink Apache access log
+RUN unlink /var/log/apache2/access.log
+
 # Expose WordPress on port 80
 EXPOSE 80
