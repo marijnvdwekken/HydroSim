@@ -9,19 +9,19 @@ To achieve this, we have minimized the use of external modules, keeping the scri
 
 The script consists of the following functions:
 
-- `def parse_arguments() -> str`
-- `def setup_epanet(inp_file: str) -> epanet`
-- `def get_zones(en: epanet) -> set[str]`
-- `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]`
-- `def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict`
-- `def set_controls(en: epanet, controls: dict) -> None`
-- `def read_data(en: epanet) -> dict`
-- `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None`
-- `def main()`
+- `def parse_arguments() -> str:`
+- `def setup_epanet(inp_file: str) -> epanet:`
+- `def get_zones(en: epanet) -> set[str]:`
+- `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:`
+- `def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:`
+- `def set_controls(en: epanet, controls: dict) -> None:`
+- `def read_data(en: epanet) -> dict:`
+- `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
+- `def main():`
 
 Below, we'll explain each function in depth and how they work under the hood.
 
-# `def parse_arguments() -> str`
+### `def parse_arguments() -> str:`
 
 The `parse_arguments` function is self-explanatory and has been designed for simplicity. It handles command-line arguments to ensure a valid `.inp` file is provided.
 
@@ -40,7 +40,7 @@ If a valid EPANET network is provided it will return a string containing the pat
 
 ---
 
-# `def setup_epanet(inp_file: str) -> epanet`
+### `def setup_epanet(inp_file: str) -> epanet:`
 
 The `setup_epanet` function ...
 
@@ -62,7 +62,7 @@ Something here...
 
 ---
 
-# `def get_zones(en: epanet) -> set[str]`
+### `def get_zones(en: epanet) -> set[str]:`
 
 The `get_zones` function ...
 
@@ -88,7 +88,7 @@ Something here...
 
 ---
 
-# `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:`
+### `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:`
 
 The `setup_clients` function ...
 
@@ -118,7 +118,7 @@ Something here...
 
 ---
 
-# `def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:`
+### `def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:`
 
 The `get_controls` function ...
 
@@ -181,7 +181,7 @@ Something here...
 
 ---
 
-# `def set_controls(en: epanet, controls: dict) -> None:`
+### `def set_controls(en: epanet, controls: dict) -> None:`
 
 The `set_controls` function ...
 
@@ -217,7 +217,7 @@ Something here...
 
 ---
 
-# `def read_data(en: epanet) -> dict:`
+### `def read_data(en: epanet) -> dict:`
 
 The `read_data` function ...
 
@@ -279,7 +279,7 @@ Something here...
 
 ---
 
-# `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
+### `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
 
 The `write_data` function ...
 
@@ -320,7 +320,7 @@ Something here...
 
 ---
 
-# `def main():`
+### `def main():`
 
 The `main` function ...
 
