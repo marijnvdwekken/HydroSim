@@ -40,7 +40,10 @@ docker compose up -d
 
 ## Documentation
 [Epanet](docs/epanet.md)
-
+[OpenPLC](docs/openplc.md)
+[Opensearch](docs/opensearch.md)
+[ScadaLTS](docs/scadalts.md)
+[Webserver](docs/webserver.md)
 
 ## Contributing
 
@@ -48,4 +51,4 @@ Contributions to improve the simulation or add new features are welcome. Please 
 
 ## Support
 
-For questions or issues, please open an issue in this repository or contact [your contact information].
+For questions or issues, please open an issue in this repository.
