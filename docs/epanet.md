@@ -276,8 +276,8 @@ Function:
 ```python
 def set_controls(en: epanet, controls: dict) -> None:
     try:
-        # offset_speed = 1000
-        # offset_setting = 2000
+        # offset_speed: int = 1000
+        # offset_setting: int = 2000
         
         for zone, elements in controls.items():
             for element, control in elements.items():
@@ -285,15 +285,15 @@ def set_controls(en: epanet, controls: dict) -> None:
 
                 if "speed" in control:
                     en.setLinkSettings(link_index, control["speed"])
-                    # print(f"{zone:<15} -> {element:<15} -> register: {offset_speed:<15} control: speed")
+                    # print(f"{zone:<15} -> {element:<15} -> speed        -> register: {offset_speed:<15}")
                     # offset_speed += 2
 
                 if "setting" in control:
                     en.setLinkSettings(link_index, control["setting"])
-                    # print(f"{zone:<15} -> {element:<15} -> register: {offset_setting:<15} control: setting")
+                    # print(f"{zone:<15} -> {element:<15} -> setting      -> register: {offset_setting:<15}")
                     # offset_setting += 2
 
-            # print()
+            # print()  # blank line for separating log entries.
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         sys.exit(1)
@@ -313,26 +313,26 @@ If any error occurs during this process, the function prints an error message an
 Below is an example of the logging/debugging process.
 
 ```
-zone0           -> valve1          -> register: 2000            control: setting
-zone0           -> valve2          -> register: 2002            control: setting
-zone0           -> valve3          -> register: 2004            control: setting
-zone0           -> valve4          -> register: 2006            control: setting
+zone0           -> valve1          -> setting      -> register: 2000
+zone0           -> valve2          -> setting      -> register: 2002
+zone0           -> valve3          -> setting      -> register: 2004
+zone0           -> valve4          -> setting      -> register: 2006
 
-zone3           -> pump1           -> register: 1000            control: speed
-zone3           -> pump2           -> register: 1002            control: speed
-zone3           -> pump3           -> register: 1004            control: speed
+zone3           -> pump1           -> speed        -> register: 1000
+zone3           -> pump2           -> speed        -> register: 1002
+zone3           -> pump3           -> speed        -> register: 1004
 
-zone1           -> pump1           -> register: 1006            control: speed
-zone1           -> pump2           -> register: 1008            control: speed
-zone1           -> pump3           -> register: 1010            control: speed
+zone1           -> pump1           -> speed        -> register: 1006
+zone1           -> pump2           -> speed        -> register: 1008
+zone1           -> pump3           -> speed        -> register: 1010
 
-zone4           -> pump2           -> register: 1012            control: speed
-zone4           -> pump3           -> register: 1014            control: speed
-zone4           -> pump1           -> register: 1016            control: speed
+zone4           -> pump2           -> speed        -> register: 1012
+zone4           -> pump3           -> speed        -> register: 1014
+zone4           -> pump1           -> speed        -> register: 1016
 
-zone2           -> pump2           -> register: 1018            control: speed
-zone2           -> pump3           -> register: 1020            control: speed
-zone2           -> pump1           -> register: 1022            control: speed
+zone2           -> pump2           -> speed        -> register: 1018
+zone2           -> pump3           -> speed        -> register: 1020
+zone2           -> pump1           -> speed        -> register: 1022
 ```
 
 ---
@@ -711,7 +711,7 @@ zone3           -> node40          -> elevation                     : 0.0       
 
 - `def main():`
 
-The `main` function ...
+The `main` function serves as the entry point and central control loop for the EPANET simulation with Modbus integration.
 
 Function:
 
@@ -760,21 +760,43 @@ def main():
             en.unload()
 ```
 
-Something here...
+This function controls the entire simulation process:
+
+1. It starts by parsing command-line arguments to get the EPANET network (`.inp`) file.
+2. Sets up the EPANET simulation environment.
+3. Identifies the zones in the network.
+4. Establishes Modbus connections with the PLCs for each zone.
+5. Initializes the hydraulic analysis.
+6. Enters an infinite loop for continuous simulation:
+    - Updates the simulation duration.
+    - Retrieves control settings from the PLCs.
+    - Applies these controls to the EPANET simulation.
+    - Runs a hydraulic analysis step.
+    - Reads the updated data from EPANET.
+    - Writes this data back to the PLCs.
+    - Prepares for the next step.
+    - Waits for 1 second before the next iteration.
+      
+The function includes error handling:
+    - It catches keyboard interrupts for a clean user-initiated exit.
+    - It handles unexpected errors, printing an error message and exiting.
+    - In the `finally` block, it ensures proper cleanup by closing all Modbus connections and unloading the EPANET simulation.
 
 ---
 
-Server receiving the registers like this:
+Below, you can see an example of how values are written as holding registers to the PLCs. The "before" state shows the registers when nothing has been written to the PLCs, and the "after" state shows the registers after writing has occurred.
 
-Registers 0-1000 before without receiving anything:
+Before (0-1000 registers):
 
 ```
 holding registers (502): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ```
 
-Registers 0-1000 after:
+After:
 
 ```
 holding registers (502): [16576, 0, 50089, 37351, 50089, 37351, 0, 0, 16904, 0, 50089, 37351, 50089, 37351, 0, 0, 16908, 0, 50089, 37351, 50089, 37351, 0, 0, 16912, 0, 50089, 37351, 50089, 37351, 0, 0, 16916, 0, 50089, 37351, 50089, 37351, 0, 0, 16920, 0, 50089, 37351, 50089, 37351, 0, 0, 16924, 0, 50089, 37351, 50089, 37351, 0, 0, 16928, 0, 50089, 37351, 50089, 37351, 0, 0, 16932, 0, 50089, 37351, 50089, 37351, 0, 0, 16936, 0, 50089, 37351, 50089, 37351, 0, 0, 16940, 0, 50089, 37351, 50089, 37351, 0, 0, 16944, 0, 50089, 37351, 50089, 37351, 0, 0, 16948, 0, 50089, 37351, 50089, 37351, 0, 0, 16952, 0, 50089, 37351, 50089, 37351, 0, 0, 16956, 0, 50089, 37351, 50089, 37351, 0, 0, 16960, 0, 50089, 37351, 50089, 37351, 0, 0, 16964, 0, 50089, 37351, 50089, 37351, 0, 0, 16968, 0, 50089, 37351, 50089, 37351, 0, 0, 16972, 0, 50089, 37351, 50089, 37351, 0, 0, 16976, 0, 50089, 37351, 50089, 37351, 0, 0, 16980, 0, 50089, 37351, 50089, 37351, 0, 0, 16984, 0, 50089, 37351, 50089, 37351, 0, 0, 16988, 0, 50089, 37351, 50089, 37351, 0, 0, 16992, 0, 50089, 37351, 50089, 37351, 0, 0, 16996, 0, 50089, 37351, 50089, 37351, 0, 0, 17000, 0, 50089, 37351, 50089, 37351, 0, 0, 17004, 0, 50089, 37351, 50089, 37351, 0, 0, 17008, 0, 50089, 37351, 50089, 37351, 0, 0, 17012, 0, 50089, 37351, 50089, 37351, 0, 0, 17016, 0, 50089, 37351, 50089, 37351, 0, 0, 17020, 0, 50089, 37351, 50089, 37351, 0, 0, 17024, 0, 50089, 37351, 50089, 37351, 0, 0, 17026, 0, 50089, 37351, 50089, 37351, 0, 0, 17028, 0, 50089, 37351, 50089, 37351, 0, 0, 17030, 0, 50089, 37351, 50089, 37351, 0, 0, 17032, 0, 50089, 37351, 50089, 37351, 0, 0, 17034, 0, 50089, 37351, 50089, 37351, 0, 0, 17036, 0, 50089, 37351, 50089, 37351, 0, 0, 17038, 0, 50089, 37351, 50089, 37351, 0, 0, 17040, 0, 50089, 37351, 50089, 37351, 0, 0, 17042, 0, 50089, 37351, 50089, 37351, 0, 0, 17044, 0, 50089, 37351, 50089, 37351, 0, 0, 17046, 0, 50089, 37351, 50089, 37351, 0, 0, 17048, 0, 50089, 37351, 50089, 37351, 0, 0, 17050, 0, 50089, 37351, 50089, 37351, 0, 0, 17052, 0, 50089, 37351, 50089, 37351, 0, 0, 17054, 0, 50089, 37351, 50089, 37351, 0, 0, 17177, 0, 16968, 0, 16968, 0, 0, 0, 0, 0, 16968, 0, 16968, 0, 0, 0, 18367, 48995, 18367, 48995, 17165, 0, 0, 0, 0, 0, 16256, 0, 0, 0, 0, 0, 17168, 0, 0, 0, 0, 0, 16256, 0, 0, 0, 0, 0, 17171, 0, 0, 0, 0, 0, 16256, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ```
+
+We have designed the code to transmit and receive all values as floats using holding registers. It's important to note that holding registers can only store 16-bit values. Therefore, we had to convert the float values to 32-bit floats. This conversion results in two 16-bit registers being reserved for each float value. Hence, we must take two steps when reading from or writing to the registers.
 
