@@ -26,7 +26,7 @@ Retreives logs from the 2 webservers:
 - Real-time control logic execution
 - User-friendly HMI for system monitoring and control
 - Scenario testing and analysis capabilities
-- Operator training in a safe, simulated environment
+- students training in a safe, simulated environment
 
 ## Requirements
 - docker compose
@@ -38,19 +38,13 @@ cd OT-Simulation
 docker compose up -d
 ```
 
+## Documentation
+[Epanet](docs/epanet.md)
+
+
 ## Contributing
 
 Contributions to improve the simulation or add new features are welcome. Please submit pull requests or open issues for discussion.
-
-## License
-
-[Include license information here]
-
-## Acknowledgments
-
-- EPANET developers
-- OpenPLC project contributors
-- ScadaLTS team
 
 ## Support
 
