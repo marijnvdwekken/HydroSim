@@ -16,9 +16,9 @@ Acts as the programmable logic controller, interfacing with the EPANET simulatio
 Provides the human-machine interface (HMI) for visualization and interaction with the simulated system.
 
 ### Opensearch
-Retreives logs from the 2 webservers: 
+Retrieves logs from the 2 webservers: 
 1. Wordpress with RCE vulnerability
-2. ScadaLTS with privesc and RCE
+2. ScadaLTS with privilege escalation and RCE
 
 ## Features
 
@@ -26,7 +26,7 @@ Retreives logs from the 2 webservers:
 - Real-time control logic execution
 - User-friendly HMI for system monitoring and control
 - Scenario testing and analysis capabilities
-- students training in a safe, simulated environment
+- Students training in a safe, simulated environment
 
 ## Requirements
 - docker compose
@@ -41,7 +41,7 @@ docker compose up -d
 ## Documentation
 - [Epanet](docs/epanet.md)
 - [OpenPLC](docs/openplc.md)
-- [Opensearch](docs/opensearch.md)
+- [OpenSearch](docs/opensearch.md)
 - [ScadaLTS](docs/scadalts.md)
 - [Webserver](docs/webserver.md)
 
