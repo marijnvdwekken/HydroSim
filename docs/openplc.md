@@ -48,6 +48,7 @@ Below are the primary variables used in the ladder logic:
 -  Contacts: Represent inputs such as StartButton.
 -  Coils: Control outputs like pump activation.
 -  Blocks: Handle logic operations and data manipulation.
+-  
 ![image](https://github.com/user-attachments/assets/0828e940-8322-4564-b009-0e4f83d1a172)
 
 ## Logic Explanation
