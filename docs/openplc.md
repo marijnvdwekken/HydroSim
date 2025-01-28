@@ -55,8 +55,10 @@ Below are screenshots of the ladder logic program and variable mappings:
 
 - **Ladder Logic Diagram**:
 empty:
-  ![Ladder Logic](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
+![Ladder Logic](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
+
 made:
+
 ![image](https://github.com/user-attachments/assets/dd2d0058-ab3c-4093-9e9c-d7191e3aa089)
 
 - **Variable Mappings**:
