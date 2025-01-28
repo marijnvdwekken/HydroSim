@@ -21,6 +21,8 @@ The script consists of the following functions:
 
 Below, we'll explain each function in depth and how they work under the hood.
 
+- `parse_arguments() -> str`
+
 The `parse_arguments()` function is self-explanatory and has been designed for simplicity. It handles command-line arguments to ensure a valid `.inp` file is provided.
 
 Function:
@@ -34,12 +36,17 @@ def parse_arguments() -> str:
     return sys.argv[1]
 ```
 
-- Input:
-    - Path to the `.inp` file.
-- Output:
-    - str: String containing the path to the `.inp` file.
-- Behavior:
-    - If no valid `.inp` file is provided, the program exits and displays a message showing how to use the script.
+Input:
+
+- Path to the `.inp` file.
+
+Output:
+
+- str: String containing the path to the `.inp` file.
+
+Behavior:
+
+- If no valid `.inp` file is provided, the program exits and displays a message showing how to use the script.
 
 
 
