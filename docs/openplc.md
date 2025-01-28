@@ -50,14 +50,18 @@ The ladder logic program performs the following tasks:
 2. Writes the pump speed to `%QW1000` for EPANET simulation.
 3. This turns the pump on and makes the water flow through
 
+## Make the contacts for the ladder logic
+![image](https://github.com/user-attachments/assets/0828e940-8322-4564-b009-0e4f83d1a172)
+
+
 ## Screenshots
 Below are screenshots of the ladder logic program and variable mappings:
 
 - **Ladder Logic Diagram**:
 - empty:
   ![Ladder Logic](https://github.com/user-attachments/assets/b71d7090-d1b7-488d-b714-3ad051348537)
-- made:
-  ![Ladder Logic_leeg](https://github.com/user-attachments/assets/dd2d0058-ab3c-4093-9e9c-d7191e3aa089)
+- With data:
+  ![Ladder Logic_data](https://github.com/user-attachments/assets/dd2d0058-ab3c-4093-9e9c-d7191e3aa089)
 - **Variable Mappings**:
   ![Variables](https://github.com/user-attachments/assets/63f969ae-d920-4357-b2a3-0673219d9663)
 
