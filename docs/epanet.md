@@ -2,7 +2,7 @@
 
 This Python script runs an EPANET simulation with Modbus controls, enabling real-time interaction between the EPANET model/network and external PLCs. The script reads control values from PLCs via Modbus, applies them to the EPANET simulation, and then writes the simulation results back to the PLCs.
 
-To achieve this, we have minimized the use of external modules, keeping the script as close as possible to default Python functionalities. The only packages/modules used are:
+To achieve this, we have minimized the use of external modules, keeping the script as close as possible to default Python functionalities. The only modules we used are:
 
 - Python standard library: `sys`, `time`
 - Third-party libraries: `epyt`, `pymodbus`
@@ -22,6 +22,8 @@ The script consists of the following functions:
 Below, we'll explain each function in depth and how they work under the hood.
 
 ### `def parse_arguments() -> str:`
+
+---
 
 The `parse_arguments` function is self-explanatory and has been designed for simplicity. It handles command-line arguments to ensure a valid `.inp` file is provided.
 
