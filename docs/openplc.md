@@ -38,10 +38,11 @@ This repository contains the ladder logic program designed to interact with Scad
 The ladder logic program uses holding registers to communicate with ScadaLTS. The `PumpSpeed` variable is mapped to `%QW1000`, which corresponds to the pump speed in EPANET.
 
 ## Variables
+https://autonomylogic.com/docs/2-5-modbus-addressing/
 Below are the key variables used in the ladder logic:
 
 - **PumpSpeed**: Located at `%QW1000` in EPANET.
-- **StartButton**: Isn't located in epanet but is an functional button within ScadaLTS.
+- **StartButton**: Isn't located in epanet but is an functional button within ScadaLTS. Can be `%QX0.0 – %QX99.7` 
 
 ## Logic Explanation
 The ladder logic program performs the following tasks:
