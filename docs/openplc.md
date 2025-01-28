@@ -54,15 +54,15 @@ Below are the primary variables used in the ladder logic:
 The ladder logic program performs the following tasks:
 1. Reads the pump speed from ScadaLTS.
 2. Writes the pump speed to `%QW1000` for EPANET simulation.
-3. This turns the pump on and makes the water flow through
+3. This turns the pump on and makes the water flow through.
 
 ## Upload ST file to openplc program
-1.  Export the Ladder logic
--  Save it as an NameOfProgram.ST 
+1.  Export the Ladder logic.
+-  Save it as an NameOfProgram.ST.
    ![image](https://github.com/user-attachments/assets/fbb6ffa1-ad0d-471b-9e1d-2ff7a7eec240)
-
-2.  Then open the running Openplc   
+2.  Then open the running Openplc and upload Program.   
  ![Openplc_Program](https://github.com/user-attachments/assets/1568d343-1398-47ff-90f6-0d79c6cff920)
+
 
  
 
