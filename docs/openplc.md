@@ -42,7 +42,7 @@ Below are the primary variables used in the ladder logic:
 
 - **PumpSpeed**: Located at `%QW1000` in EPANET.
 - **StartButton**: A functional button within ScadaLTS. Can be assigned between `%QX0.0 – %QX99.7`.  
-Reference:
+- **Reference**:
 For additional details on Modbus addressing, visit `https://autonomylogic.com/docs/2-5-modbus-addressing/`.
 
 ## Make the contacts, blocks, coils for the ladder logic
