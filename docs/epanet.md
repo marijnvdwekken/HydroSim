@@ -19,12 +19,14 @@ The script consists of the following functions:
 - `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
 - `def main():`
 
-Below, we'll explain each function in depth and how they work under the hood.
+In the section below, we'll explain each function in depth and how they work under the hood.
 
-1. `def parse_arguments() -> str:`
+---
+
+- `def parse_arguments() -> str:`
 
 The `parse_arguments` function is self-explanatory and has been designed for simplicity. It handles command-line arguments to ensure a valid `.inp` file is provided.
-2. sdsd
+
 Function:
 
 ```python
@@ -40,7 +42,7 @@ If a valid EPANET network is provided it will return a string containing the pat
 
 ---
 
-### `def setup_epanet(inp_file: str) -> epanet:`
+- `def setup_epanet(inp_file: str) -> epanet:`
 
 The `setup_epanet` function ...
 
@@ -62,7 +64,7 @@ Something here...
 
 ---
 
-### `def get_zones(en: epanet) -> set[str]:`
+- `def get_zones(en: epanet) -> set[str]:`
 
 The `get_zones` function ...
 
@@ -88,7 +90,7 @@ Something here...
 
 ---
 
-### `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:`
+- `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:`
 
 The `setup_clients` function ...
 
@@ -118,7 +120,7 @@ Something here...
 
 ---
 
-### `def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:`
+- `def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:`
 
 The `get_controls` function ...
 
@@ -181,7 +183,7 @@ Something here...
 
 ---
 
-### `def set_controls(en: epanet, controls: dict) -> None:`
+- `def set_controls(en: epanet, controls: dict) -> None:`
 
 The `set_controls` function ...
 
@@ -217,7 +219,7 @@ Something here...
 
 ---
 
-### `def read_data(en: epanet) -> dict:`
+- `def read_data(en: epanet) -> dict:`
 
 The `read_data` function ...
 
@@ -279,7 +281,7 @@ Something here...
 
 ---
 
-### `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
+- `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
 
 The `write_data` function ...
 
@@ -320,7 +322,7 @@ Something here...
 
 ---
 
-### `def main():`
+- `def main():`
 
 The `main` function ...
 
@@ -372,139 +374,3 @@ def main():
 ```
 
 Something here...
-
----
-
-
-
-
-s
-sd
-s
-s
-
-s
-s
-s
-s
-s
-s
-
-asdasddasdsdadasdasda
-asdasd
-asda
----
-
-### setup_epanet(inp_file: str)
-Initializes the EPANET simulation environment.
-
-- **Input**: Path to the `.inp` file.
-- **Output**: An `epanet` object representing the simulation.
-- **Behavior**:
-  - Sets up initial simulation parameters (e.g., duration, hydraulic step).
-  - Exits if initialization fails.
-
----
-
-### get_zones(en: epanet)
-Extracts unique zones from node and link IDs in the EPANET network.
-
-- **Input**: An `epanet` object.
-- **Output**: A set of zone names.
-- **Behavior**:
-  - Parses node and link IDs to identify zones based on naming conventions (e.g., `zone-element`).
-
----
-
-### setup_clients(zones: set)
-Establishes Modbus TCP connections for each zone.
-
-- **Input**: Set of zone names.
-- **Output**: Dictionary mapping zones to `ModbusTcpClient` objects.
-- **Behavior**:
-  - Creates Modbus clients for each zone and attempts to connect repeatedly until successful.
-
----
-
-### get_controls(clients: dict, en: epanet)
-Reads control values (e.g., pump speeds, valve settings) from PLCs via Modbus.
-
-- **Input**:
-  - Dictionary of Modbus clients.
-  - An `epanet` object.
-- **Output**: Dictionary of control values for pumps and valves.
-- **Behavior**:
-  - Reads values from Modbus registers for each zone and maps them to corresponding elements in EPANET.
-
----
-
-### set_controls(en: epanet, controls: dict)
-Applies control values from PLCs to the EPANET simulation.
-
-- **Input**:
-  - An `epanet` object.
-  - Dictionary of control values.
-- **Output**: None.
-- **Behavior**:
-  - Updates pump speeds and valve settings in EPANET based on received controls.
-
----
-
-### read_data(en: epanet)
-Extracts current simulation data (e.g., pressures, flow rates) from EPANET.
-
-- **Input**: An `epanet` object.
-- **Output**: Dictionary containing simulation data for nodes and links.
-- **Behavior**:
-  - Reads hydraulic properties (e.g., pressure, flow rate) for each element in the network.
-
----
-
-### write_data(clients: dict, data: dict)
-Writes simulation results back to PLCs via Modbus.
-
-- **Input**:
-  - Dictionary of Modbus clients.
-  - Dictionary of simulation data.
-- **Output**: None.
-- **Behavior**:
-  - Converts simulation data into Modbus register format and writes it to the appropriate PLC registers.
-
----
-
-### main()
-Orchestrates the entire process of running the EPANET simulation with Modbus controls.
-
-1. Initializes EPANET and Modbus connections.
-2. Enters a continuous loop where it:
-   - Reads control values from PLCs.
-   - Updates EPANET with these controls.
-   - Runs a hydraulic analysis step in EPANET.
-   - Extracts simulation data and writes it back to PLCs.
-3. Handles program interruption and cleanup.
-
----
-
-## Data Flow
-
-1. **PLC to EPANET**:
-   - Control values (e.g., pump speeds, valve settings) are read from Modbus registers and applied to corresponding elements in EPANET.
-
-2. **EPANET to PLC**:
-   - After each hydraulic analysis step, results (e.g., pressures, flow rates) are extracted from EPANET and written back to Modbus registers for each zone.
-
----
-
-## Modbus Register Mapping
-
-| Data Type       | Register Address | Description              |
-|------------------|------------------|--------------------------|
-| Pump Speeds      | Starting at 1000 | Control pump operation.  |
-| Valve Settings   | Starting at 2000 | Control valve operation. |
-| Simulation Data  | Sequential       | Results for monitoring.  |
-
-Each value occupies two registers (FLOAT32 format).
-
----
-
-This documentation provides a detailed explanation of how the script operates and interacts with both EPANET and external PLCs via Modbus TCP communication. It ensures real-time bidirectional data flow for efficient water distribution network management.
