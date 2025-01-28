@@ -93,6 +93,7 @@ Something here...
 - `def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:`
 
 The `setup_clients` function ...
+https://github.com/Ketho/OT-Simulation/blob/test/docs/openplc.md#adding-a-plc
 
 Function:
 
@@ -179,7 +180,72 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
         sys.exit(1)
 ```
 
-Something here...
+```
+{'zone0': {'valve1': {'setting': 1.8367379491291107e-40}, 'valve2': {'setting': 1.8367379491291107e-40}, 'valve3': {'setting': 1.8367379491291107e-40}, 'valve4': {'setting': 1.8367379491291107e-40}}, 'zone3': {'pump1': {'speed': 9.183689745645554e-41}, 'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}}, 'zone1': {'pump1': {'speed': 9.183689745645554e-41}, 'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}}, 'zone4': {'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}, 'pump1': {'speed': 9.183689745645554e-41}}, 'zone2': {'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}, 'pump1': {'speed': 9.183689745645554e-41}}}
+```
+
+```
+{
+    "zone0": {
+        "valve1": {
+            "setting": 1.8367379491291107e-40
+        },
+        "valve2": {
+            "setting": 1.8367379491291107e-40
+        },
+        "valve3": {
+            "setting": 1.8367379491291107e-40
+        },
+        "valve4": {
+            "setting": 1.8367379491291107e-40
+        }
+    },
+    "zone3": {
+        "pump1": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump2": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump3": {
+            "speed": 9.183689745645554e-41
+        }
+    },
+    "zone1": {
+        "pump1": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump2": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump3": {
+            "speed": 9.183689745645554e-41
+        }
+    },
+    "zone4": {
+        "pump2": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump3": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump1": {
+            "speed": 9.183689745645554e-41
+        }
+    },
+    "zone2": {
+        "pump2": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump3": {
+            "speed": 9.183689745645554e-41
+        },
+        "pump1": {
+            "speed": 9.183689745645554e-41
+        }
+    }
+}
+```
 
 ---
 
@@ -300,7 +366,204 @@ def read_data(en: epanet) -> dict:
         sys.exit(1)
 ```
 
-Something here...
+```
+{'zone0': {'junction2': {'index': '1', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction3': {'index': '2', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction4': {'index': '3', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction5': {'index': '4', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction6': {'index': '5', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction1': {'index': '147', 'hydraulic_head': '1.99999996490334e-13', 'pressure': '1.99999996490334e-13', 'elevation': '0.0'}, 'reservoir1': {'index': '149', 'hydraulic_head': '0.0', 'pressure': '0.0', 'elevation': '0.0'}, 'valve1': {'index': '152', 'status': '1', 'flow_rate': '0.0904926210641861', 'setting': '0.0'}, 'valve2': {'index': '153', 'status': '1', 'flow_rate': '0.0', 'setting': '0.0'}, 'valve3': {'index': '154', 'status': '1', 'flow_rate': '-0.0005311733111739159', 'setting': '0.0'}, 'valve4': {'index': '155', 'status': '1', 'flow_rate': '0.0005311733111739159', 'setting': '0.0'}}, 'zone3': {'junction1': {'index': '6', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction6': {'index': '34', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction2': {'index': '35', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction5': {'index': '36', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction3': {'index': '37', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction4': {'index': '38', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node40': {'index': '39', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node39': {'index': '40', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node38': {'index': '41', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node37': {'index': '42', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node36': {'index': '43', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node35': {'index': '44', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node34': {'index': '45', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node33': {'index': '46', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node32': {'index': '47', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node31': {'index': '48', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node41': {'index': '49', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node1': {'index': '50', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node2': {'index': '51', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node3': {'index': '52', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node4': {'index': '53', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node5': {'index': '54', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node6': {'index': '55', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node7': {'index': '56', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node29': {'index': '57', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node30': {'index': '58', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node23': {'index': '59', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node24': {'index': '60', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node25': {'index': '61', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node26': {'index': '62', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node27': {'index': '63', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node28': {'index': '64', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node8': {'index': '65', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node18': {'index': '66', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node17': {'index': '67', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node16': {'index': '68', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node15': {'index': '69', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node14': {'index': '70', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node13': {'index': '71', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node12': {'index': '72', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node11': {'index': '73', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node10': {'index': '74', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node9': {'index': '75', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node22': {'index': '76', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node21': {'index': '77', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node20': {'index': '78', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node19': {'index': '79', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'tank1': {'index': '153', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0', 'minimum_water_level': '0.0', 'maximum_water_level': '50.0', 'initial_water_level': '50.0', 'minimum_water_volume': '0.0', 'maximum_water_volume': '98174.7734375', 'initial_water_volume': '98174.7734375'}, 'pump1': {'index': '141', 'status': '0', 'flow_rate': '0.0', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '0.0'}, 'pump2': {'index': '144', 'status': '1', 'flow_rate': '0.02326112985610962', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '2.0630763356473348e-18'}, 'pump3': {'index': '147', 'status': '1', 'flow_rate': '0.0004578706284519285', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '0.0'}}, 'zone1': {'junction2': {'index': '7', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction3': {'index': '8', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction4': {'index': '9', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction1': {'index': '10', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node2': {'index': '11', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node3': {'index': '12', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node4': {'index': '13', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node5': {'index': '14', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node6': {'index': '15', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node7': {'index': '16', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node11': {'index': '17', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node12': {'index': '18', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node13': {'index': '19', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node14': {'index': '20', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node15': {'index': '21', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node16': {'index': '22', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node10': {'index': '23', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node8': {'index': '24', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node9': {'index': '25', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node1': {'index': '26', 'hydraulic_head': '49.998661041259766', 'pressure': '49.998661041259766', 'elevation': '0.0'}, 'node18': {'index': '27', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node19': {'index': '28', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node20': {'index': '29', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node21': {'index': '30', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node22': {'index': '31', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node23': {'index': '32', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node24': {'index': '33', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node17': {'index': '148', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'tank1': {'index': '150', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0', 'minimum_water_level': '0.0', 'maximum_water_level': '50.0', 'initial_water_level': '50.0', 'minimum_water_volume': '0.0', 'maximum_water_volume': '98174.7734375', 'initial_water_volume': '98174.7734375'}, 'pump1': {'index': '140', 'status': '0', 'flow_rate': '0.0', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '0.0'}, 'pump2': {'index': '142', 'status': '1', 'flow_rate': '0.02326112985610962', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '2.0630763356473348e-18'}, 'pump3': {'index': '146', 'status': '1', 'flow_rate': '0.09038212150335312', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '3.138246150793097e-17'}}, 'zone4': {'junction1': {'index': '80', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction7': {'index': '81', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction2': {'index': '82', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction3': {'index': '83', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction6': {'index': '84', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction4': {'index': '85', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction5': {'index': '86', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node31': {'index': '87', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node32': {'index': '88', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node35': {'index': '89', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node34': {'index': '90', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node33': {'index': '91', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node11': {'index': '92', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node10': {'index': '93', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node12': {'index': '94', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node6': {'index': '95', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node7': {'index': '96', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node8': {'index': '97', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node9': {'index': '98', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node1': {'index': '99', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node2': {'index': '100', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node4': {'index': '101', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node5': {'index': '102', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node3': {'index': '103', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node15': {'index': '104', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node14': {'index': '105', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node13': {'index': '106', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node20': {'index': '107', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node19': {'index': '108', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node18': {'index': '109', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node17': {'index': '110', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node16': {'index': '111', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node24': {'index': '112', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node23': {'index': '113', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node21': {'index': '114', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node22': {'index': '115', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node28': {'index': '116', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node27': {'index': '117', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node29': {'index': '118', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node30': {'index': '119', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node25': {'index': '120', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node26': {'index': '121', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'tank1': {'index': '152', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0', 'minimum_water_level': '0.0', 'maximum_water_level': '50.0', 'initial_water_level': '50.0', 'minimum_water_volume': '0.0', 'maximum_water_volume': '98174.7734375', 'initial_water_volume': '98174.7734375'}, 'pump2': {'index': '145', 'status': '1', 'flow_rate': '0.02326112985610962', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '2.0630763356473348e-18'}, 'pump3': {'index': '148', 'status': '1', 'flow_rate': '8.897751831682399e-05', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '5.037188637665904e-22'}, 'pump1': {'index': '151', 'status': '0', 'flow_rate': '0.0', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '0.0'}}, 'zone2': {'junction1': {'index': '122', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction3': {'index': '123', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction4': {'index': '124', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'junction2': {'index': '125', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node1': {'index': '126', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node2': {'index': '127', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node3': {'index': '128', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node4': {'index': '129', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node5': {'index': '130', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node6': {'index': '131', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node11': {'index': '132', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node12': {'index': '133', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node13': {'index': '134', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node14': {'index': '135', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node10': {'index': '136', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node17': {'index': '137', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node15': {'index': '138', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node16': {'index': '139', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node18': {'index': '140', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node19': {'index': '141', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node20': {'index': '142', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node21': {'index': '143', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node8': {'index': '144', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node9': {'index': '145', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'node7': {'index': '146', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0'}, 'tank1': {'index': '151', 'hydraulic_head': '50.0', 'pressure': '50.0', 'elevation': '0.0', 'minimum_water_level': '0.0', 'maximum_water_level': '50.0', 'initial_water_level': '50.0', 'minimum_water_volume': '0.0', 'maximum_water_volume': '98174.7734375', 'initial_water_volume': '98174.7734375'}, 'pump2': {'index': '143', 'status': '1', 'flow_rate': '0.02326112985610962', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '2.0630763356473348e-18'}, 'pump3': {'index': '149', 'status': '1', 'flow_rate': '0.00035591007326729596', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '0.0'}, 'pump1': {'index': '150', 'status': '0', 'flow_rate': '0.0', 'power': '1.0', 'speed': '1.0193895617666565e-38', 'energy_usage': '0.0'}}}
+```
+
+```
+[---TRUNCATED---]
+        }
+    },
+    "zone2": {
+        "junction1": {
+            "index": "122",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "junction3": {
+            "index": "123",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "junction4": {
+            "index": "124",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "junction2": {
+            "index": "125",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node1": {
+            "index": "126",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node2": {
+            "index": "127",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node3": {
+            "index": "128",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node4": {
+            "index": "129",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node5": {
+            "index": "130",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node6": {
+            "index": "131",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node11": {
+            "index": "132",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node12": {
+            "index": "133",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node13": {
+            "index": "134",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node14": {
+            "index": "135",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node10": {
+            "index": "136",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node17": {
+            "index": "137",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node15": {
+            "index": "138",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node16": {
+            "index": "139",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node18": {
+            "index": "140",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node19": {
+            "index": "141",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node20": {
+            "index": "142",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node21": {
+            "index": "143",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node8": {
+            "index": "144",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node9": {
+            "index": "145",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "node7": {
+            "index": "146",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0"
+        },
+        "tank1": {
+            "index": "151",
+            "hydraulic_head": "50.0",
+            "pressure": "50.0",
+            "elevation": "0.0",
+            "minimum_water_level": "0.0",
+            "maximum_water_level": "50.0",
+            "initial_water_level": "50.0",
+            "minimum_water_volume": "0.0",
+            "maximum_water_volume": "98174.7734375",
+            "initial_water_volume": "98174.7734375"
+        },
+        "pump2": {
+            "index": "143",
+            "status": "1",
+            "flow_rate": "0.02326112985610962",
+            "power": "1.0",
+            "speed": "1.0193895617666565e-38",
+            "energy_usage": "2.0630763356473348e-18"
+        },
+        "pump3": {
+            "index": "149",
+            "status": "1",
+            "flow_rate": "0.00035591007326729596",
+            "power": "1.0",
+            "speed": "1.0193895617666565e-38",
+            "energy_usage": "0.0"
+        },
+        "pump1": {
+            "index": "150",
+            "status": "0",
+            "flow_rate": "0.0",
+            "power": "1.0",
+            "speed": "1.0193895617666565e-38",
+            "energy_usage": "0.0"
+        }
+    }
+}
+```
 
 ---
 
