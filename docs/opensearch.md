@@ -4,7 +4,7 @@ OpenSearch is an open-source dashboard that we use to [automatically ingest](htt
 ## Screenshots
 For example, the `webserver/log/apache2/access.log` log file is read and then visualized in our OpenSearch dashboard through a log ingestion workflow.
 
-- The access.log file
+- The access.log file from the Apache web server
 
 ![](https://github.com/user-attachments/assets/4616222a-3eeb-4fc8-a8e8-b2597e3ab44a)
 
@@ -48,7 +48,7 @@ The log file paths are defined in the `docker-compose.yaml`. For example The `/v
 ```
 
 ## Testing
-When visiting the (WordPress) web server on http://127.0.0.1/80 the `access.log` will be updated and should be automatically ingested to the OpenSearch dashboard.
+When visiting the (WordPress) web server on http://127.0.0.1:80 the `access.log` will be updated and should be automatically ingested to the OpenSearch dashboard.
 
 This can also be manually tested by adding a line to the log file, which should show in the dashboard when refreshing it. This will require first elevating to root with `sudo su` or otherwise editing with `sudo nano`, since the log files are supposed to be read-only.
 ```
