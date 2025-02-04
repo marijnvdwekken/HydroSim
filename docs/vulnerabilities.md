@@ -6,7 +6,9 @@ The **OT SIM** environment consists of the following components:
 2. **Web server**  
 3. **ScadaLTS**  
 4. **Database for ScadaLTS**  
-5. **OpenPLC (multiple instances)**  
+5. **OpenPLC (multiple instances)**
+
+For each one of these components we have researched its attack surfaces and have archived different vulnerabilities that can be used to exploit.  
 
 ## 2. Web Server
 
