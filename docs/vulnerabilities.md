@@ -1,4 +1,4 @@
-# Vulnerabilities in OT-Simulation
+# 1. Vulnerabilities in OT-Simulation
 
 The **OT SIM** environment consists of the following components:
 
@@ -10,7 +10,7 @@ The **OT SIM** environment consists of the following components:
 
 For each one of these components we have researched its attack surfaces and have archived different vulnerabilities that can be used to exploit.  
 
-## 1. Web Server
+## 2. Web Server
 
 The web server runs on a **`wordpress:5.8-php7.4-apache`** container. Within this container, an outdated and vulnerable version of Bash is installed: **`bash-3.1`**, which is susceptible to the **Shellshock vulnerability**. This allows an attacker to exploit remote command execution (RCE) through a vulnerable script that can be triggered remotely.
 
@@ -18,7 +18,7 @@ Additionally, the server contains credentials for an employee account, which cou
 
 ---
 
-## 2. ScadaLTS
+## 3. ScadaLTS
 
 The **ScadaLTS environment** is protected by a login screen, but it is susceptible to brute-force attacks.
 
@@ -35,7 +35,7 @@ Once an attacker gains administrative privileges, they can manipulate key values
 
 ---
 
-## 3. OpenPLC
+## 5. OpenPLC
 
 The **PLCs (Programmable Logic Controllers)** are accessible from the **HMI**, and the **Modbus port** is open. If the PLCs are not securely programmed, attackers can directly control pumps and other equipment, bypassing normal operational logic.
 
