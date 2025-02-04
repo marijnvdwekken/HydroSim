@@ -1,4 +1,4 @@
-# Vulnerabilities in OT-Simulation
+# 1. Vulnerabilities in OT-Simulation
 
 The **OT SIM** environment consists of the following components:
 
