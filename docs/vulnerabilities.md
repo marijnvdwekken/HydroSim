@@ -51,9 +51,9 @@ The **PLCs (Programmable Logic Controllers)** are accessible from the **HMI**, a
 
 ### CVE's
 - CVE-2018-20818
-  - A buffer overflow vulnerability was discovered in the OpenPLC controller, in the OpenPLC_v2 and OpenPLC_v3 versions. It occurs in the modbus.cpp mapUnusedIO() function, which can cause a runtime crash of the PLC or possibly have unspecified other impact.
+A buffer overflow vulnerability was discovered in the OpenPLC controller, in the OpenPLC_v2 and OpenPLC_v3 versions. It occurs in the modbus.cpp mapUnusedIO() function, which can cause a runtime crash of the PLC or possibly have unspecified other impact.
 -  CVE-2021-3351
-  -  OpenPLC runtime V3 through 2016-03-14 allows stored XSS via the Device Name to the web server's Add New Device page.
+OpenPLC runtime V3 through 2016-03-14 allows stored XSS via the Device Name to the web server's Add New Device page.
 
 ---
 
