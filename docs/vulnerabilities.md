@@ -51,10 +51,24 @@ The **PLCs (Programmable Logic Controllers)** are accessible from the **HMI**, a
 
 ### CVE's
 - CVE-2018-20818
-A buffer overflow vulnerability was discovered in the OpenPLC controller, in the OpenPLC_v2 and OpenPLC_v3 versions. It occurs in the modbus.cpp mapUnusedIO() function, which can cause a runtime crash of the PLC or possibly have unspecified other impact.
+  A buffer overflow vulnerability was discovered in the OpenPLC controller, in the OpenPLC_v2 and OpenPLC_v3 versions. It occurs in the modbus.cpp mapUnusedIO() function, which can cause a runtime crash of the PLC or possibly have unspecified other impact.
 -  CVE-2021-3351
-OpenPLC runtime V3 through 2016-03-14 allows stored XSS via the Device Name to the web server's Add New Device page.
-
+  OpenPLC runtime V3 through 2016-03-14 allows stored XSS via the Device Name to the web server's Add New Device page.
+- CVE-2021-31630
+  Command Injection in Open PLC Webserver v3 allows remote attackers to execute arbitrary code via the "Hardware Layer Code Box" component on the "/hardware" page of the application. (Authentication required) **POC Available**
+- CVE-2024-34026
+  A stack-based buffer overflow vulnerability exists in the OpenPLC Runtime EtherNet/IP parser functionality of OpenPLC _v3 b4702061dc14d1024856f71b4543298d77007b88. A specially crafted EtherNet/IP request can lead to remote code execution. An attacker can send a series of EtherNet/IP requests to trigger this vulnerability.
+- CVE-2024-36980
+  An out-of-bounds read vulnerability exists in the OpenPLC Runtime EtherNet/IP PCCC parser functionality of OpenPLC_v3 b4702061dc14d1024856f71b4543298d77007b88. A specially crafted network request can lead to denial of service. An attacker can send a series of EtherNet/IP requests to trigger this   vulnerability.This is the first instance of the incorrect comparison.
+- CVE-2024-36981
+  An out-of-bounds read vulnerability exists in the OpenPLC Runtime EtherNet/IP PCCC parser functionality of OpenPLC_v3 b4702061dc14d1024856f71b4543298d77007b88. A specially crafted network request can lead to denial of service. An attacker can send a series of EtherNet/IP requests to trigger this vulnerability.This is the final instance of the incorrect comparison.
+- CVE-2024-37741
+  OpenPLC 3 through 9cd8f1b allows XSS via an SVG document as a profile picture.
+- CVE-2024-39589
+  Multiple invalid pointer dereference vulnerabilities exist in the OpenPLC Runtime EtherNet/IP parser functionality of OpenPLC_v3 16bf8bac1a36d95b73e7b8722d0edb8b9c5bb56a. A specially crafted EtherNet/IP request can lead to denial of service. An attacker can send a series of EtherNet/IP requests to trigger these vulnerabilities.This instance of the vulnerability occurs within the `Protected_Logical_Read_Reply` function
+- CVE-2024-39590
+Multiple invalid pointer dereference vulnerabilities exist in the OpenPLC Runtime EtherNet/IP parser functionality of OpenPLC_v3 16bf8bac1a36d95b73e7b8722d0edb8b9c5bb56a. A specially crafted EtherNet/IP request can lead to denial of service. An attacker can send a series of EtherNet/IP requests to trigger these vulnerabilities.This instance of the vulnerability occurs within the `Protected_Logical_Write_Reply` function
+  
 ---
 
 ## Conclusion
