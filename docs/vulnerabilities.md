@@ -34,9 +34,6 @@ Once an attacker gains administrative privileges, they can manipulate key values
 - Unauthorized changes to **process values**, leading to incorrect decision-making by operators.
 
 ### CVE's
-- **CVE-2022-41976**
-  An privilege escalation issue was discovered in Scada-LTS 2.7.1.1 build 2948559113 allows remote attackers, authenticated in the application as a low-privileged user to change role (e.g., to administrator) by updating their user profile.
-
 - **CVE-2023-33472**
   An issue was discovered in Scada-LTS v2.7.5.2 build 4551883606 and before, allows remote attackers with low-level authentication to escalate privileges, execute arbitrary code, and obtain sensitive information via Event Handlers function.
 
