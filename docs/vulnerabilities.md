@@ -34,10 +34,10 @@ Once an attacker gains administrative privileges, they can manipulate key values
 - Unauthorized changes to **process values**, leading to incorrect decision-making by operators.
 
 ### CVE's
-- **CVE-2023-33472**
+- **CVE-2023-33472**  
   An issue was discovered in Scada-LTS v2.7.5.2 build 4551883606 and before, allows remote attackers with low-level authentication to escalate privileges, execute arbitrary code, and obtain sensitive information via Event Handlers function.
 
-- **CVE-2024-7901**
+- **CVE-2024-7901**  
   A vulnerability has been found in Scada-LTS 2.7.8 and classified as problematic. Affected by this vulnerability is an unknown functionality of the file /Scada-LTS/app.shtm#/alarms/Scada of the component Message Handler. The manipulation leads to cross site scripting. The attack can be launched remotely. The exploit has been disclosed to the public and may be used. NOTE: A fix is planned for the upcoming release at the end of September 2024.
 
 ---
