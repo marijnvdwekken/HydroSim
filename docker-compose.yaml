@@ -21,6 +21,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    volumes:
+      - ./webserver/log/apache2:/var/log/apache2
     networks:
       - intranet
 
