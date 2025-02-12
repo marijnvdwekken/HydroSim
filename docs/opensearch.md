@@ -108,6 +108,6 @@ Which should return the following JSON response.
 
 ## Logging Scada-LTS
 
-The Scada-LTS log files are in `/usr/local/tomcat/logs` and are created by user and date, for example `localhost_access_log.2025-02-12.txt` which would require us writing a script to properly implement automatic log file ingestion.
+The scadalts container log files are in `/usr/local/tomcat/logs` and are created by user and date, for example `localhost_access_log.2025-02-12.txt` which would require us writing a script to properly implement automatic log file ingestion.
 
 ![](https://github.com/user-attachments/assets/4af86778-5e30-491f-a9b8-f8c3facccd14)
