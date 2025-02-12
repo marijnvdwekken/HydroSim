@@ -10,7 +10,11 @@ For example, the `webserver/log/apache2/access.log` log file is read and then vi
 
 - The ingested log file visualization in OpenSearch Dashboard
 
+![](https://github.com/user-attachments/assets/54c1bb90-0231-4e7e-845c-13a46008ab59)
+
 ![](https://github.com/user-attachments/assets/d1907fe0-043b-4e40-afd2-7fc72525f5fd)
+
+
 
 ## Docker configuration
 It comprises of the following containers:
