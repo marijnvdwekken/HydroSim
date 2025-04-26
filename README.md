@@ -35,7 +35,7 @@ Retrieves logs from the 2 webservers:
 ```
 git clone https://github.com/coecs-hhs/HydroSim
 cd HydroSim
-docker compose up -d
+sudo docker compose up -d
 ```
 
 ## Documentation
