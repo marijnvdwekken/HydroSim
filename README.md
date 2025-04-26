@@ -33,8 +33,8 @@ Retrieves logs from the 2 webservers:
 
 ## Installation
 ```
-git clone https://github.com/Ketho/OT-Simulation
-cd OT-Simulation
+git clone https://github.com/coecs-hhs/HydroSim
+cd HydroSim
 docker compose up -d
 ```
 
