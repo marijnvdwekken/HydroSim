@@ -26,6 +26,8 @@ services:
     networks:
       - intranet
       - database
+    command: apache2ctl -D FOREGROUND
+
 
   scadalts:
     container_name: scadalts
