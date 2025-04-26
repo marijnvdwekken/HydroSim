@@ -25,6 +25,7 @@ services:
       - ./webserver/log/apache2:/var/log/apache2
     networks:
       - intranet
+      - database
 
   scadalts:
     container_name: scadalts
