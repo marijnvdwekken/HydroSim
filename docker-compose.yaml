@@ -43,7 +43,6 @@ services:
     volumes:
       - ./scadalts/tomcat_log:/usr/local/tomcat/logs:rw
       - ./scadalts/config.zip:/config.zip
-    
     command:
   [
     "/usr/bin/wait-for-it",
@@ -56,7 +55,6 @@ services:
     "-c",
     "curl -d 'username=admin&password=admin&submit=Login' -c cookies http://localhost:8080/ScadaBR/login.htm && curl -b cookies -v -F importFile=/config.zip http://localhost:8080/ScadaBR/import_project.htm && curl 'http://localhost:8080/ScadaBR/dwr/call/plaincall/EmportDwr.loadProject.dwr' -X POST -b cookies --data-raw 'callCount=1\npage=/ScadaBR/import_project.htm\nhttpSessionId=\nscriptSessionId=D15BC242A0E69D4251D5585A07806324697\nc0-scriptName=EmportDwr\nc0-methodName=loadProject\nc0-id=0\nbatchId=5\n' && /usr/local/tomcat/bin/catalina.sh run"
   ]
-  
     networks:
       - intranet
       - plc_network
