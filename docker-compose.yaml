@@ -21,10 +21,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    depends_on:
+      - database
+    environment:
+      - WORDPRESS_DB_HOST=database:3306
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=root
+      - WORDPRESS_DB_NAME=scadalts
     volumes:
       - ./webserver/log/apache2:/var/log/apache2
     networks:
       - intranet
+      - database
 
   scadalts:
     container_name: scadalts
