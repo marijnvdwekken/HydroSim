@@ -12,8 +12,8 @@ cd /OpenPLC_v3/webserver/scripts
 ./compile_program.sh script.st
 
 # generate mbconfig.cfg
-cd /OpenPLC_v3/webserver/
-python2.7 -c 'import webserver; webserver.generate_mbconfig()'
+#cd /OpenPLC_v3/webserver/
+#python2.7 -c 'import webserver; webserver.generate_mbconfig()'
 
 # start openplc webserver
 cd /OpenPLC_v3
