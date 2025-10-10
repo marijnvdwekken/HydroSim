@@ -39,15 +39,11 @@ services:
       - "8080"
     volumes:
       - ./scadalts/tomcat_log:/usr/local/tomcat/logs:rw
-<<<<<<< HEAD
-      - ./scadalts/Config.zip:/config.zip
+      - ./scadalts/config:/config.zip
       - ./scadalts/config.zip/uploads:/usr/local/tomcat/webapps/ScadaBR/graphics/uploads:ro
       - ./scadalts/config.zip/uploads:/usr/local/tomcat/webapps/ScadaBR/graphics/view_uploads:ro
       - ./scadalts/config.zip/uploads:/usr/local/tomcat/webapps/ScadaBR/WEB-INF/filedata/view_uploads:ro
       - ./scadalts/config.zip/uploads:/usr/local/tomcat/webapps/Scada-LTS/uploads:ro
-=======
-      - ./scadalts/config:/config.zip
->>>>>>> 7777f62d3306af96321547b62f7e2a86bff46ac8
     command:
       [
         "/usr/bin/wait-for-it",
