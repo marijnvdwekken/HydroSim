@@ -39,7 +39,7 @@ services:
       - "8080"
     volumes:
       - ./scadalts/tomcat_log:/usr/local/tomcat/logs:rw
-      - ./scadalts/config.zip:/config.zip
+      - ./scadalts/config:/config.zip
     command:
       [
         "/usr/bin/wait-for-it",
