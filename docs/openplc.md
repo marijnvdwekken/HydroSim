@@ -38,12 +38,12 @@ Download to the openplc editor to make the ladderlogic:
 - [Openplc-editor](https://autonomylogic.com/download/).
 
 ## Overview
-The ladder logic program uses holding registers to communicate with ScadaLTS. The `PumpSpeed` variable is mapped to `%QW1000`, which corresponds to the pump speed in EPANET.
+The ladder logic program uses holding registers to communicate with ScadaLTS. Pump speeds are exposed as IEEE‑754 `REAL` values that occupy two consecutive Modbus holding registers starting at address `1000`. The high word (`%QW1000`) contains the most significant bits and the low word (`%QW1001`) contains the least significant bits so that EPANET can read the values directly as `FLOAT32`.
 
 ## Variables
 Below are the primary variables used in the ladder logic:
 
-- **PumpSpeed**: Located at `%QW1000` in EPANET.
+- **PumpSpeed**: Exported as a 32-bit float split over `%QW1000`/`%QW1001` (and subsequent even/odd pairs for additional pumps).
 - **StartButton**: A functional button within ScadaLTS. Can be assigned between `%QX0.0 – %QX99.7`.  
 - **Reference**: For additional details on Modbus addressing, visit [OpenPLC-Adressing](https://autonomylogic.com/docs/2-5-modbus-addressing/).
 

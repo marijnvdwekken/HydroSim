@@ -224,8 +224,10 @@ If any error occurs during this process, the function prints an error message an
 
 Below is an example of the controls dictionary when printed out.
 
+> Note: Pump speeds are published by the OpenPLC programs as 32-bit floats (two consecutive registers) so the bridge now sees clean numeric values instead of the tiny denormalised numbers that appeared when single 16-bit registers were reinterpreted as floats. EPANET writes the low word first when pushing data to the PLCs so that ScadaLTS’s Modbus driver (which expects little-endian word order) interprets the values correctly.
+
 ```
-{'zone0': {'valve1': {'setting': 1.8367379491291107e-40}, 'valve2': {'setting': 1.8367379491291107e-40}, 'valve3': {'setting': 1.8367379491291107e-40}, 'valve4': {'setting': 1.8367379491291107e-40}}, 'zone3': {'pump1': {'speed': 9.183689745645554e-41}, 'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}}, 'zone1': {'pump1': {'speed': 9.183689745645554e-41}, 'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}}, 'zone4': {'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}, 'pump1': {'speed': 9.183689745645554e-41}}, 'zone2': {'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}, 'pump1': {'speed': 9.183689745645554e-41}}}
+{'zone0': {'valve1': {'setting': 0.0}, 'valve2': {'setting': 0.0}, 'valve3': {'setting': 0.0}, 'valve4': {'setting': 0.0}}, 'zone3': {'pump1': {'speed': 1.0}, 'pump2': {'speed': 1.0}, 'pump3': {'speed': 1.0}}, 'zone1': {'pump1': {'speed': 1.0}, 'pump2': {'speed': 1.0}, 'pump3': {'speed': 1.0}}, 'zone4': {'pump2': {'speed': 0.0}, 'pump3': {'speed': 0.0}, 'pump1': {'speed': 0.0}}, 'zone2': {'pump2': {'speed': 0.0}, 'pump3': {'speed': 0.0}, 'pump1': {'speed': 0.0}}}
 ```
 
 Formatted with JSON:
@@ -234,60 +236,60 @@ Formatted with JSON:
 {
     "zone0": {
         "valve1": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         },
         "valve2": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         },
         "valve3": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         },
         "valve4": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         }
     },
     "zone3": {
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         }
     },
     "zone1": {
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         }
     },
     "zone4": {
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         }
     },
     "zone2": {
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         }
     }
 }

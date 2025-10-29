@@ -6,6 +6,13 @@ log-pipeline:
     - grok:
         match:
           log: [ "%{COMMONAPACHELOG}" ]
+    - date:
+        match:
+          - key: "timestamp"
+            patterns:
+              - "dd/MMM/yyyy:HH:mm:ss Z"
+        destination: "@timestamp"
+        from_time_received: false
   sink:
     - opensearch:
         hosts: [ "https://opensearch-node1:9200" ]
