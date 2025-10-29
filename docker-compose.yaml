@@ -223,9 +223,11 @@ services:
   fluent-bit:
     container_name: fluent-bit
     image: docker.io/fluent/fluent-bit
+    user: "0:0"
     volumes:
       - ./opensearch/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-      - ./webserver/log/apache2/access.log:/var/log/test.log
+      - ./webserver/log/apache2/access.log:/var/log/webserver/access.log
+      - ./scadalts/tomcat_log:/var/log/scadalts
       - fluent-bit-buffer:/var/fluent-bit/buffer
     depends_on:
       - data-prepper
