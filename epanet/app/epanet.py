@@ -200,6 +200,8 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
                     registers: list[int] = client.convert_to_registers(
                         float(value), client.DATATYPE.FLOAT32
                     )
+                    if len(registers) == 2:
+                        registers = [registers[1], registers[0]]
 
                     client.write_registers(address, registers)
 
