@@ -227,7 +227,7 @@ services:
       dockerfile: Dockerfile
     user: "0:0"
     volumes:
-      - ./webserver/log/apache2/access.log:/var/log/webserver/access.log
+      - ./webserver/log/apache2:/var/log/webserver
       - ./scadalts/tomcat_log:/var/log/scadalts
       - fluent-bit-buffer:/var/fluent-bit/buffer
     depends_on:
@@ -235,6 +235,7 @@ services:
     networks:
       - opensearch-net
   data-prepper:
+    container_name: data-prepper
     build:
       context: ./opensearch/.
       dockerfile: Dockerfile
