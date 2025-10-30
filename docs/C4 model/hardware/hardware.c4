@@ -1,0 +1,30 @@
+model {
+    extend hardware {
+        container gateway 'Gateway' {
+            description '- Subscribeert op de MQTT-topics
+                - Zet JSON-data om naar data voor de PLC
+            '
+            -> plc0 'Geeft omgezette data door aan'
+        }
+
+        container plc0 'PLC' {
+            description '- Regelt de fysiek weergave van de SCADA.
+                - S7-300 of S7-1200 series PLC.
+                - Idealiter interchangable. 
+            '
+        }
+    }
+}
+
+views {
+    view hardwareview of hardware{
+        title 'Hardware / Overview'
+        description 'Hardware overview used in the HydroSim project'
+        include *,
+        server.hwconnectie
+
+        style server {
+            color muted
+        }
+    }
+}

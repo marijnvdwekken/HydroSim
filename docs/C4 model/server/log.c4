@@ -1,0 +1,41 @@
+model {
+    extend server.log {
+        component fb 'Fluent-bit' {
+            description 'Verzamelt logs uit containers'
+            style {}
+
+            -> dp 'Stuurt ontvangen logdata door naar de'
+        }
+
+        component dp 'Data-prepper' {
+            description 'Verwerkt / verrijkt logs'
+            style {}
+
+            -> server.db 'Slaat logs op in de'
+        }
+
+        component osnode 'OpenSearch-Node' {
+            description 'Genereert logs'
+            style {}
+            -> fb 'Stuurt ruwe logdata door naar de'
+        }
+
+        component osdashboard 'OpenSearch-Dashboard' {
+            description 'Toont logs aan de gebruiker'
+            style {}
+
+            user -> osdashboard 'Leest logging vanaf de'
+            -> server.db 'Vraagt data op om weer te geven in de'
+        }
+    }
+}
+
+views {
+    view logview of server.log {
+        title 'Server / log'
+        include 
+            *,
+            server.ui,
+
+    }
+}
