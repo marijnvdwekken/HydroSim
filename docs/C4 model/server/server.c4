@@ -1,0 +1,53 @@
+model {
+    extend server {
+        container ui 'User Interface' {
+            description 'Interfaces voor het aansturen van de virtuele OT omgeving.'
+            style {}       
+
+            -> server.plc-zone 'Update Simulator'
+            -> server.hwconnectie 'Update Hardware'
+            -> server.db 'Updates status'
+            -> server.log 'Log acties'
+        }
+        
+        container plc-zone 'PLC-zone 0-4' {
+            description 'Virtuele PLC\'s waarmee de waterdistributieplant gesimuleerd aangestuurd kan worden.'
+            style {}
+        }
+
+        container db 'Database' {
+            description 'Centrale database met de status van containers binnen de server'
+            style {
+                shape storage
+                color database-color
+            }
+            
+        }
+
+        container log 'Logging' {
+            description '- OpenSearch 
+                - Dashboard voor binnenhalen en weergeven van log-bestanden uit de Webserver en de SCADA containers.
+            '
+        }
+
+        container hwconnectie 'Hardware connectie' {
+            description '- Zelf toe te voegen connectie naar de fysieke hardware.
+                - MQTT
+            '
+            style {}
+
+            -> hardware 'Stuurt aan'
+        }
+    }
+}
+
+views {
+    view serverview of server{
+        title 'Server / Overview'
+        include *
+
+        style user, hacker, hardware {
+            color muted
+        }
+    }
+}

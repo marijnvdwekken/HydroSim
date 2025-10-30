@@ -1,0 +1,17 @@
+specification {
+    color actor-color #00ff77
+    color database-color #FFBF00
+    color tofix-color #e05353ff 
+    color tomake-color #FFFF00
+
+    element actor {
+        style {
+            shape person
+            color actor-color
+        }
+    }
+
+    element system
+    element container 
+    element component
+}

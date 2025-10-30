@@ -1,0 +1,43 @@
+model {
+    extend server.ui {
+        component SCADA-LTS {
+            description 'SCADA visuele interface voor het aansturen van de waterdistributieplant.'
+            style {}
+            
+        }
+
+        component EPA "EPAnet" {
+            description ''
+            style {}       
+
+            -> SCADA-LTS 'Simuleert waterdistributie-systeem'
+        }
+
+        component Webserver {
+            description 'Aanvalsvector voor de hacker om in de virtuele OT omgeving te komen.'
+            style {
+                icon tech:wordpress
+                shape browser
+            }
+
+            hacker -> Webserver 'Probeert in de OT omgeving binnen te breken via de' 
+        }
+    }
+}
+
+views {
+    view uiview of server.ui{
+        title 'Server / UI'
+        description 'User interface overview used in the HydroSim project'
+        include 
+            *,
+            server.log,
+            server.plc-zone,
+            server.hwconnectie,
+            server.db
+
+        style server.db, server.plc-zone, server.hwconnectie, user, hacker, server.log {
+            color muted
+        }
+    }
+}

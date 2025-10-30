@@ -1,0 +1,39 @@
+model {
+    extend server.hwconnectie {
+        component MQTT-Broker {
+            description 'MQTT-broker die het MQTT-verkeer regelt.'
+            style {
+            }
+            
+            -> hardware.gateway 'Stuurt MQTT-berichten naar'
+        }
+
+        component MQTT-Client {
+            description 'Publisht berichten op de juiste topics.'
+            style {
+            }
+            -> MQTT-Broker 'Publisht berichten voor fysieke hardware naar'
+        }
+
+        component MessagePrepper "Message prepper" {
+            description 'Zet SCADA informatie om naar JSON format voor in een MQTT-bericht.'
+            style {
+            }
+            server.SCADA-LTS -> MessagePrepper 'Stuurt data door om een bericht naar de hardware te sturen'
+            -> MQTT-Client 'Biedt geformatteerde JSON berichten aan'
+        }
+    }
+}
+
+views {
+    view hwconview of server.hwconnectie{
+        title 'Server / Hardware connectie'
+        description 'Benodigde containers voor de verbinding naar de fysieke hardware'
+        include 
+            *
+
+        style server.db, server.fb, server.plc-zone, user, hacker, server.log {
+            color muted
+        }
+    }
+}

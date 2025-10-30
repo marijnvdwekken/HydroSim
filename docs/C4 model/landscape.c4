@@ -1,0 +1,33 @@
+model {
+    // Actors
+    user = actor 'Default user' { description 'De operator die de waterdistributieplant aanstuurt.' }
+    hacker = actor 'Hacker' { description 'Probeert in te breken in de waterdistributieplant.'}
+
+    // Systems
+    server = system 'HydroSim Server' {
+        style {
+            icon tech:docker
+            opacity 10%
+        }
+        description 'Simulator voor een waterdistributieplant'
+    }
+
+    hardware = system 'HydroSim Hardware' {
+        description 'Een manquette met fysieke PLC\'s die als een "physical twin" werkt.'
+        style {
+          color green
+        }
+    }
+
+    user -> server.SCADA-LTS 'Stuurt waterdistributieplant aan op de'
+    user -> server 'Heeft interactie met de'
+    hacker -> server 'Beïnvloed illegaal de'
+    server -> hardware 'visualiseert fysiek de waterdistributieplant op de'
+}
+
+views {
+  view index {
+    title 'System context'
+    include *
+  }
+}
