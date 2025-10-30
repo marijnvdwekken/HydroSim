@@ -4,15 +4,24 @@ model {
             description 'Interfaces voor het aansturen van de virtuele OT omgeving.'
             style {}       
 
-            -> server.plc-zone 'Update Simulator'
-            -> server.hwconnectie 'Update Hardware'
-            -> server.db 'Updates status'
-            -> server.log 'Log acties'
+            // -> server.plc-zone 'Update Simulator'
+            // -> server.hwconnectie 'Update Hardware'
+            // -> server.db 'Updates status'
+            // -> server.log 'Log acties'
+        }
+
+        container epanet 'EPAnet' {
+
+
+            -> plc-zone 'Watersimulatie data doorsturen'
         }
         
         container plc-zone 'PLC-zone 0-4' {
             description 'Virtuele PLC\'s waarmee de waterdistributieplant gesimuleerd aangestuurd kan worden.'
             style {}
+
+            -> ui.SCADA-LTS 'EPANET watersimulatie data doorsturen'
+            -> epanet 'Veranderingen in actuatoren doorsturen'
         }
 
         container db 'Database' {

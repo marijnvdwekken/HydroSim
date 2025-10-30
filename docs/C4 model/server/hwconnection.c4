@@ -32,7 +32,7 @@ views {
         include 
             *
 
-        style server.db, server.fb, server.plc-zone, user, hacker, server.log {
+        style server.ui {
             color muted
         }
     }
