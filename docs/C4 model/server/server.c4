@@ -55,8 +55,11 @@ views {
         title 'Server / Overview'
         include *
 
-        style user, hacker, hardware {
+        style user, hacker {
             color muted
+        }
+        style hardware {
+            color green
         }
     }
 }
