@@ -1,0 +1,51 @@
+@startuml HydroSim Hardware diagram
+!define HARDWARE_COLOR #88CCFF
+package "Server" #FFDD88 {
+  class MqttService {
+    +connect(brokerUrl)
+    +subscribe(topic)
+    +publish(topic,msg)
+  }
+
+  object Topic {
+    +name: String
+    +qos: int
+  }
+
+  class JsonTranslator {
+    +toJson(data)
+    +fromJson(json)
+  }
+
+  class HardwareDispatcher {
+    +sendCommand(deviceId, payload)
+    +receiveStatus(deviceId)
+  }
+  HardwareDispatcher --> JsonTranslator : "Vertaal Modbus naar JSON / \nVertaal JSON naar Modbus"
+  HardwareDispatcher --> MqttService : "Publish JSON naar MQTT"
+
+  MqttService --> Topic : "Maakt aan / Publish"
+} 
+
+package "Hardware" #88CCFF{
+  class Pi_Receiver {
+    -portnr: int
+    +listen(port)
+    +onMessageReceived(data)
+  }
+
+  class Pi_ModbusSender {
+    +sendModbusCommand(address,functionCode,data)
+    +readModbusResponse()
+  }
+
+  class Pi_JsonTranslator{
+    +toJson(sensorData)
+    +fromJson(json)
+  }
+  Pi_Receiver --> Topic : "Subscribe"
+  Pi_Receiver --> Pi_JsonTranslator : "Vertaal JSON naar ModbusData"
+  Pi_Receiver --> Pi_ModbusSender : "Verstuur ModbusData naar PLC"
+} 
+' Pi_ModbusSender
+@enduml
