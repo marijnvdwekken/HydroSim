@@ -2,8 +2,10 @@
 !define HARDWARE_COLOR #88CCFF
 package "Server" #FFDD88 {
   class MqttService {
-    +connect(brokerUrl)
-    +subscribe(topic)
+    -topic: String
+    -brokerUrl: String
+    -connect(brokerUrl)
+    -subscribe(topic)
     +publish(topic,msg)
   }
 
@@ -28,13 +30,15 @@ package "Server" #FFDD88 {
 } 
 
 package "Hardware" #88CCFF{
-  class Pi_Receiver {
-    -portnr: int
-    +listen(port)
+  class Pi_MQTTReceiver {
+    -topic: String
+    -brokerUrl: String
+    -connect(brokerUrl)
+    -subscribe(topic)
     +onMessageReceived(data)
   }
 
-  class Pi_ModbusSender {
+  class Pi_ModbusComs {
     +sendModbusCommand(address,functionCode,data)
     +readModbusResponse()
   }
@@ -43,9 +47,9 @@ package "Hardware" #88CCFF{
     +toJson(sensorData)
     +fromJson(json)
   }
-  Pi_Receiver --> Topic : "Subscribe"
-  Pi_Receiver --> Pi_JsonTranslator : "Vertaal JSON naar ModbusData"
-  Pi_Receiver --> Pi_ModbusSender : "Verstuur ModbusData naar PLC"
+  Pi_MQTTReceiver --> Topic : "Subscribe"
+  Pi_MQTTReceiver --> Pi_JsonTranslator : "Vertaal JSON naar ModbusData"
+  Pi_MQTTReceiver --> Pi_ModbusComs : "Verstuur ModbusData naar PLC"
 } 
-' Pi_ModbusSender
+
 @enduml
