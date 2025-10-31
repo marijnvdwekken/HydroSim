@@ -40,7 +40,7 @@ model {
         }
 
         container hwconnectie 'Hardware connectie' {
-            description '- Zelf toe te voegen connectie naar de fysieke hardware.
+            description '- Zelf te implementeren connectie naar de fysieke hardware.
                 - MQTT
             '
             style {}

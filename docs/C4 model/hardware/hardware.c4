@@ -7,7 +7,6 @@ model {
             style {
                 color green
             }
-            -> plc0 'Geeft omgezette data door aan'
         }
 
         container plc0 'PLC' {

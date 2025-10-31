@@ -5,7 +5,7 @@ model {
             style {
             }
             
-            -> hardware.gateway 'Stuurt MQTT-berichten naar'
+            -> hardware.gateway.mqttclient 'Stuurt MQTT-berichten naar'
         }
 
         component MQTT-Client {
