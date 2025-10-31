@@ -1,5 +1,7 @@
 @startuml HydroSim Hardware diagram
-!define HARDWARE_COLOR #88CCFF
+' Altijd gevulde symbolen
+skinparam classAttributeIconSize 0
+
 package "Server" #FFDD88 {
   class MqttService {
     -topic: String
@@ -26,7 +28,7 @@ package "Server" #FFDD88 {
   HardwareDispatcher --> JsonTranslator : "Vertaal Modbus naar JSON / \nVertaal JSON naar Modbus"
   HardwareDispatcher --> MqttService : "Publish JSON naar MQTT"
 
-  MqttService --> Topic : "Maakt aan / Publish"
+  MqttService .[#red].> Topic : "Maakt aan / Publish"
 } 
 
 package "Hardware" #88CCFF{
@@ -47,7 +49,7 @@ package "Hardware" #88CCFF{
     +toJson(sensorData)
     +fromJson(json)
   }
-  Pi_MQTTReceiver --> Topic : "Subscribe"
+  Pi_MQTTReceiver .[#red].> Topic : "Subscribe"
   Pi_MQTTReceiver --> Pi_JsonTranslator : "Vertaal JSON naar ModbusData"
   Pi_MQTTReceiver --> Pi_ModbusComs : "Verstuur ModbusData naar PLC"
 } 
