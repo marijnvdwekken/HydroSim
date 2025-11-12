@@ -228,6 +228,22 @@ services:
     networks:
     - opensearch-net
 
+  #MQTT broker with TLS
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "8883:8883"
+    expose:
+      - "8883:8883"
+    volumes:
+      - ./broker/conf:/mosquitto/config
+      - ./broker/certs:/mosquitto/certs
+    user: "1883"
+    networks:
+      - mqtt_net
+
 volumes:
   opensearch-data1:
 
@@ -236,3 +252,4 @@ networks:
   plc_network:
   database:
   opensearch-net:
+  mqtt_net:
