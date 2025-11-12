@@ -21,6 +21,12 @@ BASE_DIR="."
 CLIENT_DIR="$BASE_DIR/clients"
 CA_DIR="$BASE_DIR/ca"
 
+# Maak de client directory aan als deze niet bestaat
+if [ ! -d "$CLIENT_DIR" ]; then
+  echo "Client directory bestaat niet. Maken van $CLIENT_DIR..."
+  mkdir -p "$CLIENT_DIR"
+fi
+
 # Bestandspaden
 KEY_FILE="$CLIENT_DIR/${CN}.key"
 CSR_FILE="$CLIENT_DIR/${CN}.csr"

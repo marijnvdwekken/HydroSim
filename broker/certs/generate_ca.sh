@@ -20,6 +20,12 @@ fi
 BASE_DIR="."
 CA_DIR="$BASE_DIR/ca"
 
+# Maak de CA directory aan als deze niet bestaat
+if [ ! -d "$CA_DIR" ]; then
+  echo "CA directory bestaat niet. Maken van $CA_DIR..."
+  mkdir -p "$CA_DIR"
+fi
+
 # Bestandspaden
 CA_KEY="$CA_DIR/ca.key"
 CA_CERT="$CA_DIR/ca.crt"

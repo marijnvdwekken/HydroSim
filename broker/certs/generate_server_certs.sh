@@ -21,6 +21,12 @@ BASE_DIR="."
 SERVER_DIR="$BASE_DIR/server"
 CA_DIR="$BASE_DIR/ca"
 
+# Maak de server directory aan als deze niet bestaat
+if [ ! -d "$SERVER_DIR" ]; then
+  echo "Server directory bestaat niet. Maken van $SERVER_DIR..."
+  mkdir -p "$SERVER_DIR"
+fi
+
 # Bestandspaden
 KEY_FILE="$SERVER_DIR/${CN}.key"
 CSR_FILE="$SERVER_DIR/${CN}.csr"
