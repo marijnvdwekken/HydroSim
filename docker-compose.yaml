@@ -1,5 +1,4 @@
 services:
-
   # Simulation
   epanet:
     container_name: epanet
@@ -8,6 +7,7 @@ services:
     build:
       context: ./epanet/.
       dockerfile: Dockerfile
+    restart: "always"
     volumes:
       - ./epanet/app:/app
     networks:
@@ -17,7 +17,7 @@ services:
   webserver:
     container_name: webserver
     build:
-      context: ./webserver/. 
+      context: ./webserver/.
       dockerfile: Dockerfile
     ports:
       - "80:80"
@@ -26,8 +26,11 @@ services:
     networks:
       - intranet
       - database
+    restart: "always"
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+        restart: true
     environment:
       - WORDPRESS_DB_HOST=database:3306
       - WORDPRESS_DB_USER=root
@@ -37,12 +40,15 @@ services:
   scadalts:
     container_name: scadalts
     image: scadalts/scadalts:v2.7.5.2
+    restart: "always"
     environment:
       - CATALINA_OPTS=-Xmx2G -Xms2G
     ports:
       - "8081:8080" # Used for external access and debugging
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+        restart: true
     expose:
       - "8080"
     volumes:
@@ -57,11 +63,10 @@ services:
         "/usr/bin/wait-for-it",
         "--host=database",
         "--port=3306",
-        "--timeout=30",
         "--strict",
         "--",
         "/usr/local/tomcat/bin/catalina.sh",
-        "run"
+        "run",
       ]
     networks:
       - intranet
@@ -71,6 +76,7 @@ services:
   database:
     container_name: database
     image: mysql/mysql-server:8.0.32
+    restart: "always"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
@@ -88,7 +94,9 @@ services:
   plc-zone0:
     container_name: plc-zone0
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
@@ -106,7 +114,9 @@ services:
   plc-zone1:
     container_name: plc-zone1
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
@@ -124,7 +134,9 @@ services:
   plc-zone2:
     container_name: plc-zone2
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
@@ -142,7 +154,9 @@ services:
   plc-zone3:
     container_name: plc-zone3
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
@@ -160,7 +174,9 @@ services:
   plc-zone4:
     container_name: plc-zone4
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
@@ -210,7 +226,7 @@ services:
     ports:
       - 5601:5601
     expose:
-      - '5601'
+      - "5601"
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200"]'
       OPENSEARCH_USERNAME: admin
