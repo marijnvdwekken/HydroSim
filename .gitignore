@@ -4,3 +4,4 @@ webserver/log
 epanet/app/scenario.txt
 epanet/app/scenario_temp*
 .venv
+/node_modules
