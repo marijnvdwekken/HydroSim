@@ -1,233 +1,233 @@
 [TITLE]
-
+test
 
 [JUNCTIONS]
 ;ID              	Elev        	Demand      	Pattern         
- zone0-junction2 	0           	0           	                	;
- zone0-junction3 	0           	0           	                	;
- zone0-junction4 	0           	0           	                	;
- zone0-junction5 	0           	0           	                	;
- zone0-junction6 	0           	0           	                	;
- zone3-junction1 	0           	0           	                	;
- zone1-junction2 	0           	0           	                	;
- zone1-junction3 	0           	0           	                	;
- zone1-junction4 	0           	0           	                	;
- zone1-junction1 	0           	0           	                	;
- zone1-node2     	0           	0.2         	1               	;
- zone1-node3     	0           	0.2         	1               	;
- zone1-node4     	0           	0.2         	1               	;
- zone1-node5     	0           	0.2         	1               	;
- zone1-node6     	0           	0.2         	1               	;
- zone1-node7     	0           	0.2         	1               	;
- zone1-node11    	0           	0           	                	;
- zone1-node12    	0           	0           	                	;
- zone1-node13    	0           	0           	                	;
- zone1-node14    	0           	0           	                	;
- zone1-node15    	0           	0           	                	;
- zone1-node16    	0           	0           	                	;
- zone1-node10    	0           	0           	                	;
- zone1-node8     	0           	0.2         	1               	;
- zone1-node9     	0           	0.2         	1               	;
- zone1-node1     	0           	0.2         	1               	;
- zone1-node18    	0           	0           	                	;
- zone1-node19    	0           	0           	                	;
- zone1-node20    	0           	0           	                	;
- zone1-node21    	0           	0           	                	;
- zone1-node22    	0           	0           	                	;
- zone1-node23    	0           	0           	                	;
- zone1-node24    	0           	0           	                	;
- zone3-junction6 	0           	0           	                	;
- zone3-junction2 	0           	0           	                	;
- zone3-junction5 	0           	0           	                	;
- zone3-junction3 	0           	0           	                	;
- zone3-junction4 	0           	0           	                	;
- zone3-node40    	0           	0           	                	;
- zone3-node39    	0           	0           	                	;
- zone3-node38    	0           	0           	                	;
- zone3-node37    	0           	0           	                	;
- zone3-node36    	0           	0           	                	;
- zone3-node35    	0           	0           	                	;
- zone3-node34    	0           	0           	                	;
- zone3-node33    	0           	0           	                	;
- zone3-node32    	0           	0           	                	;
- zone3-node31    	0           	0           	                	;
- zone3-node41    	0           	0           	                	;
- zone3-node1     	0           	0           	                	;
- zone3-node2     	0           	0           	                	;
- zone3-node3     	0           	0           	                	;
- zone3-node4     	0           	0           	                	;
- zone3-node5     	0           	0           	                	;
- zone3-node6     	0           	0           	                	;
- zone3-node7     	0           	0           	                	;
- zone3-node29    	0           	0           	                	;
- zone3-node30    	0           	0           	                	;
- zone3-node23    	0           	0           	                	;
- zone3-node24    	0           	0           	                	;
- zone3-node25    	0           	0           	                	;
- zone3-node26    	0           	0           	                	;
- zone3-node27    	0           	0           	                	;
- zone3-node28    	0           	0           	                	;
- zone3-node8     	0           	0           	                	;
- zone3-node18    	0           	0           	                	;
- zone3-node17    	0           	0           	                	;
- zone3-node16    	0           	0           	                	;
- zone3-node15    	0           	0           	                	;
- zone3-node14    	0           	0           	                	;
- zone3-node13    	0           	0           	                	;
- zone3-node12    	0           	0           	                	;
- zone3-node11    	0           	0           	                	;
- zone3-node10    	0           	0           	                	;
- zone3-node9     	0           	0           	                	;
- zone3-node22    	0           	0           	                	;
- zone3-node21    	0           	0           	                	;
- zone3-node20    	0           	0           	                	;
- zone3-node19    	0           	0           	                	;
- zone4-junction1 	0           	0           	                	;
- zone4-junction7 	0           	0           	                	;
- zone4-junction2 	0           	0           	                	;
- zone4-junction3 	0           	0           	                	;
- zone4-junction6 	0           	0           	                	;
- zone4-junction4 	0           	0           	                	;
- zone4-junction5 	0           	0           	                	;
- zone4-node31    	0           	0           	                	;
- zone4-node32    	0           	0           	                	;
- zone4-node35    	0           	0           	                	;
- zone4-node34    	0           	0           	                	;
- zone4-node33    	0           	0           	                	;
- zone4-node11    	0           	0           	                	;
- zone4-node10    	0           	0           	                	;
- zone4-node12    	0           	0           	                	;
- zone4-node6     	0           	0           	                	;
- zone4-node7     	0           	0           	                	;
- zone4-node8     	0           	0           	                	;
- zone4-node9     	0           	0           	                	;
- zone4-node1     	0           	0           	                	;
- zone4-node2     	0           	0           	                	;
- zone4-node4     	0           	0           	                	;
- zone4-node5     	0           	0           	                	;
- zone4-node3     	0           	0           	                	;
- zone4-node15    	0           	0           	                	;
- zone4-node14    	0           	0           	                	;
- zone4-node13    	0           	0           	                	;
- zone4-node20    	0           	0           	                	;
- zone4-node19    	0           	0           	                	;
- zone4-node18    	0           	0           	                	;
- zone4-node17    	0           	0           	                	;
- zone4-node16    	0           	0           	                	;
- zone4-node24    	0           	0           	                	;
- zone4-node23    	0           	0           	                	;
- zone4-node21    	0           	0           	                	;
- zone4-node22    	0           	0           	                	;
- zone4-node28    	0           	0           	                	;
- zone4-node27    	0           	0           	                	;
- zone4-node29    	0           	0           	                	;
- zone4-node30    	0           	0           	                	;
- zone4-node25    	0           	0           	                	;
- zone4-node26    	0           	0           	                	;
- zone2-junction1 	0           	0           	                	;
- zone2-junction3 	0           	0           	                	;
- zone2-junction4 	0           	0           	                	;
- zone2-junction2 	0           	0           	                	;
- zone2-node1     	0           	0           	                	;
- zone2-node2     	0           	0           	                	;
- zone2-node3     	0           	0           	                	;
- zone2-node4     	0           	0           	                	;
- zone2-node5     	0           	0           	                	;
- zone2-node6     	0           	0           	                	;
- zone2-node11    	0           	0           	                	;
- zone2-node12    	0           	0           	                	;
- zone2-node13    	0           	0           	                	;
- zone2-node14    	0           	0           	                	;
- zone2-node10    	0           	0           	                	;
- zone2-node17    	0           	0           	                	;
- zone2-node15    	0           	0           	                	;
- zone2-node16    	0           	0           	                	;
- zone2-node18    	0           	0           	                	;
- zone2-node19    	0           	0           	                	;
- zone2-node20    	0           	0           	                	;
- zone2-node21    	0           	0           	                	;
- zone2-node8     	0           	0           	                	;
- zone2-node9     	0           	0           	                	;
- zone2-node7     	0           	0           	                	;
- zone0-junction1 	0           	0           	                	;
- zone1-node17    	0           	0           	                	;
+ zone0-junction2 	10          	0           	                	;
+ zone0-junction3 	50          	0           	                	;
+ zone0-junction4 	50          	0           	                	;
+ zone0-junction5 	50          	0           	                	;
+ zone0-junction6 	50          	0           	                	;
+ zone3-junction1 	50          	0           	                	;
+ zone1-junction2 	50          	0           	                	;
+ zone1-junction3 	50          	0           	                	;
+ zone1-junction4 	50          	0           	                	;
+ zone1-junction1 	50          	0           	                	;
+ zone1-node2     	50          	.5          	1               	;
+ zone1-node3     	50          	.5          	1               	;
+ zone1-node4     	50          	.5          	1               	;
+ zone1-node5     	50          	.5          	1               	;
+ zone1-node6     	50          	.5          	1               	;
+ zone1-node7     	50          	.5          	1               	;
+ zone1-node11    	50          	.5          	1               	;
+ zone1-node12    	50          	.5          	1               	;
+ zone1-node13    	50          	.5          	1               	;
+ zone1-node14    	50          	.5          	1               	;
+ zone1-node15    	50          	.5          	1               	;
+ zone1-node16    	50          	.5          	1               	;
+ zone1-node10    	50          	.5          	1               	;
+ zone1-node8     	50          	.5          	1               	;
+ zone1-node9     	50          	.5          	1               	;
+ zone1-node1     	50          	.5          	1               	;
+ zone1-node18    	50          	.5          	1               	;
+ zone1-node19    	50          	.5          	1               	;
+ zone1-node20    	50          	.5          	1               	;
+ zone1-node21    	50          	.5          	1               	;
+ zone1-node22    	50          	.5          	1               	;
+ zone1-node23    	50          	.5          	1               	;
+ zone1-node24    	50          	.5          	1               	;
+ zone3-junction6 	50          	0           	                	;
+ zone3-junction2 	50          	0           	                	;
+ zone3-junction5 	50          	0           	                	;
+ zone3-junction3 	50          	0           	                	;
+ zone3-junction4 	50          	0           	                	;
+ zone3-node40    	50          	.5          	1               	;
+ zone3-node39    	50          	.5          	1               	;
+ zone3-node38    	50          	.5          	1               	;
+ zone3-node37    	50          	.5          	1               	;
+ zone3-node36    	50          	.5          	1               	;
+ zone3-node35    	50          	.5          	1               	;
+ zone3-node34    	50          	.5          	1               	;
+ zone3-node33    	50          	.5          	1               	;
+ zone3-node32    	50          	.5          	1               	;
+ zone3-node31    	50          	.5          	1               	;
+ zone3-node41    	50          	.5          	1               	;
+ zone3-node1     	50          	.5          	1               	;
+ zone3-node2     	50          	.5          	1               	;
+ zone3-node3     	50          	.5          	1               	;
+ zone3-node4     	50          	.5          	1               	;
+ zone3-node5     	50          	.5          	1               	;
+ zone3-node6     	50          	.5          	1               	;
+ zone3-node7     	50          	.5          	1               	;
+ zone3-node29    	50          	.5          	1               	;
+ zone3-node30    	50          	.5          	1               	;
+ zone3-node23    	50          	.5          	1               	;
+ zone3-node24    	50          	.5          	1               	;
+ zone3-node25    	50          	.5          	1               	;
+ zone3-node26    	50          	.5          	1               	;
+ zone3-node27    	50          	.5          	1               	;
+ zone3-node28    	50          	.5          	1               	;
+ zone3-node8     	50          	.5          	1               	;
+ zone3-node18    	50          	.5          	1               	;
+ zone3-node17    	50          	.5          	1               	;
+ zone3-node16    	50          	.5          	1               	;
+ zone3-node15    	50          	.5          	1               	;
+ zone3-node14    	50          	.5          	1               	;
+ zone3-node13    	50          	.5          	1               	;
+ zone3-node12    	50          	.5          	1               	;
+ zone3-node11    	50          	.5          	1               	;
+ zone3-node10    	50          	.5          	1               	;
+ zone3-node9     	50          	.5          	1               	;
+ zone3-node22    	50          	1           	                	;
+ zone3-node21    	50          	.5          	1               	;
+ zone3-node20    	50          	.5          	1               	;
+ zone3-node19    	50          	.5          	1               	;
+ zone4-junction1 	50          	0           	                	;
+ zone4-junction7 	50          	0           	                	;
+ zone4-junction2 	50          	0           	                	;
+ zone4-junction3 	50          	0           	                	;
+ zone4-junction6 	50          	0           	                	;
+ zone4-junction4 	50          	0           	                	;
+ zone4-junction5 	50          	0           	                	;
+ zone4-node31    	50          	.5          	1               	;
+ zone4-node32    	50          	.5          	1               	;
+ zone4-node35    	50          	.5          	1               	;
+ zone4-node34    	50          	.5          	1               	;
+ zone4-node33    	50          	.5          	1               	;
+ zone4-node11    	50          	.5          	1               	;
+ zone4-node10    	50          	.5          	1               	;
+ zone4-node12    	50          	.5          	1               	;
+ zone4-node6     	50          	.5          	1               	;
+ zone4-node7     	50          	.5          	1               	;
+ zone4-node8     	50          	.5          	1               	;
+ zone4-node9     	50          	.5          	1               	;
+ zone4-node1     	50          	.5          	1               	;
+ zone4-node2     	50          	.5          	1               	;
+ zone4-node4     	50          	.5          	1               	;
+ zone4-node5     	50          	.5          	1               	;
+ zone4-node3     	50          	.5          	1               	;
+ zone4-node15    	50          	.5          	1               	;
+ zone4-node14    	50          	.5          	1               	;
+ zone4-node13    	50          	.5          	1               	;
+ zone4-node20    	50          	.5          	1               	;
+ zone4-node19    	50          	.5          	1               	;
+ zone4-node18    	50          	.5          	1               	;
+ zone4-node17    	50          	.5          	1               	;
+ zone4-node16    	50          	.5          	1               	;
+ zone4-node24    	50          	.5          	1               	;
+ zone4-node23    	50          	.5          	1               	;
+ zone4-node21    	50          	.5          	1               	;
+ zone4-node22    	50          	.5          	1               	;
+ zone4-node28    	50          	.5          	1               	;
+ zone4-node27    	50          	1           	                	;
+ zone4-node29    	50          	1           	                	;
+ zone4-node30    	50          	.5          	1               	;
+ zone4-node25    	50          	.5          	1               	;
+ zone4-node26    	50          	.5          	1               	;
+ zone2-junction1 	50          	0           	                	;
+ zone2-junction3 	50          	0           	                	;
+ zone2-junction4 	50          	0           	                	;
+ zone2-junction2 	50          	0           	                	;
+ zone2-node1     	50          	.5          	1               	;
+ zone2-node2     	50          	.5          	1               	;
+ zone2-node3     	50          	.5          	1               	;
+ zone2-node4     	50          	.5          	1               	;
+ zone2-node5     	50          	.5          	1               	;
+ zone2-node6     	50          	.5          	1               	;
+ zone2-node11    	50          	.5          	1               	;
+ zone2-node12    	50          	.5          	1               	;
+ zone2-node13    	50          	.5          	1               	;
+ zone2-node14    	50          	.5          	1               	;
+ zone2-node10    	50          	.5          	1               	;
+ zone2-node17    	50          	.5          	1               	;
+ zone2-node15    	50          	.5          	1               	;
+ zone2-node16    	50          	.5          	1               	;
+ zone2-node18    	50          	.5          	1               	;
+ zone2-node19    	50          	.5          	1               	;
+ zone2-node20    	50          	.5          	1               	;
+ zone2-node21    	50          	.5          	1               	;
+ zone2-node8     	50          	.5          	1               	;
+ zone2-node9     	50          	.5          	1               	;
+ zone2-node7     	50          	.5          	1               	;
+ zone0-junction1 	10          	0           	                	;
+ zone1-node17    	50          	.5          	1               	;
 
 [RESERVOIRS]
 ;ID              	Head        	Pattern         
- zone0-reservoir1	0           	                	;
+ zone0-reservoir1	50          	                	;
 
 [TANKS]
 ;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve        	Overflow
- zone1-tank1     	0           	50          	0           	50          	50          	0           	                	;
- zone2-tank1     	0           	50          	0           	50          	50          	0           	                	;
- zone4-tank1     	0           	50          	0           	50          	50          	0           	                	;
- zone3-tank1     	0           	50          	0           	50          	50          	0           	                	;
+ zone1-tank1     	50          	10          	5           	15          	50          	0           	                	;
+ zone2-tank1     	50          	10          	5           	15          	50          	0           	                	;
+ zone4-tank1     	50          	10          	5           	15          	50          	0           	                	;
+ zone3-tank1     	50          	10          	5           	15          	50          	0           	                	;
 
 [PIPES]
 ;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
- 12              	zone1-junction2 	zone1-node1     	1000        	12          	100         	0           	Open  	;
- 13              	zone1-junction2 	zone1-node9     	1000        	12          	100         	0           	Open  	;
- 14              	zone1-junction2 	zone1-node8     	1000        	12          	100         	0           	Open  	;
- 15              	zone1-junction2 	zone1-node7     	1000        	12          	100         	0           	Open  	;
- 16              	zone1-junction2 	zone1-node6     	1000        	12          	100         	0           	Open  	;
- 17              	zone1-junction2 	zone1-node5     	1000        	12          	100         	0           	Open  	;
- 18              	zone1-junction2 	zone1-node4     	1000        	12          	100         	0           	Open  	;
- 19              	zone1-junction2 	zone1-node3     	1000        	12          	100         	0           	Open  	;
- 20              	zone1-junction2 	zone1-node2     	1000        	12          	100         	0           	Open  	;
- 21              	zone1-node11    	zone1-junction3 	1000        	12          	100         	0           	Open  	;
- 22              	zone1-junction3 	zone1-node12    	1000        	12          	100         	0           	Open  	;
- 23              	zone1-junction3 	zone1-node13    	1000        	12          	100         	0           	Open  	;
- 24              	zone1-junction3 	zone1-node14    	1000        	12          	100         	0           	Open  	;
- 25              	zone1-junction3 	zone1-node15    	1000        	12          	100         	0           	Open  	;
- 26              	zone1-junction3 	zone1-node16    	1000        	12          	100         	0           	Open  	;
- 27              	zone1-junction3 	zone1-node10    	1000        	12          	100         	0           	Open  	;
- 29              	zone1-junction4 	zone1-node18    	1000        	12          	100         	0           	Open  	;
- 30              	zone1-node19    	zone1-junction4 	1000        	12          	100         	0           	Open  	;
- 31              	zone1-junction4 	zone1-node20    	1000        	12          	100         	0           	Open  	;
- 32              	zone1-junction4 	zone1-node21    	1000        	12          	100         	0           	Open  	;
- 33              	zone1-junction4 	zone1-node22    	1000        	12          	100         	0           	Open  	;
- 34              	zone1-junction4 	zone1-node23    	1000        	12          	100         	0           	Open  	;
- 35              	zone1-junction4 	zone1-node24    	1000        	12          	100         	0           	Open  	;
+ 12              	zone1-junction2 	zone1-node1     	1000        	100         	100         	0           	Open  	;
+ 13              	zone1-junction2 	zone1-node9     	1000        	100         	100         	0           	Open  	;
+ 14              	zone1-junction2 	zone1-node8     	1000        	100         	100         	0           	Open  	;
+ 15              	zone1-junction2 	zone1-node7     	1000        	100         	100         	0           	Open  	;
+ 16              	zone1-junction2 	zone1-node6     	1000        	100         	100         	0           	Open  	;
+ 17              	zone1-junction2 	zone1-node5     	1000        	100         	100         	0           	Open  	;
+ 18              	zone1-junction2 	zone1-node4     	1000        	100         	100         	0           	Open  	;
+ 19              	zone1-junction2 	zone1-node3     	1000        	100         	100         	0           	Open  	;
+ 20              	zone1-junction2 	zone1-node2     	1000        	100         	100         	0           	Open  	;
+ 21              	zone1-junction3 	zone1-node11    	1000        	100         	100         	0           	Open  	;
+ 22              	zone1-junction3 	zone1-node12    	1000        	100         	100         	0           	Open  	;
+ 23              	zone1-junction3 	zone1-node13    	1000        	100         	100         	0           	Open  	;
+ 24              	zone1-junction3 	zone1-node14    	1000        	100         	100         	0           	Open  	;
+ 25              	zone1-junction3 	zone1-node15    	1000        	100         	100         	0           	Open  	;
+ 26              	zone1-junction3 	zone1-node16    	1000        	100         	100         	0           	Open  	;
+ 27              	zone1-junction3 	zone1-node10    	1000        	100         	100         	0           	Open  	;
+ 29              	zone1-junction4 	zone1-node18    	1000        	100         	100         	0           	Open  	;
+ 30              	zone1-junction4 	zone1-node19    	1000        	100         	100         	0           	Open  	;
+ 31              	zone1-junction4 	zone1-node20    	1000        	100         	100         	0           	Open  	;
+ 32              	zone1-junction4 	zone1-node21    	1000        	100         	100         	0           	Open  	;
+ 33              	zone1-junction4 	zone1-node22    	1000        	100         	100         	0           	Open  	;
+ 34              	zone1-junction4 	zone1-node23    	1000        	100         	100         	0           	Open  	;
+ 35              	zone1-junction4 	zone1-node24    	1000        	100         	100         	0           	Open  	;
  37              	zone3-junction1 	zone3-junction6 	1000        	300         	100         	0           	Open  	;
  38              	zone3-junction1 	zone3-junction2 	1000        	300         	100         	0           	Open  	;
  39              	zone3-junction1 	zone3-junction5 	1000        	300         	100         	0           	Open  	;
- 41              	zone3-junction6 	zone3-node41    	1000        	12          	100         	0           	Open  	;
- 42              	zone3-junction6 	zone3-node40    	1000        	12          	100         	0           	Open  	;
- 43              	zone3-junction6 	zone3-node39    	1000        	12          	100         	0           	Open  	;
- 44              	zone3-junction6 	zone3-node38    	1000        	12          	100         	0           	Open  	;
- 45              	zone3-junction6 	zone3-node37    	1000        	12          	100         	0           	Open  	;
- 46              	zone3-junction6 	zone3-node36    	1000        	12          	100         	0           	Open  	;
- 47              	zone3-junction6 	zone3-node35    	1000        	12          	100         	0           	Open  	;
- 48              	zone3-junction6 	zone3-node34    	1000        	12          	100         	0           	Open  	;
- 49              	zone3-junction6 	zone3-node33    	1000        	12          	100         	0           	Open  	;
- 50              	zone3-junction6 	zone3-node32    	1000        	12          	100         	0           	Open  	;
- 51              	zone3-junction6 	zone3-node31    	1000        	12          	100         	0           	Open  	;
- 52              	zone3-junction2 	zone3-node2     	1000        	12          	100         	0           	Open  	;
- 53              	zone3-junction2 	zone3-node3     	1000        	12          	100         	0           	Open  	;
- 54              	zone3-junction2 	zone3-node4     	1000        	12          	100         	0           	Open  	;
- 55              	zone3-junction2 	zone3-node5     	1000        	12          	100         	0           	Open  	;
- 56              	zone3-junction2 	zone3-node6     	1000        	12          	100         	0           	Open  	;
- 57              	zone3-junction2 	zone3-node7     	1000        	12          	100         	0           	Open  	;
- 58              	zone3-junction2 	zone3-node1     	1000        	12          	100         	0           	Open  	;
- 59              	zone3-junction5 	zone3-node29    	1000        	12          	100         	0           	Open  	;
- 60              	zone3-junction5 	zone3-node30    	1000        	12          	100         	0           	Open  	;
- 61              	zone3-node23    	zone3-junction5 	1000        	12          	100         	0           	Open  	;
- 62              	zone3-junction5 	zone3-node24    	1000        	12          	100         	0           	Open  	;
- 63              	zone3-junction5 	zone3-node25    	1000        	12          	100         	0           	Open  	;
- 64              	zone3-junction5 	zone3-node26    	1000        	12          	100         	0           	Open  	;
- 65              	zone3-node27    	zone3-junction5 	1000        	12          	100         	0           	Open  	;
- 66              	zone3-node28    	zone3-junction5 	1000        	12          	100         	0           	Open  	;
- 67              	zone3-junction3 	zone3-node8     	1000        	12          	100         	0           	Open  	;
- 68              	zone3-node18    	zone3-junction3 	1000        	12          	100         	0           	Open  	;
- 69              	zone3-junction3 	zone3-node17    	1000        	12          	100         	0           	Open  	;
- 70              	zone3-junction3 	zone3-node16    	1000        	12          	100         	0           	Open  	;
- 71              	zone3-junction3 	zone3-node15    	1000        	12          	100         	0           	Open  	;
- 72              	zone3-junction3 	zone3-node14    	1000        	12          	100         	0           	Open  	;
- 73              	zone3-node13    	zone3-junction3 	1000        	12          	100         	0           	Open  	;
- 74              	zone3-junction3 	zone3-node12    	1000        	12          	100         	0           	Open  	;
- 75              	zone3-junction3 	zone3-node11    	1000        	12          	100         	0           	Open  	;
- 76              	zone3-junction3 	zone3-node10    	1000        	12          	100         	0           	Open  	;
- 77              	zone3-node9     	zone3-junction3 	1000        	12          	100         	0           	Open  	;
+ 41              	zone3-junction6 	zone3-node41    	1000        	100         	100         	0           	Open  	;
+ 42              	zone3-junction6 	zone3-node40    	1000        	100         	100         	0           	Open  	;
+ 43              	zone3-junction6 	zone3-node39    	1000        	100         	100         	0           	Open  	;
+ 44              	zone3-junction6 	zone3-node38    	1000        	100         	100         	0           	Open  	;
+ 45              	zone3-junction6 	zone3-node37    	1000        	100         	100         	0           	Open  	;
+ 46              	zone3-junction6 	zone3-node36    	1000        	100         	100         	0           	Open  	;
+ 47              	zone3-junction6 	zone3-node35    	1000        	100         	100         	0           	Open  	;
+ 48              	zone3-junction6 	zone3-node34    	1000        	100         	100         	0           	Open  	;
+ 49              	zone3-junction6 	zone3-node33    	1000        	100         	100         	0           	Open  	;
+ 50              	zone3-junction6 	zone3-node32    	1000        	100         	100         	0           	Open  	;
+ 51              	zone3-junction6 	zone3-node31    	1000        	100         	100         	0           	Open  	;
+ 52              	zone3-junction2 	zone3-node2     	1000        	100         	100         	0           	Open  	;
+ 53              	zone3-junction2 	zone3-node3     	1000        	100         	100         	0           	Open  	;
+ 54              	zone3-junction2 	zone3-node4     	1000        	100         	100         	0           	Open  	;
+ 55              	zone3-junction2 	zone3-node5     	1000        	100         	100         	0           	Open  	;
+ 56              	zone3-junction2 	zone3-node6     	1000        	100         	100         	0           	Open  	;
+ 57              	zone3-junction2 	zone3-node7     	1000        	100         	100         	0           	Open  	;
+ 58              	zone3-junction2 	zone3-node1     	1000        	100         	100         	0           	Open  	;
+ 59              	zone3-junction5 	zone3-node29    	1000        	100         	100         	0           	Open  	;
+ 60              	zone3-junction5 	zone3-node30    	1000        	100         	100         	0           	Open  	;
+ 61              	zone3-junction5 	zone3-node23    	1000        	100         	100         	0           	Open  	;
+ 62              	zone3-junction5 	zone3-node24    	1000        	100         	100         	0           	Open  	;
+ 63              	zone3-junction5 	zone3-node25    	1000        	100         	100         	0           	Open  	;
+ 64              	zone3-junction5 	zone3-node26    	1000        	100         	100         	0           	Open  	;
+ 65              	zone3-junction5 	zone3-node27    	1000        	100         	100         	0           	Open  	;
+ 66              	zone3-junction5 	zone3-node28    	1000        	100         	100         	0           	Open  	;
+ 67              	zone3-junction3 	zone3-node8     	1000        	100         	100         	0           	Open  	;
+ 68              	zone3-junction3 	zone3-node18    	1000        	100         	100         	0           	Open  	;
+ 69              	zone3-junction3 	zone3-node17    	1000        	100         	100         	0           	Open  	;
+ 70              	zone3-junction3 	zone3-node16    	1000        	100         	100         	0           	Open  	;
+ 71              	zone3-junction3 	zone3-node15    	1000        	100         	100         	0           	Open  	;
+ 72              	zone3-junction3 	zone3-node14    	1000        	100         	100         	0           	Open  	;
+ 73              	zone3-junction3 	zone3-node13    	1000        	100         	100         	0           	Open  	;
+ 74              	zone3-junction3 	zone3-node12    	1000        	100         	100         	0           	Open  	;
+ 75              	zone3-junction3 	zone3-node11    	1000        	100         	100         	0           	Open  	;
+ 76              	zone3-junction3 	zone3-node10    	1000        	100         	100         	0           	Open  	;
+ 77              	zone3-junction3 	zone3-node9     	1000        	100         	100         	0           	Open  	;
  78              	zone3-junction4 	zone3-node22    	1000        	12          	100         	0           	Open  	;
  79              	zone3-junction4 	zone3-node21    	1000        	12          	100         	0           	Open  	;
  80              	zone3-junction4 	zone3-node20    	1000        	12          	100         	0           	Open  	;
@@ -236,105 +236,229 @@
  84              	zone4-junction1 	zone4-junction2 	1000        	300         	100         	0           	Open  	;
  85              	zone4-junction1 	zone4-junction3 	1000        	300         	100         	0           	Open  	;
  86              	zone4-junction3 	zone4-junction4 	1000        	300         	100         	0           	Open  	;
- 87              	zone4-junction6 	zone4-junction3 	1000        	300         	100         	0           	Open  	;
- 88              	zone4-node35    	zone4-junction7 	1000        	12          	100         	0           	Open  	;
- 89              	zone4-junction7 	zone4-node34    	1000        	12          	100         	0           	Open  	;
- 90              	zone4-junction7 	zone4-node33    	1000        	12          	100         	0           	Open  	;
- 91              	zone4-junction7 	zone4-node32    	1000        	12          	100         	0           	Open  	;
- 92              	zone4-junction7 	zone4-node31    	1000        	12          	100         	0           	Open  	;
- 93              	zone4-junction2 	zone4-node5     	1000        	12          	100         	0           	Open  	;
- 94              	zone4-node1     	zone4-junction2 	1000        	12          	100         	0           	Open  	;
- 95              	zone4-junction2 	zone4-node2     	1000        	12          	100         	0           	Open  	;
- 96              	zone4-junction2 	zone4-node3     	1000        	12          	100         	0           	Open  	;
- 97              	zone4-node4     	zone4-junction2 	1000        	12          	100         	0           	Open  	;
- 98              	zone4-junction3 	zone4-node12    	1000        	12          	100         	0           	Open  	;
- 99              	zone4-junction3 	zone4-node6     	1000        	12          	100         	0           	Open  	;
- 100             	zone4-junction3 	zone4-node7     	1000        	12          	100         	0           	Open  	;
- 101             	zone4-junction3 	zone4-node8     	1000        	12          	100         	0           	Open  	;
- 102             	zone4-node9     	zone4-junction3 	1000        	12          	100         	0           	Open  	;
- 103             	zone4-junction3 	zone4-node10    	1000        	12          	100         	0           	Open  	;
- 104             	zone4-node11    	zone4-junction3 	1000        	12          	100         	0           	Open  	;
- 105             	zone4-junction4 	zone4-node14    	1000        	12          	100         	0           	Open  	;
- 106             	zone4-junction4 	zone4-node15    	1000        	12          	100         	0           	Open  	;
- 107             	zone4-junction4 	zone4-node16    	1000        	12          	100         	0           	Open  	;
- 108             	zone4-junction4 	zone4-node17    	1000        	12          	100         	0           	Open  	;
- 109             	zone4-junction4 	zone4-node13    	1000        	12          	100         	0           	Open  	;
- 110             	zone4-junction4 	zone4-node20    	1000        	12          	100         	0           	Open  	;
- 111             	zone4-junction4 	zone4-node19    	1000        	12          	100         	0           	Open  	;
- 112             	zone4-junction4 	zone4-node18    	1000        	12          	100         	0           	Open  	;
+ 87              	zone4-junction3 	zone4-junction6 	1000        	300         	100         	0           	Open  	;
+ 88              	zone4-junction7 	zone4-node35    	1000        	100         	100         	0           	Open  	;
+ 89              	zone4-junction7 	zone4-node34    	1000        	100         	100         	0           	Open  	;
+ 90              	zone4-junction7 	zone4-node33    	1000        	100         	100         	0           	Open  	;
+ 91              	zone4-junction7 	zone4-node32    	1000        	100         	100         	0           	Open  	;
+ 92              	zone4-junction7 	zone4-node31    	1000        	100         	100         	0           	Open  	;
+ 93              	zone4-junction2 	zone4-node5     	1000        	100         	100         	0           	Open  	;
+ 94              	zone4-junction2 	zone4-node1     	1000        	100         	100         	0           	Open  	;
+ 95              	zone4-junction2 	zone4-node2     	1000        	100         	100         	0           	Open  	;
+ 96              	zone4-junction2 	zone4-node3     	1000        	100         	100         	0           	Open  	;
+ 97              	zone4-junction2 	zone4-node4     	1000        	100         	100         	0           	Open  	;
+ 98              	zone4-junction3 	zone4-node12    	1000        	100         	100         	0           	Open  	;
+ 99              	zone4-junction3 	zone4-node6     	1000        	100         	100         	0           	Open  	;
+ 100             	zone4-junction3 	zone4-node7     	1000        	100         	100         	0           	Open  	;
+ 101             	zone4-junction3 	zone4-node8     	1000        	100         	100         	0           	Open  	;
+ 102             	zone4-junction3 	zone4-node9     	1000        	100         	100         	0           	Open  	;
+ 103             	zone4-junction3 	zone4-node10    	1000        	100         	100         	0           	Open  	;
+ 104             	zone4-junction3 	zone4-node11    	1000        	100         	100         	0           	Open  	;
+ 105             	zone4-junction4 	zone4-node14    	1000        	100         	100         	0           	Open  	;
+ 106             	zone4-junction4 	zone4-node15    	1000        	100         	100         	0           	Open  	;
+ 107             	zone4-junction4 	zone4-node16    	1000        	100         	100         	0           	Open  	;
+ 108             	zone4-junction4 	zone4-node17    	1000        	100         	100         	0           	Open  	;
+ 109             	zone4-junction4 	zone4-node13    	1000        	100         	100         	0           	Open  	;
+ 110             	zone4-junction4 	zone4-node20    	1000        	100         	100         	0           	Open  	;
+ 111             	zone4-junction4 	zone4-node19    	1000        	100         	100         	0           	Open  	;
+ 112             	zone4-junction4 	zone4-node18    	1000        	100         	100         	0           	Open  	;
  113             	zone4-junction4 	zone4-junction5 	1000        	300         	100         	0           	Open  	;
- 114             	zone4-junction5 	zone4-node24    	1000        	12          	100         	0           	Open  	;
- 115             	zone4-junction5 	zone4-node21    	1000        	12          	100         	0           	Open  	;
- 116             	zone4-node22    	zone4-junction5 	1000        	12          	100         	0           	Open  	;
- 117             	zone4-junction5 	zone4-node23    	1000        	12          	100         	0           	Open  	;
- 118             	zone4-junction6 	zone4-node25    	1000        	12          	100         	0           	Open  	;
- 119             	zone4-junction6 	zone4-node26    	1000        	12          	100         	0           	Open  	;
- 120             	zone4-junction6 	zone4-node27    	1000        	12          	100         	0           	Open  	;
+ 114             	zone4-junction5 	zone4-node24    	1000        	100         	100         	0           	Open  	;
+ 115             	zone4-junction5 	zone4-node21    	1000        	100         	100         	0           	Open  	;
+ 116             	zone4-junction5 	zone4-node22    	1000        	12          	100         	0           	Open  	;
+ 117             	zone4-junction5 	zone4-node23    	1000        	100         	100         	0           	Open  	;
+ 118             	zone4-junction6 	zone4-node25    	1000        	100         	100         	0           	Open  	;
+ 119             	zone4-junction6 	zone4-node26    	1000        	100         	100         	0           	Open  	;
+ 120             	zone4-junction6 	zone4-node27    	1000        	100         	100         	0           	Open  	;
  121             	zone4-junction6 	zone4-node28    	1000        	12          	100         	0           	Open  	;
- 122             	zone4-junction6 	zone4-node29    	1000        	12          	100         	0           	Open  	;
- 123             	zone4-junction6 	zone4-node30    	1000        	12          	100         	0           	Open  	;
+ 122             	zone4-junction6 	zone4-node29    	1000        	100         	100         	0           	Open  	;
+ 123             	zone4-junction6 	zone4-node30    	1000        	100         	100         	0           	Open  	;
  125             	zone2-junction1 	zone2-junction2 	1000        	300         	100         	0           	Open  	;
  126             	zone2-junction2 	zone2-junction4 	1000        	300         	100         	0           	Open  	;
- 127             	zone2-junction3 	zone2-junction2 	1000        	300         	100         	0           	Open  	;
- 128             	zone2-junction1 	zone2-node2     	1000        	12          	100         	0           	Open  	;
- 129             	zone2-junction1 	zone2-node1     	1000        	12          	100         	0           	Open  	;
- 130             	zone2-junction1 	zone2-node3     	1000        	12          	100         	0           	Open  	;
- 131             	zone2-node4     	zone2-junction1 	1000        	12          	100         	0           	Open  	;
- 132             	zone2-junction1 	zone2-node5     	1000        	12          	100         	0           	Open  	;
- 133             	zone2-node6     	zone2-junction1 	1000        	12          	100         	0           	Open  	;
- 134             	zone2-node7     	zone2-junction2 	1000        	12          	100         	0           	Open  	;
- 135             	zone2-junction2 	zone2-node9     	1000        	12          	100         	0           	Open  	;
- 136             	zone2-junction2 	zone2-node8     	1000        	12          	100         	0           	Open  	;
- 137             	zone2-junction3 	zone2-node10    	1000        	12          	100         	0           	Open  	;
- 138             	zone2-junction3 	zone2-node17    	1000        	12          	100         	0           	Open  	;
- 139             	zone2-junction3 	zone2-node16    	1000        	12          	100         	0           	Open  	;
- 140             	zone2-node15    	zone2-junction3 	1000        	12          	100         	0           	Open  	;
- 141             	zone2-junction3 	zone2-node14    	1000        	12          	100         	0           	Open  	;
- 142             	zone2-junction3 	zone2-node13    	1000        	12          	100         	0           	Open  	;
- 143             	zone2-junction3 	zone2-node12    	1000        	12          	100         	0           	Open  	;
- 144             	zone2-junction3 	zone2-node11    	1000        	12          	100         	0           	Open  	;
- 145             	zone2-junction4 	zone2-node21    	1000        	12          	100         	0           	Open  	;
- 146             	zone2-node20    	zone2-junction4 	1000        	12          	100         	0           	Open  	;
+ 127             	zone2-junction2 	zone2-junction3 	1000        	300         	100         	0           	Open  	;
+ 128             	zone2-junction1 	zone2-node2     	1000        	100         	100         	0           	Open  	;
+ 129             	zone2-junction1 	zone2-node1     	1000        	100         	100         	0           	Open  	;
+ 130             	zone2-junction1 	zone2-node3     	1000        	100         	100         	0           	Open  	;
+ 131             	zone2-junction1 	zone2-node4     	1000        	100         	100         	0           	Open  	;
+ 132             	zone2-junction1 	zone2-node5     	1000        	100         	100         	0           	Open  	;
+ 133             	zone2-junction1 	zone2-node6     	1000        	100         	100         	0           	Open  	;
+ 134             	zone2-junction2 	zone2-node7     	1000        	100         	100         	0           	Open  	;
+ 135             	zone2-junction2 	zone2-node9     	1000        	100         	100         	0           	Open  	;
+ 136             	zone2-junction2 	zone2-node8     	1000        	100         	100         	0           	Open  	;
+ 137             	zone2-junction3 	zone2-node10    	1000        	100         	100         	0           	Open  	;
+ 138             	zone2-junction3 	zone2-node17    	1000        	100         	100         	0           	Open  	;
+ 139             	zone2-junction3 	zone2-node16    	1000        	100         	100         	0           	Open  	;
+ 140             	zone2-junction3 	zone2-node15    	1000        	100         	100         	0           	Open  	;
+ 141             	zone2-junction3 	zone2-node14    	1000        	100         	100         	0           	Open  	;
+ 142             	zone2-junction3 	zone2-node13    	1000        	100         	100         	0           	Open  	;
+ 143             	zone2-junction3 	zone2-node12    	1000        	100         	100         	0           	Open  	;
+ 144             	zone2-junction3 	zone2-node11    	1000        	100         	100         	0           	Open  	;
+ 145             	zone2-junction4 	zone2-node21    	1000        	100         	100         	0           	Open  	;
+ 146             	zone2-junction4 	zone2-node20    	1000        	100         	100         	0           	Open  	;
  147             	zone2-junction4 	zone2-node19    	1000        	12          	100         	0           	Open  	;
  148             	zone2-junction4 	zone2-node18    	1000        	12          	100         	0           	Open  	;
- 1               	zone0-reservoir1	zone0-junction1 	1000        	1500        	100         	0           	Open  	;
  2               	zone3-junction1 	zone3-junction3 	1000        	300         	100         	0           	Open  	;
- 3               	zone3-junction4 	zone3-junction3 	1000        	300         	100         	0           	Open  	;
+ 3               	zone3-junction3 	zone3-junction4 	1000        	300         	100         	0           	Open  	;
  4               	zone1-junction1 	zone1-junction2 	1000        	300         	100         	0           	Open  	;
  5               	zone1-junction1 	zone1-junction3 	1000        	300         	100         	0           	Open  	;
  6               	zone1-junction1 	zone1-junction4 	1000        	300         	100         	0           	Open  	;
- 28              	zone1-junction4 	zone1-node17    	1000        	12          	100         	0           	Open  	;
+ 28              	zone1-junction4 	zone1-node17    	1000        	100         	100         	0           	Open  	;
+ 1               	zone0-reservoir1	zone0-junction1 	1000        	200         	100         	0           	Open  	;
 
 [PUMPS]
 ;ID              	Node1           	Node2           	Parameters
- zone1-pump1     	zone0-junction1 	zone1-tank1     	POWER 1	SPEED 1	;
- zone3-pump1     	zone0-junction1 	zone3-tank1     	POWER 1	SPEED 1	;
- zone1-pump2     	zone1-tank1     	zone0-junction2 	POWER 1	SPEED 1	;
- zone2-pump2     	zone2-tank1     	zone0-junction2 	POWER 1	SPEED 1	;
- zone3-pump2     	zone3-tank1     	zone0-junction2 	POWER 1	SPEED 1	;
- zone4-pump2     	zone4-tank1     	zone0-junction2 	POWER 1	SPEED 1	;
- zone1-pump3     	zone0-junction3 	zone1-junction1 	POWER 1	SPEED 1	;
- zone3-pump3     	zone0-junction4 	zone3-junction1 	POWER 1	SPEED 1	;
- zone4-pump3     	zone0-junction5 	zone4-junction1 	POWER 1	SPEED 1	;
- zone2-pump3     	zone0-junction6 	zone2-junction1 	POWER 1	SPEED 1	;
- zone2-pump1     	zone0-junction1 	zone2-tank1     	POWER 1	SPEED 1	;
- zone4-pump1     	zone0-junction1 	zone4-tank1     	POWER 1	SPEED 1	;
+ zone1-pump1     	zone0-junction1 	zone1-tank1     	HEAD 1	;
+ zone3-pump1     	zone0-junction1 	zone3-tank1     	HEAD 1	;
+ zone1-pump2     	zone1-tank1     	zone0-junction2 	HEAD 1	;
+ zone2-pump2     	zone2-tank1     	zone0-junction2 	HEAD 1	;
+ zone3-pump2     	zone3-tank1     	zone0-junction2 	HEAD 1	;
+ zone4-pump2     	zone4-tank1     	zone0-junction2 	HEAD 1	;
+ zone1-pump3     	zone0-junction3 	zone1-junction1 	HEAD 1	;
+ zone3-pump3     	zone0-junction4 	zone3-junction1 	HEAD 1	;
+ zone4-pump3     	zone0-junction5 	zone4-junction1 	HEAD 1	;
+ zone2-pump3     	zone0-junction6 	zone2-junction1 	HEAD 1	;
+ zone2-pump1     	zone0-junction1 	zone2-tank1     	HEAD 1	;
+ zone4-pump1     	zone0-junction1 	zone4-tank1     	HEAD 1	;
 
 [VALVES]
 ;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
- zone0-valve1    	zone0-junction2 	zone0-junction3 	1500        	TCV 	0           	0           	;
+ zone0-valve1    	zone0-junction2 	zone0-junction3 	200         	TCV 	0           	0           	;
  zone0-valve2    	zone0-junction3 	zone0-junction4 	1500        	TCV 	0           	0           	;
- zone0-valve3    	zone0-junction4 	zone0-junction5 	1500        	TCV 	0           	0           	;
- zone0-valve4    	zone0-junction5 	zone0-junction6 	1500        	TCV 	0           	0           	;
+ zone0-valve3    	zone0-junction4 	zone0-junction5 	200         	TCV 	0           	0           	;
+ zone0-valve4    	zone0-junction5 	zone0-junction6 	200         	TCV 	0           	0           	;
 
 [TAGS]
+ LINK 	12              	100
+ LINK 	13              	100
+ LINK 	14              	100
+ LINK 	15              	100
+ LINK 	16              	100
+ LINK 	17              	100
+ LINK 	18              	100
+ LINK 	19              	100
+ LINK 	20              	100
+ LINK 	21              	100
+ LINK 	22              	100
+ LINK 	23              	100
+ LINK 	24              	100
+ LINK 	25              	100
+ LINK 	26              	100
+ LINK 	27              	100
+ LINK 	29              	100
+ LINK 	30              	100
+ LINK 	31              	100
+ LINK 	32              	100
+ LINK 	33              	100
+ LINK 	34              	100
+ LINK 	35              	100
+ LINK 	41              	100
+ LINK 	42              	100
+ LINK 	43              	100
+ LINK 	44              	100
+ LINK 	45              	100
+ LINK 	46              	100
+ LINK 	47              	100
+ LINK 	48              	100
+ LINK 	49              	100
+ LINK 	50              	100
+ LINK 	51              	100
+ LINK 	52              	100
+ LINK 	53              	100
+ LINK 	54              	100
+ LINK 	55              	100
+ LINK 	56              	100
+ LINK 	57              	100
+ LINK 	58              	100
+ LINK 	59              	100
+ LINK 	60              	100
+ LINK 	61              	100
+ LINK 	62              	100
+ LINK 	63              	100
+ LINK 	64              	100
+ LINK 	65              	100
+ LINK 	66              	100
+ LINK 	67              	100
+ LINK 	68              	100
+ LINK 	69              	100
+ LINK 	70              	100
+ LINK 	71              	100
+ LINK 	72              	100
+ LINK 	73              	100
+ LINK 	74              	100
+ LINK 	75              	100
+ LINK 	76              	100
+ LINK 	77              	100
+ LINK 	88              	100
+ LINK 	89              	100
+ LINK 	90              	100
+ LINK 	91              	100
+ LINK 	92              	100
+ LINK 	93              	100
+ LINK 	94              	100
+ LINK 	95              	100
+ LINK 	96              	100
+ LINK 	97              	100
+ LINK 	98              	100
+ LINK 	99              	100
+ LINK 	100             	100
+ LINK 	101             	100
+ LINK 	102             	100
+ LINK 	103             	100
+ LINK 	104             	100
+ LINK 	105             	100
+ LINK 	106             	100
+ LINK 	107             	100
+ LINK 	108             	100
+ LINK 	109             	100
+ LINK 	110             	100
+ LINK 	111             	100
+ LINK 	112             	100
+ LINK 	114             	100
+ LINK 	115             	100
+ LINK 	117             	100
+ LINK 	118             	100
+ LINK 	119             	100
+ LINK 	120             	100
+ LINK 	122             	100
+ LINK 	123             	100
+ LINK 	128             	100
+ LINK 	129             	100
+ LINK 	130             	100
+ LINK 	131             	100
+ LINK 	132             	100
+ LINK 	133             	100
+ LINK 	134             	100
+ LINK 	135             	100
+ LINK 	136             	100
+ LINK 	137             	100
+ LINK 	138             	100
+ LINK 	139             	100
+ LINK 	140             	100
+ LINK 	141             	100
+ LINK 	142             	100
+ LINK 	143             	100
+ LINK 	144             	100
+ LINK 	145             	100
+ LINK 	146             	100
+ LINK 	28              	100
 
 [DEMANDS]
 ;Junction        	Demand      	Pattern         	Category
 
 [STATUS]
-;ID              	Status/Setting
-
+;ID           Status/Setting
+ zone1-pump1  OPEN
+ zone2-pump1  OPEN
+ zone3-pump1  OPEN
+ zone4-pump1  OPEN
+ zone1-pump2  OPEN
+ zone2-pump2  OPEN
+ zone3-pump2  OPEN
+ zone4-pump2  OPEN
+ zone1-pump3  OPEN
+ zone2-pump3  OPEN
+ zone3-pump3  OPEN
+ zone4-pump3  OPEN
 [PATTERNS]
 ;ID              	Multipliers
 ;Water Usage per Hour
@@ -345,13 +469,22 @@
 
 [CURVES]
 ;ID              	X-Value     	Y-Value
-;PUMP: PUMP: 
- 1               	10          	10          
+;PUMP: PUMP: PUMP: PUMP: 
+ 1               	0           	40          
+ 1               	10          	38          
+ 1               	20          	34          
+ 1               	40          	25          
+ 1               	50          	15          
+ 1               	60          	0           
 
 [CONTROLS]
 
 
+
+
 [RULES]
+
+
 
 
 [ENERGY]
@@ -385,18 +518,18 @@
 ;Tank            	Model
 
 [TIMES]
- Duration           	0:00 
- Hydraulic Timestep 	1:00 
+ Duration           	12:00 
+ Hydraulic Timestep 	0:01 
  Quality Timestep   	0:05 
- Pattern Timestep   	1:00 
+ Pattern Timestep   	0:05 
  Pattern Start      	0:00 
- Report Timestep    	1:00 
+ Report Timestep    	0:05 
  Report Start       	0:00 
  Start ClockTime    	12 am
  Statistic          	NONE
 
 [REPORT]
- Status             	No
+ Status             	Yes
  Summary            	No
  Page               	0
 
@@ -569,7 +702,7 @@ zone2-node7     	9840.720          	9345.568
 zone0-junction1 	2364.071          	8985.605          
 zone1-node17    	6890.582          	8590.720          
 zone0-reservoir1	2361.890          	6709.367          
-zone1-tank1     	3495.631          	9272.995          
+zone1-tank1     	3499.001          	9259.740          
 zone2-tank1     	4123.874          	9272.995          
 zone4-tank1     	4127.876          	8756.795          
 zone3-tank1     	3483.626          	8756.795          
@@ -587,7 +720,6 @@ zone3-tank1     	3483.626          	8756.795
 112             	9995.997          	6216.974          
 116             	9831.865          	5544.436          
 117             	9555.645          	5648.519          
-134             	9763.811          	9583.667          
 
 [LABELS]
 ;X-Coord             Y-Coord             Label & Anchor Node

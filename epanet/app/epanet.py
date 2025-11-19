@@ -17,8 +17,9 @@ def parse_arguments() -> str:
 def setup_epanet(inp_file: str) -> epanet:
     try:
         en: epanet = epanet(inp_file)
-        en.setTimeSimulationDuration(10)  # initial setup; duration will be set to infinite in main function.
-        en.setTimeHydraulicStep(1)
+        en.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
+        en.setTimeHydraulicStep(60)
+        
         return en
     except Exception as e:
         print(f"ERROR in setup_epanet: {e}")
@@ -121,8 +122,8 @@ def set_controls(en: epanet, controls: dict) -> None:
             for element, control in elements.items():
                 link_index: int = en.getLinkIndex(f"{zone}-{element}")
 
-                if "speed" in control:
-                    en.setLinkSettings(link_index, control["speed"])
+                # if "speed" in control:
+                #     en.setLinkSettings(link_index, control["speed"])
                     # print(f"{zone:<15} -> {element:<15} -> speed        -> register: {offset_speed:<15}")
                     # offset_speed += 2
 

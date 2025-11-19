@@ -1,23 +1,23 @@
-#!/bin/bash 
+#!/bin/bash
+set -euo pipefail
+
 # modifying openplc database
 # https://github.com/thiagoralves/OpenPLC_v3/blob/master/webserver/openplc.db
 
-# remove all existing programs
-SQL_REMOVE_PROGRAM="DELETE FROM Programs"
-sqlite3 /OpenPLC_v3/webserver/openplc.db "$SQL_REMOVE_PROGRAM"
+DB_PATH="/OpenPLC_v3/webserver/openplc.db"
 
-# add new programe as "script.st"
-SQL_PROGRAM="INSERT INTO Programs (Name, Description, File, Date_upload) VALUES ('Program Name', 'Desc', 'script.st', strftime('%s', 'now'));"
-sqlite3 /OpenPLC_v3/webserver/openplc.db "$SQL_PROGRAM"
+# Reset the OpenPLC program table so the runtime always finds script.st.
+sqlite3 "$DB_PATH" <<'SQL'
+DELETE FROM Programs;
+INSERT INTO Programs (Name, Description, File, Date_upload)
+VALUES ('Program Name', 'Desc', 'script.st', strftime('%s', 'now'));
+SQL
 
 # remove all existing slave devices
-SQL_REMOVE_DEVICE="DELETE FROM Slave_dev"
-sqlite3 /OpenPLC_v3/webserver/openplc.db "$SQL_REMOVE_DEVICE"
+sqlite3 "$DB_PATH" "DELETE FROM Slave_dev"
 
-# Change or disable Modbus port. Comment out if not requried.
-SQL_UPDATE_Modbus="UPDATE Settings SET Value = '502' WHERE Key = 'Modbus_port';"
-sqlite3 /OpenPLC_v3/webserver/openplc.db "$SQL_UPDATE_Modbus"
+# Change or disable Modbus port. Comment out if not required.
+sqlite3 "$DB_PATH" "UPDATE Settings SET Value = '502' WHERE Key = 'Modbus_port';"
 
-# enable openplc start run mode. Comment out if not requried.
-SQL_Start_run_mode="UPDATE Settings SET Value = 'true' WHERE Key = 'Start_run_mode';"
-sqlite3 /OpenPLC_v3/webserver/openplc.db "$SQL_Start_run_mode"
+# enable openplc start run mode. Comment out if not required.
+sqlite3 "$DB_PATH" "UPDATE Settings SET Value = 'true' WHERE Key = 'Start_run_mode';"
