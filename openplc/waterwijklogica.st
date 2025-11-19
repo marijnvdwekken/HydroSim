@@ -7,8 +7,8 @@ PROGRAM program0
     EmergencyStop AT %IX0.4 : BOOL;
     MainPump AT %QX0.0 : BOOL;
     Alarm AT %QX0.1 : BOOL;
-    PumpSpeed : REAL;
-    PumpSpeedBits : DWORD;
+    PumpSpeed AT %MD1000 : REAL;
+    PumpSpeedBits AT %MD1006 : DWORD;
     Pump1SpeedHigh AT %QW1000 : WORD;
     Pump1SpeedLow AT %QW1001 : WORD;
     Pump2SpeedHigh AT %QW1002 : WORD;
@@ -20,7 +20,7 @@ PROGRAM program0
   MainPump := StartSwitch AND LowPressureSensor AND NOT(HighPressureSensor) AND NOT(FaultSensor) AND NOT(EmergencyStop);
   Alarm := FaultSensor OR EmergencyStop;
 
-  IF MainPump THEN
+  (* IF MainPump THEN
     PumpSpeed := 1.0;
   ELSE
     PumpSpeed := 0.0;
@@ -32,7 +32,7 @@ PROGRAM program0
   Pump2SpeedHigh := Pump1SpeedHigh;
   Pump2SpeedLow := Pump1SpeedLow;
   Pump3SpeedHigh := Pump1SpeedHigh;
-  Pump3SpeedLow := Pump1SpeedLow;
+  Pump3SpeedLow := Pump1SpeedLow; *)
 END_PROGRAM
 
 CONFIGURATION Config0

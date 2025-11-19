@@ -19,6 +19,23 @@ The script consists of the following functions:
 - `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
 - `def main():`
 
+### Modbus control toggles
+
+Controls coming from the PLCs can be enabled/disabled independently through environment variables on the `epanet` container/service:
+
+- `USE_MODBUS_PUMP_SPEED` (default `false`): when `true`, pump speeds are read from the PLC. When `false`, EPANET keeps using the pump curve defined inside the `.inp`.
+- `USE_MODBUS_VALVE_SETTINGS` (default `true`): when `true`, valve settings (PRV/FCV/etc.) are overwritten with the PLC register values. Set to `false` when you want EPANET to keep the configuration from the `.inp`.
+
+Example:
+
+```yaml
+environment:
+  - USE_MODBUS_PUMP_SPEED=false
+  - USE_MODBUS_VALVE_SETTINGS=false
+```
+
+With both flags set to `false`, the script becomes read-only towards EPANET (no Modbus-based controls are applied), which is useful for validating the hydraulic model against the original GUI simulation.
+
 Later on, we'll explain each function in depth and how they work under the hood.
 
 ## Before we start
