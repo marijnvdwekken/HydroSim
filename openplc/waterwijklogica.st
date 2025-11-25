@@ -1,6 +1,6 @@
 PROGRAM program0
   VAR
-    StartSwitch AT %IX0.0 : BOOL;
+    StartSwitch AT %IX0.0 : BOOL := TRUE;
     LowPressureSensor AT %IX0.1 : BOOL;
     HighPressureSensor AT %IX0.2 : BOOL;
     FaultSensor AT %IX0.3 : BOOL;
@@ -17,10 +17,10 @@ PROGRAM program0
     Pump3SpeedLow AT %QW1005 : WORD;
   END_VAR
 
-  MainPump := StartSwitch AND LowPressureSensor AND NOT(HighPressureSensor) AND NOT(FaultSensor) AND NOT(EmergencyStop);
+  MainPump := StartSwitch;
   Alarm := FaultSensor OR EmergencyStop;
 
-  (* IF MainPump THEN
+  IF MainPump THEN
     PumpSpeed := 1.0;
   ELSE
     PumpSpeed := 0.0;
@@ -32,7 +32,7 @@ PROGRAM program0
   Pump2SpeedHigh := Pump1SpeedHigh;
   Pump2SpeedLow := Pump1SpeedLow;
   Pump3SpeedHigh := Pump1SpeedHigh;
-  Pump3SpeedLow := Pump1SpeedLow; *)
+  Pump3SpeedLow := Pump1SpeedLow; 
 END_PROGRAM
 
 CONFIGURATION Config0
