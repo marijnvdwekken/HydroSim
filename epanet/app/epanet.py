@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
 import sys
 import time
-
+import os, sys, json
+import paho.mqtt.client as mqtt
 from epyt import epanet
 from pymodbus.client import ModbusTcpClient
+
+
+BROKER = os.getenv("MQTT_BROKER_URL","mqtt://192.168.2.55")
+TOPIC = os.getenv("MQTT_TOPIC", "test/topic")
+
+CA = os.getenv("MQTT_CA_CERT","certs/ca/ca.crt")
+KEY = os.getenv("MQTT_CLIENT_KEY","certs/server/server.key")
+CERT = os.getenv("MQTT_CLIENT_CERT","certs/server/server.crt")
+TLS = os.getenv("MQTT_TLS_ENABLED","true") == "true"
 
 
 def parse_arguments() -> str:
@@ -219,11 +229,22 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
     except Exception as e:
         print(f"ERROR in write_data: {e}")
         sys.exit(1)
-
-
+#zone2-pump1-speed
+#zone3-pump1-speed
 def main():
     inp_file: str = parse_arguments()
+    mqtt_client = mqtt.Client(client_id=f"mqtt-publisher-{os.urandom(4).hex()}")
 
+    if TLS and CA and KEY and CERT:
+        mqtt_client.tls_set(ca_certs=CA, certfile=CERT, keyfile=KEY)
+        mqtt_client.tls_insecure_set(True)
+        host = BROKER.split("://")[-1]
+        print(f"Connecting TLS to {host}:8883")
+        mqtt_client.connect(host, 8883)
+    else:
+        print(f"Connecting to {BROKER} without TLS")
+        mqtt_client.connect(BROKER.split("://")[-1])
+    mqtt_client.loop_start()
     try:
         en: epanet = setup_epanet(inp_file)
 
@@ -246,16 +267,21 @@ def main():
 
             data: dict = read_data(en)
             write_data(clients, data)
+            mqtt_client.publish(TOPIC, str(data))
 
             en.nextHydraulicAnalysisStep()
 
             time.sleep(1)
     except KeyboardInterrupt:
         print(">--- Program interrupted by user ---")
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()
         sys.exit(0)  # clean exit confirmed by user action.
     except Exception as e:
         print(f"Failed to run EPANET simulation due to an unexpected error: {e}")
         sys.exit(1)
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()
     finally:
         if "clients" in locals():
             for client in clients.values():
@@ -263,6 +289,8 @@ def main():
         if "en" in locals():
             en.closeHydraulicAnalysis()
             en.unload()
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()
 
 
 if __name__ == "__main__":

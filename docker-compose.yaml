@@ -10,6 +10,7 @@ services:
     restart: "always"
     volumes:
       - ./epanet/app:/app
+      - ./mqtt/certs:/certs
     networks:
       - plc_network
 
