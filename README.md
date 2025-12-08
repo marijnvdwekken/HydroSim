@@ -45,6 +45,12 @@ sudo docker compose up -d
 - [ScadaLTS](docs/scadalts.md)
 - [Webserver](docs/webserver.md)
 
+## Dev container (EPANET debugging)
+- Install the VS Code Dev Containers extension and open this folder in VS Code.
+- Run “Reopen in Container”; the image (Python 3.12) installs `epyt`, `pymodbus`, `paho-mqtt`, `pyModbusTCP`, and `debugpy` from `.devcontainer/requirements.txt`.
+- Use the existing launch config `Python Debugger: Current File with Arguments` to debug `epanet/app/epanet.py` (it defaults to `scenario.inp`).
+- Set MQTT/TLS env vars in `.env` if you need non-default connection details during debugging.
+
 ## Contributing
 
 Contributions to improve the simulation or add new features are welcome. Please submit pull requests or open issues for discussion.
