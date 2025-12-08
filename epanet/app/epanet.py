@@ -88,22 +88,22 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
                         pass
                     case "PUMP":
                         controls[zone].setdefault(element, {})
-                        controls[zone][element]["speed"] = None
+                        controls[zone][element]["status"] = None
                     case _:
                         controls[zone].setdefault(element, {})
                         controls[zone][element]["setting"] = None
 
         for zone, client in clients.items():
-            pump_count = sum(1 for element in controls[zone] if "speed" in controls[zone][element])
+            pump_count = sum(1 for element in controls[zone] if "status" in controls[zone][element])
 
             if pump_count > 0: 
                 pump_registers = client.read_holding_registers(address=1000, count=pump_count * 2).registers  # this function caused a weird error on the server only, but defining the function parameters this way, the error was solved :)
 
-            for i, element in enumerate(e for e in controls[zone] if "speed" in controls[zone][e]):
+            for i, element in enumerate(e for e in controls[zone] if "status" in controls[zone][e]):
                 converted_value = client.convert_from_registers(
                     pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
                 )
-                controls[zone][element]["speed"] = converted_value
+                controls[zone][element]["status"] = converted_value
 
             valve_count = sum(1 for element in controls[zone] if "setting" in controls[zone][element])
 
@@ -132,8 +132,8 @@ def set_controls(en: epanet, controls: dict) -> None:
             for element, control in elements.items():
                 link_index: int = en.getLinkIndex(f"{zone}-{element}")
 
-                # if "speed" in control:
-                #     en.setLinkSettings(link_index, control["speed"])
+                # if "status" in control:
+                #     en.setLinkSettings(link_index, control["status"])
                     # print(f"{zone:<15} -> {element:<15} -> speed        -> register: {offset_speed:<15}")
                     # offset_speed += 2
 
@@ -190,6 +190,7 @@ def read_data(en: epanet) -> dict:
                         e["power"] = str(en.getLinkPumpPower(link_index))
                         e["speed"] = str(en.getLinkSettings(link_index))
                         e["energy_usage"] = str(en.getLinkEnergy(link_index))
+                        
                     case _:  # default case to handle all valve types.
                         e["setting"] = str(en.getLinkSettings(link_index))
 
@@ -216,7 +217,7 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
 
                     client.write_registers(address, registers)
 
-                    # print(
+                # print(
                     #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
                     #     f"registers: {str(registers):<20}, address: {address}"
                     # )
@@ -261,6 +262,7 @@ def main():
             )  # this way the duration is set to infinite.
 
             controls: dict = get_controls(clients, en)
+            print(controls)
             set_controls(en, controls)
 
             en.runHydraulicAnalysis()
