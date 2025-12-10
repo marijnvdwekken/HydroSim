@@ -5,17 +5,29 @@ import os, sys, json
 import paho.mqtt.client as mqtt
 from epyt import epanet
 from pymodbus.client import ModbusTcpClient
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-BROKER = os.getenv("MQTT_BROKER_URL","mqtt://192.168.2.55")
-TOPIC = os.getenv("MQTT_TOPIC", "test/topic")
+MY_ENV_VAR = os.getenv('.env')
 
-CA = os.getenv("MQTT_CA_CERT","certs/ca/ca.crt")
-KEY = os.getenv("MQTT_CLIENT_KEY","certs/server/server.key")
-CERT = os.getenv("MQTT_CLIENT_CERT","certs/server/server.crt")
+BROKER = os.getenv("MQTT_BROKER_URL","")
+TOPIC = os.getenv("MQTT_TOPIC", "")
+
+CA = os.getenv("MQTT_CA_CERT","")
+KEY = os.getenv("MQTT_CLIENT_KEY","")
+CERT = os.getenv("MQTT_CLIENT_CERT","")
 TLS = os.getenv("MQTT_TLS_ENABLED","true") == "true"
 
+# print(f"BROKER: {BROKER}")
+# print(f"TOPIC: {TOPIC}")
 
+# print(f"CA: {CA}")
+# print(f"KEY: {KEY}")
+# print(f"CERT: {CERT}")
+# print(f"TLS: {TLS}")
+# print(f"TEST: {os.path.isfile(KEY)}")
 def parse_arguments() -> str:
     if len(sys.argv) != 2 or not sys.argv[1].endswith(".inp"):
         print("Run EPANET simulation with Modbus controls.")
@@ -235,17 +247,22 @@ def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
 def main():
     inp_file: str = parse_arguments()
     mqtt_client = mqtt.Client(client_id=f"mqtt-publisher-{os.urandom(4).hex()}")
+    try:
+        if TLS and CA and KEY and CERT:
+            mqtt_client.tls_set(ca_certs=CA, certfile=CERT, keyfile=KEY)
+            mqtt_client.tls_insecure_set(True)
+            host = BROKER.split("://")[-1]
+            print(f"Connecting TLS to {host}:8883")
+            mqtt_client.connect(host, 8883)
+        else:
+            print(f"Connecting to {BROKER} without TLS")
+            mqtt_client.connect(BROKER.split("://")[-1])
+        mqtt_client.loop_start()
+        print("Connected to mqtt broker")
+    except Exception as e:
+        print(f"Cant connect to mqtt: {e}")
+        pass
 
-    if TLS and CA and KEY and CERT:
-        mqtt_client.tls_set(ca_certs=CA, certfile=CERT, keyfile=KEY)
-        mqtt_client.tls_insecure_set(True)
-        host = BROKER.split("://")[-1]
-        print(f"Connecting TLS to {host}:8883")
-        mqtt_client.connect(host, 8883)
-    else:
-        print(f"Connecting to {BROKER} without TLS")
-        mqtt_client.connect(BROKER.split("://")[-1])
-    mqtt_client.loop_start()
     try:
         en: epanet = setup_epanet(inp_file)
 
@@ -262,7 +279,6 @@ def main():
             )  # this way the duration is set to infinite.
 
             controls: dict = get_controls(clients, en)
-            print(controls)
             set_controls(en, controls)
 
             en.runHydraulicAnalysis()
