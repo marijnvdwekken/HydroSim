@@ -1,89 +1,67 @@
 #!/usr/bin/env python3
-import sys
+import json
+import math
+import os
 import time
-import os, sys, json
-import paho.mqtt.client as mqtt
+from pathlib import Path
+
+# import paho.mqtt.client as mqtt
 from epyt import epanet
 from pymodbus.client import ModbusTcpClient
 
-
-BROKER = os.getenv("MQTT_BROKER_URL","mqtt://192.168.2.55")
+BROKER = os.getenv("MQTT_BROKER_URL", "mqtt://192.168.2.55")
 TOPIC = os.getenv("MQTT_TOPIC", "test/topic")
 
-CA = os.getenv("MQTT_CA_CERT","certs/ca/ca.crt")
-KEY = os.getenv("MQTT_CLIENT_KEY","certs/server/server.key")
-CERT = os.getenv("MQTT_CLIENT_CERT","certs/server/server.crt")
-TLS = os.getenv("MQTT_TLS_ENABLED","true") == "true"
+CA = os.getenv("MQTT_CA_CERT", "certs/ca/ca.crt")
+KEY = os.getenv("MQTT_CLIENT_KEY", "certs/server/server.key")
+CERT = os.getenv("MQTT_CLIENT_CERT", "certs/server/server.crt")
+TLS = os.getenv("MQTT_TLS_ENABLED", "true") == "true"
 
-
-def parse_arguments() -> str:
-    if len(sys.argv) != 2 or not sys.argv[1].endswith(".inp"):
-        print("Run EPANET simulation with Modbus controls.")
-        print(f">>> python {sys.argv[0]} [network.inp]")
-        sys.exit(1)
-    return sys.argv[1]
+ep = epanet(Path(__file__).parent.resolve() / "scenario.inp")
 
 
 def setup_epanet(inp_file: str) -> epanet:
     try:
-        en: epanet = epanet(inp_file)
-        en.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
-        en.setTimeHydraulicStep(60)
-        
-        return en
+        ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
+        ep.setTimeHydraulicStep(5 * 60)
     except Exception as e:
         print(f"ERROR in setup_epanet: {e}")
-        sys.exit(1)
+        raise e
 
 
-def get_zones(en: epanet) -> set[str]:
+def setup_clients(zones: dict[str, dict]) -> dict[str, ModbusTcpClient]:
     try:
-        zones: set[str] = set()
-
-        for name_id in en.getNodeNameID() + en.getLinkNameID():
-            if "-" not in name_id:
-                continue
-            zone, _ = name_id.split("-", 1)
-            zones.add(zone)
-        return zones
-    except Exception as e:
-        print(f"ERROR in get_zones: {e}")
-        sys.exit(1)
-
-
-def setup_clients(zones: set) -> dict[str, ModbusTcpClient]:
-    try:
-        clients: dict[str, ModbusTcpClient] = {
-            zone: ModbusTcpClient(host=f'plc-{zone}', port=502)
-            for zone in zones
-        }
         # clients: dict[str, ModbusTcpClient] = {
-        #     zone: ModbusTcpClient(host="127.0.0.1", port=502 + i) 
-        #     for i, zone in enumerate(zones)
+        #     zone: ModbusTcpClient(host=f"plc-{zone.replace('z', 'zone')}", port=502)
+        #     for zone in zones
         # }
-        for _, client in clients.items():
+        clients: dict[str, ModbusTcpClient] = {
+            zone: ModbusTcpClient(host="127.0.0.1", port=502 + i)
+            for i, zone in enumerate(zones)
+        }
+        for client in clients.values():
             while not client.connect():
                 time.sleep(1)
         return clients
     except Exception as e:
         print(f"ERROR in setup_clients: {e}")
-        sys.exit(1)
+        raise e
 
 
-def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
+def read_plc(client: ModbusTcpClient) -> dict:
     try:
         controls: dict = {}
 
-        for name_id in en.getNodeNameID() + en.getLinkNameID():
+        for name_id in ep.getNodeNameID() + ep.getLinkNameID():
             if "-" not in name_id:
                 continue
             zone, element = name_id.split("-", 1)
             controls.setdefault(zone, {})
 
-            if name_id in en.getLinkNameID():
-                link_index: int = en.getLinkIndex(name_id)
+            if name_id in ep.getLinkNameID():
+                link_index: int = ep.getLinkIndex(name_id)
 
-                match en.getLinkType(link_index):
+                match ep.getLinkType(link_index):
                     case "PIPE":
                         pass
                     case "PUMP":
@@ -93,204 +71,266 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
                         controls[zone].setdefault(element, {})
                         controls[zone][element]["setting"] = None
 
-        for zone, client in clients.items():
-            pump_count = sum(1 for element in controls[zone] if "speed" in controls[zone][element])
+        # for zone, client in clients.items():
+        pump_count = sum(
+            1 for element in controls[zone] if "speed" in controls[zone][element]
+        )
 
-            if pump_count > 0: 
-                pump_registers = client.read_holding_registers(address=1000, count=pump_count * 2).registers  # this function caused a weird error on the server only, but defining the function parameters this way, the error was solved :)
+        if pump_count > 0:
+            pump_registers = client.read_holding_registers(
+                address=1000, count=pump_count * 2
+            ).registers  # this function caused a weird error on the server only, but defining the function parameters this way, the error was solved :)
 
-            for i, element in enumerate(e for e in controls[zone] if "speed" in controls[zone][e]):
-                converted_value = client.convert_from_registers(
-                    pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
-                )
-                controls[zone][element]["speed"] = converted_value
+        for i, element in enumerate(
+            e for e in controls[zone] if "speed" in controls[zone][e]
+        ):
+            converted_value = client.convert_from_registers(
+                pump_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+            )
+            controls[zone][element]["speed"] = converted_value
 
-            valve_count = sum(1 for element in controls[zone] if "setting" in controls[zone][element])
+        valve_count = sum(
+            1 for element in controls[zone] if "setting" in controls[zone][element]
+        )
 
-            if valve_count > 0: 
-                valve_registers = client.read_holding_registers(address=2000, count=valve_count * 2).registers  # same applies here...
+        if valve_count > 0:
+            valve_registers = client.read_holding_registers(
+                address=2000, count=valve_count * 2
+            ).registers  # same applies here...
 
-            for i, element in enumerate(e for e in controls[zone] if "setting" in controls[zone][e]):
-                converted_value = client.convert_from_registers(
-                    valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
-                )
-                controls[zone][element]["setting"] = converted_value
-            
+        for i, element in enumerate(
+            e for e in controls[zone] if "setting" in controls[zone][e]
+        ):
+            converted_value = client.convert_from_registers(
+                valve_registers[i * 2 : i * 2 + 2], client.DATATYPE.FLOAT32
+            )
+            controls[zone][element]["setting"] = converted_value
 
         return controls
     except Exception as e:
         print(f"Error in get_controls: {e}")
-        sys.exit(1)
+        raise e
 
 
-def set_controls(en: epanet, controls: dict) -> None:
+def set_values(controls: dict) -> None:
     try:
         # offset_speed: int = 1000
         # offset_setting: int = 2000
-        
+
         for zone, elements in controls.items():
             for element, control in elements.items():
-                link_index: int = en.getLinkIndex(f"{zone}-{element}")
+                link_index: int = ep.getLinkIndex(f"{zone}-{element}")
 
                 # if "speed" in control:
-                #     en.setLinkSettings(link_index, control["speed"])
-                    # print(f"{zone:<15} -> {element:<15} -> speed        -> register: {offset_speed:<15}")
-                    # offset_speed += 2
+                #     ep.setLinkSettings(link_index, control["speed"])
+                # print(f"{zone:<15} -> {element:<15} -> speed        -> register: {offset_speed:<15}")
+                # offset_speed += 2
 
                 if "setting" in control:
-                    en.setLinkSettings(link_index, control["setting"])
+                    ep.setLinkSettings(link_index, control["setting"])
                     # print(f"{zone:<15} -> {element:<15} -> setting      -> register: {offset_setting:<15}")
                     # offset_setting += 2
 
             # print()  # blank line for separating log entries.
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
-        sys.exit(1)
+        raise e
 
 
-def read_data(en: epanet) -> dict:
+def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None:
     try:
-        data: dict = {}
-
-        for name_id in en.getNodeNameID() + en.getLinkNameID():
-            if "-" not in name_id:
-                continue
-            zone, element = name_id.split("-", 1)
-            data.setdefault(zone, {}).setdefault(element, {})
-
-            e: dict = data[zone][element]
-
-            if name_id in en.getNodeNameID():
-                node_index: int = en.getNodeIndex(name_id)
-
-                e["index"] = str(node_index)
-                e["hydraulic_head"] = str(en.getNodeHydraulicHead(node_index))
-                e["pressure"] = str(en.getNodePressure(node_index))
-                e["elevation"] = str(en.getNodeElevations(node_index))
-
-                if en.getNodeType(node_index) == "TANK":
-                    e["minimum_water_level"] = str(en.getNodeTankMinimumWaterLevel(node_index))
-                    e["maximum_water_level"] = str(en.getNodeTankMaximumWaterLevel(node_index))
-                    e["initial_water_level"] = str(en.getNodeTankInitialLevel(node_index))
-                    e["minimum_water_volume"] = str(en.getNodeTankMinimumWaterVolume(node_index))
-                    e["maximum_water_volume"] = str(en.getNodeTankMaximumWaterVolume(node_index))
-                    e["initial_water_volume"] = str(en.getNodeTankInitialWaterVolume(node_index))
-
-            if name_id in en.getLinkNameID():
-                link_index: int = en.getLinkIndex(name_id)
-
-                e["index"] = str(link_index)
-                e["status"] = str(en.getLinkStatus(link_index))
-                e["flow_rate"] = str(en.getLinkFlows(link_index))
-
-                match en.getLinkType(link_index):
-                    case "PIPE":
-                        pass
-                    case "PUMP":
-                        e["power"] = str(en.getLinkPumpPower(link_index))
-                        e["speed"] = str(en.getLinkSettings(link_index))
-                        e["energy_usage"] = str(en.getLinkEnergy(link_index))
-                    case _:  # default case to handle all valve types.
-                        e["setting"] = str(en.getLinkSettings(link_index))
-
-        return data
-    except Exception as e:
-        print(f"ERROR in read_data: {e}")
-        sys.exit(1)
-
-
-def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:
-    try:
-        for zone, elements in data.items():
-            client: ModbusTcpClient = clients[zone]
-            offset: int = 0
-
-            for element, values in elements.items():
-                for i, (k, value) in enumerate(values.items()):
-                    address: int = offset + i * 2
+        offset: int = 0
+        for element, values in data.items():
+            for i, (k, value) in enumerate(values.items()):
+                address: int = offset + i * 2
+                if isinstance(value, str):
+                    pass
                     registers: list[int] = client.convert_to_registers(
-                        float(value), client.DATATYPE.FLOAT32
+                        value, client.DATATYPE.STRING
                     )
-                    if len(registers) == 2:
-                        registers = [registers[1], registers[0]]
+                elif isinstance(value, float | int):
+                    registers: list[int] = client.convert_to_registers(
+                        value, client.DATATYPE.FLOAT32
+                    )
 
-                    client.write_registers(address, registers)
+                client.write_registers(address, registers)
 
-                    # print(
-                    #     f"{zone:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
-                    #     f"registers: {str(registers):<20}, address: {address}"
-                    # )
+                print(
+                    f"{client.comm_params.host:<15} -> {element:<15} -> {k:<30}: {value:<30}, "
+                    f"registers: {str(registers):<20}, address: {address}"
+                )
 
-                offset += len(values) * 2
-
-                # print()  # blank lines for separating log entries.
-            # print()
-            # print()
+            else:
+                # TODO print id/name to plc
+                print(element)
+            offset += len(values) * 2
     except Exception as e:
         print(f"ERROR in write_data: {e}")
-        sys.exit(1)
-#zone2-pump1-speed
-#zone3-pump1-speed
+        raise e
+
+
+def get_zone_items(zone_id: str) -> tuple[list, list]:
+    """fucntion to get the items from a zone
+
+    Args:
+        zone_id (str): id of the zone u want the items from
+
+    Returns:
+        tuple (list, list): returns a tuple of the nodes and links in the zone
+    """
+    nodes = [
+        id
+        for id, name in zip(ep.getNodeIndex(), ep.getNodeNameID())
+        if name.startswith(zone_id)
+    ]
+    links = [
+        id
+        for id, name in zip(ep.getLinkIndex(), ep.getLinkNameID())
+        if name.startswith(zone_id)
+    ]
+    return nodes, links
+
+
+def get_nodedata(nodes):
+    zone_data = {}
+
+    for node in nodes:
+        node_data = dict()
+        name = ep.getNodeNameID(node)
+        node_data["type"] = ep.getNodeType(node)
+        node_data["pressure"] = round(ep.getNodePressure(node), 3)
+        node_data["quality"] = round(ep.getNodeActualQuality(node), 3)
+        node_data["elevation"] = ep.getNodeElevations(node)
+        match ep.getNodeType(node):
+            case "JUNCTION":
+                node_data["demand"] = round(ep.getNodeActualDemand(node), 3)
+                node_data["head"] = round(ep.getNodeHydraulicHead(node), 3)
+            case "TANK":
+                # h = V / (pi * r^2)
+                # V = pi * r^2 * h
+
+                node_data["level"] = round(
+                    float(
+                        ep.getNodeTankVolume(node)
+                        / (math.pi * ep.getNodeTankDiameter(node))
+                    ),
+                    3,
+                )
+            case "RESERVOIR":
+                pass
+            case _:
+                pass
+        print(name, json.dumps(node_data))
+        zone_data[name] = node_data
+    return zone_data
+
+
+def get_linkdata(links):
+    zone_data = {}
+    for link in links:
+        link_data = dict()
+        # variables of every node
+        name = ep.getLinkNameID(link)
+        link_data["type"] = ep.getLinkType(link)
+        link_data["quality"] = ep.getLinkActualQuality(link)
+        link_data["headloss"] = round(ep.getLinkHeadloss(link), 3)
+        link_data["flow"] = round(float(ep.getLinkFlows(link)), 3)
+        # the same as speed = 0 or if the pipe is open of closed
+        link_data["status"] = ep.getLinkStatus(link)
+
+        match ep.getLinkType(link):
+            case "PIPE":
+                link_data["velocity"] = round(ep.getLinkVelocity(link), 3)
+                link_data["length"] = ep.getLinkLength(link)
+                pass
+            case "PUMP":
+                # determent to be always 1
+                link_data["power"] = ep.getLinkPumpPower(link)
+                # used to change the rotation speed. 0 = off
+                link_data["speed"] = float(ep.getLinkSettings(link))
+                link_data["energy"] = round(ep.getLinkEnergy(link), 3)
+                link_data["efficeiency"] = round(ep.getLinkPumpEfficiency(link), 3)
+                link_data["state"] = ep.getLinkPumpState(link)
+            # there are more valve types but only the TCV is used
+            case "VALVE" | "TCV":
+                link_data["velocity"] = round(ep.getLinkVelocity(link), 3)
+                pass
+            case _:
+                pass
+        print(name, json.dumps(link_data))
+        zone_data[name] = link_data
+    return zone_data
+
+
 def main():
-    inp_file: str = parse_arguments()
-    mqtt_client = mqtt.Client(client_id=f"mqtt-publisher-{os.urandom(4).hex()}")
+    # mqtt_client = mqtt.Client(client_id=f"mqtt-publisher-{os.urandom(4).hex()}")
 
-    if TLS and CA and KEY and CERT:
-        mqtt_client.tls_set(ca_certs=CA, certfile=CERT, keyfile=KEY)
-        mqtt_client.tls_insecure_set(True)
-        host = BROKER.split("://")[-1]
-        print(f"Connecting TLS to {host}:8883")
-        mqtt_client.connect(host, 8883)
-    else:
-        print(f"Connecting to {BROKER} without TLS")
-        mqtt_client.connect(BROKER.split("://")[-1])
-    mqtt_client.loop_start()
+    # if TLS and CA and KEY and CERT:
+    #     mqtt_client.tls_set(ca_certs=CA, certfile=CERT, keyfile=KEY)
+    #     mqtt_client.tls_insecure_set(True)
+    #     host = BROKER.split("://")[-1]
+    #     print(f"Connecting TLS to {host}:8883")
+    #     mqtt_client.connect(host, 8883)
+    # else:
+    #     print(f"Connecting to {BROKER} without TLS")
+    #     mqtt_client.connect(BROKER.split("://")[-1])
+    # mqtt_client.loop_start()
     try:
-        en: epanet = setup_epanet(inp_file)
 
-        zones: set[str] = get_zones(en)
+        zone_ids = ["z0", "z1", "z2", "z3", "z4"]
+
+        clients: dict[str, ModbusTcpClient] = setup_clients(zone_ids)
+
+        ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
+        ep.setTimeHydraulicStep(5 * 60)
+        ep.openHydraulicAnalysis()
+        ep.initializeHydraulicAnalysis(0)
         
-        clients: dict[str, ModbusTcpClient] = setup_clients(zones)
-
-        en.openHydraulicAnalysis()
-        en.initializeHydraulicAnalysis()
-
         while True:
-            en.setTimeSimulationDuration(
-                en.getTimeSimulationDuration() + en.getTimeHydraulicStep()
-            )  # this way the duration is set to infinite.
+            # this way the duration is set to infinite.
+            ep.setTimeSimulationDuration(
+                ep.getTimeSimulationDuration() + ep.getTimeHydraulicStep()
+            )
 
-            controls: dict = get_controls(clients, en)
-            set_controls(en, controls)
+            # for zone, client in clients.items():
+            #     # nodes, links = get_zone_items(zone)
+            #     new_data = read_plc(client)
+            #     set_values(new_data)
 
-            en.runHydraulicAnalysis()
+            tstep = ep.runHydraulicAnalysis()
 
-            data: dict = read_data(en)
-            write_data(clients, data)
-            mqtt_client.publish(TOPIC, str(data))
+            for zone, client in clients.items():
+                data = {}
+                nodes, links = get_zone_items(zone)
+                # there is no way as of 11-12-2025 to get the tag value of the links and nodes
+                # epyt has a way to add comments with setNodeComment() and setLinkComment()
+                print(f"Working on zone {zone}")
+                data.update(get_linkdata(links))
+                data.update(get_nodedata(nodes))
 
-            en.nextHydraulicAnalysisStep()
+                write_plc(client, data)
+                # mqtt_client.publish(TOPIC, str(data))
 
+            ep.nextHydraulicAnalysisStep()
+
+
+            print(f"time step = {tstep}")
             time.sleep(1)
+            break
     except KeyboardInterrupt:
         print(">--- Program interrupted by user ---")
-        mqtt_client.loop_stop()
-        mqtt_client.disconnect()
-        sys.exit(0)  # clean exit confirmed by user action.
     except Exception as e:
         print(f"Failed to run EPANET simulation due to an unexpected error: {e}")
-        sys.exit(1)
-        mqtt_client.loop_stop()
-        mqtt_client.disconnect()
     finally:
-        if "clients" in locals():
+        local_variables = locals()
+        if "clients" in local_variables:
             for client in clients.values():
                 client.close()
-        if "en" in locals():
-            en.closeHydraulicAnalysis()
-            en.unload()
-        mqtt_client.loop_stop()
-        mqtt_client.disconnect()
+
+        ep.closeHydraulicAnalysis()
+        ep.unload()
+        # mqtt_client.loop_stop()
+        # mqtt_client.disconnect()
 
 
 if __name__ == "__main__":
