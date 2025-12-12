@@ -1,7 +1,7 @@
 scadalts/db*
 scadalts/tomcat_log
 webserver/log
-epanet/app/scenario.txt
-epanet/app/scenario_temp*
+epanet/app/*.txt
+epanet/app/*_temp*
 .venv
 /node_modules
