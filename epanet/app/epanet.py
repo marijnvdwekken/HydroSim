@@ -2,6 +2,9 @@
 import json
 import math
 import os
+import json
+import math
+import os
 import time
 from pathlib import Path
 
@@ -66,6 +69,8 @@ def setup_epanet(inp_file: str) -> epanet:
     try:
         ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
         ep.setTimeHydraulicStep(5 * 60)
+        ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
+        ep.setTimeHydraulicStep(5 * 60)
     except Exception as e:
         print(f"ERROR in setup_epanet: {e}")
         raise e
@@ -102,17 +107,21 @@ def read_plc(client: ModbusTcpClient) -> dict:
         controls: dict = {}
         for name_id in ep.getLinkNameID():
             # We besturen alleen items met een zone-prefix
-            if "-" not in name_id: continue
-            
+            if "-" not in name_id:
+                continue
+
             zone, element = name_id.split("-", 1)
             link_index = ep.getLinkIndex(name_id)
-            
+
             ltype = ep.getLinkType(link_index)
             if ltype == "PUMP" or ltype in ["VALVE", "TCV", "PRV", "PSV"]:
                 controls.setdefault(zone, {})
-                controls[zone][element] = {"status": None, "index": link_index, "type": ltype}
+                controls[zone][element] = {
+                    "status": None,
+                    "index": link_index,
+                    "type": ltype,
+                }
 
-    
         if zone in controls and len(controls[zone]) > 0:
             try:
                 # Lees genoeg coils (32)
@@ -162,7 +171,8 @@ def set_values(controls: dict) -> None:
 
 
 def float_to_registers(value):
-    return list(struct.unpack('>HH', struct.pack('>f', value)))
+    return list(struct.unpack(">HH", struct.pack(">f", value)))
+
 
 def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None:
     try:
