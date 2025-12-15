@@ -2,17 +2,15 @@
 import json
 import math
 import os
-import json
-import math
-import os
+import re
+import struct
 import time
 from pathlib import Path
 
-import struct
 import paho.mqtt.client as mqtt
+from dotenv import load_dotenv
 from epyt import epanet
 from pymodbus.client import ModbusTcpClient
-from dotenv import load_dotenv
 
 load_dotenv()
 BROKER = os.getenv("MQTT_BROKER_URL", "")
@@ -23,13 +21,12 @@ KEY = os.getenv("MQTT_CLIENT_KEY", "certs/server/server.key")
 CERT = os.getenv("MQTT_CLIENT_CERT", "certs/server/server.crt")
 TLS = os.getenv("MQTT_TLS_ENABLED", "true") == "true"
 
-ep = epanet(Path(__file__).parent.resolve() / "scenario.inp")
 CA = os.getenv("MQTT_CA_CERT", "")
 KEY = os.getenv("MQTT_CLIENT_KEY", "")
 CERT = os.getenv("MQTT_CLIENT_CERT", "")
 TLS = os.getenv("MQTT_TLS_ENABLED", "true") == "true"
 
-ep = epanet(Path(__file__).parent.resolve() / "scenario.inp")
+ep = epanet((Path(__file__).parent.resolve() / "scenario.inp").as_posix())
 
 # --- CONFIGURATIE ---
 PUMP_MAPPING = {
@@ -62,19 +59,6 @@ ZONE_METERS = {"z0": "z0-valve", "z1": "16", "z2": "21", "z3": "18", "z4": "22"}
 METER_TO_ZONE = {v: k for k, v in ZONE_METERS.items()}
 # --------------------
 
-plc_states = {}
-
-
-def setup_epanet(inp_file: str) -> epanet:
-    try:
-        ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
-        ep.setTimeHydraulicStep(5 * 60)
-        ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
-        ep.setTimeHydraulicStep(5 * 60)
-    except Exception as e:
-        print(f"ERROR in setup_epanet: {e}")
-        raise e
-
 
 def setup_clients(zones: dict[str, dict]) -> dict[str, ModbusTcpClient]:
     try:
@@ -102,69 +86,52 @@ def get_coil_index(zone, element, type_map):
     return int(digits) if digits else 0
 
 
-def read_plc(client: ModbusTcpClient) -> dict:
+def read_plc(client: ModbusTcpClient) -> dict[str, dict]:
     try:
-        controls: dict = {}
+        controls = {}
+        zone = client.comm_params.host
         for name_id in ep.getLinkNameID():
             # We besturen alleen items met een zone-prefix
-            if "-" not in name_id:
+            if not re.search("^z\d", name_id):
                 continue
-
-            zone, element = name_id.split("-", 1)
             link_index = ep.getLinkIndex(name_id)
 
             ltype = ep.getLinkType(link_index)
-            if ltype == "PUMP" or ltype in ["VALVE", "TCV", "PRV", "PSV"]:
-                controls.setdefault(zone, {})
-                controls[zone][element] = {
-                    "status": None,
-                    "index": link_index,
-                    "type": ltype,
-                }
+            controls[link_index] = {"type": ltype}
 
-        if zone in controls and len(controls[zone]) > 0:
-            try:
-                # Lees genoeg coils (32)
-                rr = client.read_coils(address=0, count=32)
-                if not rr.isError():
-                    plc_states[zone] = rr.bits[:32]
-                    for element, data in controls[zone].items():
-                        check_type = "PUMP" if data["type"] == "PUMP" else "VALVE"
-                        map_dict = (
-                            PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
-                        )
-                        idx = get_coil_index(zone, element, map_dict)
-                        if idx < len(rr.bits):
-                            is_running = rr.bits[idx]
-                            controls[zone][element]["status"] = (
-                                1.0 if is_running else 0.0
-                            )
-            except:
-                pass
+        # Lees genoeg coils (32)
+        rr = client.read_coils(address=0, count=32)
+        if not rr.isError():
+            for element, data in controls.items():
+                check_type = "PUMP" if data["type"] == "PUMP" else "VALVE"
+                map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
+                idx = get_coil_index(zone, element, map_dict)
+                if idx < len(rr.bits):
+                    is_running = rr.bits[idx]
+                    controls[element]["status"] = 1.0 if is_running else 0.0
+
         return controls
     except Exception as e:
         print(f"Error in get_controls: {e}")
         raise e
 
 
-def set_values(controls: dict) -> None:
+def set_values(controls: dict[str, dict]) -> None:
     try:
-        for zone, elements in controls.items():
-            for element, control in elements.items():
-                if "status" in control and control["status"] is not None:
-                    idx = control["index"]
-                    val = control["status"]
-                    ltype = control.get("type", "LINK")
+        for element, control in controls.items():
+            if "status" in control and control["status"] is not None:
+                val = control["status"]
+                ltype = control.get("type")
 
-                    new_status = 1 if val > 0.5 else 0
-                    current_status = ep.getLinkStatus(idx)
+                new_status = 1 if val > 0.5 else 0
+                current_status = ep.getLinkStatus(element)
 
-                    if new_status != current_status:
-                        ep.setLinkStatus(idx, new_status)
-                        # ALLEEN voor pompen de speed aanpassen.
-                        # Voor kleppen is setting 0.0 = OPEN (weerstand 0), dus niet doen!
-                        if ltype == "PUMP":
-                            ep.setLinkSettings(idx, 1.0 if new_status == 1 else 0.0)
+                if new_status != current_status:
+                    ep.setLinkStatus(element, new_status)
+                    # ALLEEN voor pompen de speed aanpassen.
+                    # Voor kleppen is setting 0.0 = OPEN (weerstand 0), dus niet doen!
+                    if ltype == "PUMP":
+                        ep.setLinkSettings(element, 1.0 if new_status == 1 else 0.0)
     except Exception as e:
         print(f"ERROR in set_controls: {e}")
         raise e
@@ -195,7 +162,7 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                     client.write_registers(
                         address=700, values=float_to_registers(flow_val)
                     )
-                except:
+                except Exception:
                     pass
 
             # --- TANKS ---
@@ -215,9 +182,9 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                             address=10 + (tank_num * 2),
                             values=float_to_registers(level),
                         )
-                    except:
+                    except Exception:
                         pass
-                except:
+                except Exception:
                     pass
 
             elif props.get("type") in ["PUMP", "VALVE"]:
@@ -233,12 +200,11 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                 idx = get_coil_index(zone, element, map_dict)
 
                 plc_text = "?"
-                if zone in plc_states and idx < len(plc_states[zone]):
-                    is_on = plc_states[zone][idx]
-                    if props["type"] == "VALVE":
-                        plc_text = "OPEN" if is_on else "DICHT"
-                    else:
-                        plc_text = "AAN" if is_on else "UIT"
+                is_on = props.get("status")
+                if props["type"] == "VALVE":
+                    plc_text = "OPEN" if is_on else "DICHT"
+                else:
+                    plc_text = "AAN" if is_on else "UIT"
 
                 plc_display = f"{plc_text} (Coil {idx})"
                 print(
@@ -247,10 +213,10 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
 
         try:
             client.write_registers(address=0, values=[sensor_mask])
-        except:
+        except Exception:
             pass
 
-    except:
+    except Exception:
         pass
 
 
@@ -317,28 +283,28 @@ def get_linkdata(links):
         # variables of every node
         name = ep.getLinkNameID(link)
         link_data["type"] = ep.getLinkType(link)
-        link_data["quality"] = ep.getLinkActualQuality(link)
-        link_data["headloss"] = round(ep.getLinkHeadloss(link), 3)
+        link_data["quality"] = float(ep.getLinkActualQuality(link))
+        link_data["headloss"] = round(float(ep.getLinkHeadloss(link)), 3)
         link_data["flow"] = round(float(ep.getLinkFlows(link)), 3)
         # the same as speed = 0 or if the pipe is open of closed
-        link_data["status"] = ep.getLinkStatus(link)
+        link_data["status"] = int(ep.getLinkStatus(link))
 
         match ep.getLinkType(link):
             case "PIPE":
-                link_data["velocity"] = round(ep.getLinkVelocity(link), 3)
-                link_data["length"] = ep.getLinkLength(link)
+                link_data["velocity"] = round(float(ep.getLinkVelocity(link)), 3)
+                link_data["length"] = int(ep.getLinkLength(link))
                 pass
             case "PUMP":
                 # determent to be always 1
                 link_data["power"] = ep.getLinkPumpPower(link)
                 # used to change the rotation speed. 0 = off
                 link_data["speed"] = float(ep.getLinkSettings(link))
-                link_data["energy"] = round(ep.getLinkEnergy(link), 3)
+                link_data["energy"] = round(float(ep.getLinkEnergy(link)), 3)
                 link_data["efficeiency"] = round(ep.getLinkPumpEfficiency(link), 3)
                 link_data["state"] = ep.getLinkPumpState(link)
             # there are more valve types but only the TCV is used
             case "VALVE" | "TCV":
-                link_data["velocity"] = round(ep.getLinkVelocity(link), 3)
+                link_data["velocity"] = round(float(ep.getLinkVelocity(link)), 3)
                 pass
             case _:
                 pass
@@ -358,7 +324,7 @@ def main():
         else:
             mqtt_client.connect(BROKER.split("://")[-1])
         mqtt_client.loop_start()
-    except:
+    except Exception:
         pass
 
     try:
@@ -377,10 +343,10 @@ def main():
                 ep.getTimeSimulationDuration() + ep.getTimeHydraulicStep()
             )
 
-            # for zone, client in clients.items():
-            #     # nodes, links = get_zone_items(zone)
-            #     new_data = read_plc(client)
-            #     set_values(new_data)
+            for zone, client in clients.items():
+                # nodes, links = get_zone_items(zone)
+                new_data = read_plc(client)
+                set_values(new_data)
 
             tstep = ep.runHydraulicAnalysis()
 
