@@ -12,6 +12,7 @@ services:
       - ./epanet/app:/app
       - ./mqtt/certs:/certs
       - ./.env:/.env
+      - ./zone-registers.txt:/zone-registers.txt
     networks:
       - plc_network
 
@@ -46,7 +47,7 @@ services:
     environment:
       - CATALINA_OPTS=-Xmx2G -Xms2G
     ports:
-      - "8081:8080" # Used for external access and debugging
+      - "8081:8080" 
     depends_on:
       database:
         condition: service_healthy
@@ -103,10 +104,10 @@ services:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: watertanklogica.st
+        script: zone_0.st
         database: database.sh
     ports:
-      - "8082:8080" # Used for external access and debugging
+      - "8082:8080" 
     expose:
       - "502"
       - "8080"
@@ -123,10 +124,10 @@ services:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_1.st
         database: database.sh
     ports:
-      - "8083:8080" # Used for external access and debugging
+      - "8083:8080" 
     expose:
       - "502"
       - "8080"
@@ -143,10 +144,10 @@ services:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_2.st
         database: database.sh
     ports:
-      - "8084:8080" # Used for external access and debugging
+      - "8084:8080" 
     expose:
       - "502"
       - "8080"
@@ -163,10 +164,10 @@ services:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_3.st
         database: database.sh
     ports:
-      - "8085:8080" # Used for external access and debugging
+      - "8085:8080" 
     expose:
       - "502"
       - "8080"
@@ -183,10 +184,10 @@ services:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_4.st
         database: database.sh
     ports:
-      - "8086:8080" # Used for external access and debugging
+      - "8086:8080" 
     expose:
       - "502"
       - "8080"
