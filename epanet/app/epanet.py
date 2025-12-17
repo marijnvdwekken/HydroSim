@@ -27,7 +27,6 @@ CERT = os.getenv("MQTT_CLIENT_CERT", "")
 TLS = os.getenv("MQTT_TLS_ENABLED", "true") == "true"
 DEBUG = os.getenv("DEBUG",True)
 
-print(DEBUG)
 ep = epanet((Path(__file__).parent.resolve() / "scenario.inp").as_posix())
 
 # --- CONFIGURATIE ---
@@ -105,15 +104,12 @@ def read_plc(client: ModbusTcpClient) -> dict[str, dict]:
         else:
             zone = client.comm_params.host + "" + str(client.comm_params.port)
         for name_id in ep.getLinkNameID():
-            # We besturen alleen items met een zone-prefix
             if not re.search("^z\\d", name_id):
                 continue
             link_index = ep.getLinkIndex(name_id)
-
             ltype = ep.getLinkType(link_index)
-            controls[name_id] = {"type": ltype}
+            controls[name_id] = {"type": ltype, "index": link_index}
 
-        # Lees genoeg coils (32)
         rr = client.read_coils(address=0, count=32)
         if not rr.isError():
             for element, data in controls.items():
@@ -130,26 +126,23 @@ def read_plc(client: ModbusTcpClient) -> dict[str, dict]:
         raise e
 
 
-def set_values(controls: dict[str, dict]) -> None:
+def set_values( values: dict) -> None:
     try:
-        for element, control in controls.items():
+        for element, control in values.items():
             if "status" in control and control["status"] is not None:
+                idx = control["index"]
                 val = control["status"]
-                ltype = control.get("type")
-
+                ltype = control.get("type", "LINK")
+                
                 new_status = 1 if val > 0.5 else 0
-                # name_id = ep.getLinkNameID
-                current_status = ep.getLinkStatus(element)
-
+                current_status = ep.getLinkStatus(idx)
+                
                 if new_status != current_status:
-                    ep.setLinkStatus(element, new_status)
-                    # ALLEEN voor pompen de speed aanpassen.
-                    # Voor kleppen is setting 0.0 = OPEN (weerstand 0), dus niet doen!
+                    ep.setLinkStatus(idx, new_status)
                     if ltype == "PUMP":
-                        ep.setLinkSettings(element, 1.0 if new_status == 1 else 0.0)
+                        ep.setLinkSettings(idx, 1.0 if new_status==1 else 0.0)
     except Exception as e:
-        print(f"ERROR in set_controls: {e}")
-        raise e
+        print(f"ERROR in set_values: {e}")
 
 
 def float_to_registers(value):
@@ -158,10 +151,10 @@ def float_to_registers(value):
 
 def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None:
     try:
-        print(
-            f"{'ZONE':<6} | {'ELEMENT':<12} | {'TYPE':<6} | {'STATUS/VALUE':<16} | {'PLC/INFO'}"
-        )
-        print("-" * 75)
+        # print(
+        #     f"{'ZONE':<6} | {'ELEMENT':<12} | {'TYPE':<6} | {'STATUS/VALUE':<16} | {'PLC/INFO'}"
+        # )
+        # print("-" * 75)
 
         if not DEBUG:
             zone = client.comm_params.host 
@@ -173,9 +166,9 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
         for element, props in data.items():
             if props.get("is_meter"):
                 flow_val = abs(float(props.get("flow", 0)))
-                print(
-                    f"{zone:<6} | {element:<12} | {'METER':<6} | {flow_val:<16.2f} | Reg 700"
-                )
+                # print(
+                #     f"{zone:<6} | {element:<12} | {'METER':<6} | {flow_val:<16.2f} | Reg 700"
+                # )
                 try:
                     client.write_registers(
                         address=700, values=float_to_registers(flow_val)
@@ -225,9 +218,9 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                     plc_text = "AAN" if is_on else "UIT"
 
                 plc_display = f"{plc_text} (Coil {idx})"
-                print(
-                    f"{zone:<6} | {element:<12} | {props['type']:<6} | {epa_text:<16} | {plc_display}"
-                )
+                # print(
+                #     f"{zone:<6} | {element:<12} | {props['type']:<6} | {epa_text:<16} | {plc_display}"
+                # )
 
         try:
             client.write_registers(address=0, values=[sensor_mask])
@@ -289,7 +282,7 @@ def get_nodedata(nodes):
                 pass
             case _:
                 pass
-        print(name, json.dumps(node_data))
+        # print(name, json.dumps(node_data))
         zone_data[name] = node_data
     return zone_data
 
@@ -326,7 +319,7 @@ def get_linkdata(links):
                 pass
             case _:
                 pass
-        print(name, json.dumps(link_data))
+        # print(name, json.dumps(link_data))
         zone_data[name] = link_data
     return zone_data
 
@@ -364,7 +357,7 @@ def main():
             for zone, client in clients.items():
                 # nodes, links = get_zone_items(zone)
                 new_data = read_plc(client)
-                # set_values(new_data)
+                set_values(new_data)
 
             tstep = ep.runHydraulicAnalysis()
 
@@ -373,7 +366,6 @@ def main():
                 nodes, links = get_zone_items(zone)
                 # there is no way as of 11-12-2025 to get the tag value of the links and nodes
                 # epyt has a way to add comments with setNodeComment() and setLinkComment()
-                print(f"Working on zone {zone}")
                 data.update(get_linkdata(links))
                 data.update(get_nodedata(nodes))
 
@@ -382,7 +374,6 @@ def main():
 
             ep.nextHydraulicAnalysisStep()
 
-            print(f"time step = {tstep}")
             time.sleep(1)
     except KeyboardInterrupt:
         print(">--- Program interrupted by user ---")
