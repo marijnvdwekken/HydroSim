@@ -25,20 +25,29 @@ CA = os.getenv("MQTT_CA_CERT", "")
 KEY = os.getenv("MQTT_CLIENT_KEY", "")
 CERT = os.getenv("MQTT_CLIENT_CERT", "")
 TLS = os.getenv("MQTT_TLS_ENABLED", "true") == "true"
+DEBUG = os.getenv("DEBUG",True)
 
+print(DEBUG)
 ep = epanet((Path(__file__).parent.resolve() / "scenario.inp").as_posix())
 
 # --- CONFIGURATIE ---
+zone0 = "plc-zone0" if not DEBUG else "127.0.0.1:5022"
+zone1 = "plc-zone1" if not DEBUG else "127.0.0.1:5023"
+zone2 = "plc-zone2" if not DEBUG else "127.0.0.1:5024"
+zone3 = "plc-zone3" if not DEBUG else "127.0.0.1:5025"
+zone4 = "plc-zone4" if not DEBUG else "127.0.0.1:5026"
+
+
 PUMP_MAPPING = {
-    "z0": {"pump0": 0, "pump1": 1, "pump2": 2, "pump3": 3},
-    "z1": {"pump1": 0},
-    "z2": {"pump1": 0},
-    "z3": {"pump1": 0},
-    "z4": {"pump1": 0},
+    zone0: {"pump0": 0, "pump1": 1, "pump2": 2, "pump3": 3},
+    zone1: {"pump1": 0},
+    zone2: {"pump1": 0},
+    zone3: {"pump1": 0},
+    zone4: {"pump1": 0},
 }
 
 VALVE_MAPPING = {
-    "z0": {
+    zone0: {
         "valve": 8,
         "valv01": 9,
         "valve00": 10,
@@ -49,10 +58,10 @@ VALVE_MAPPING = {
         "valve30": 15,
         "valve31": 16,
     },
-    "z1": {"valve0": 2, "valve1": 4},
-    "z2": {"valve0": 2, "valve1": 4},
-    "z3": {"valve0": 2, "valve1": 4},
-    "z4": {"valve0": 2, "valve1": 4},
+    zone1: {"valve0": 2, "valve1": 4},
+    zone2: {"valve0": 2, "valve1": 4},
+    zone3: {"valve0": 2, "valve1": 4},
+    zone4: {"valve0": 2, "valve1": 4},
 }
 
 ZONE_METERS = {"z0": "z0-valve", "z1": "16", "z2": "21", "z3": "18", "z4": "22"}
@@ -62,14 +71,16 @@ METER_TO_ZONE = {v: k for k, v in ZONE_METERS.items()}
 
 def setup_clients(zones: dict[str, dict]) -> dict[str, ModbusTcpClient]:
     try:
-        # clients: dict[str, ModbusTcpClient] = {
-        #     zone: ModbusTcpClient(host=f"plc-{zone.replace('z', 'zone')}", port=502)
-        #     for zone in zones
-        # }
-        clients: dict[str, ModbusTcpClient] = {
-            zone: ModbusTcpClient(host="127.0.0.1", port=502 + i)
-            for i, zone in enumerate(zones)
-        }
+        if not DEBUG:
+            clients: dict[str, ModbusTcpClient] = {
+                zone: ModbusTcpClient(host=f"plc-{zone.replace('z', 'zone')}", port=502)
+                for zone in zones
+            }
+        else:
+            clients: dict[str, ModbusTcpClient] = {
+                zone: ModbusTcpClient(host="127.0.0.1", port=5022 + i)
+                for i, zone in enumerate(zones)
+            }
         for client in clients.values():
             while not client.connect():
                 time.sleep(1)
@@ -89,15 +100,18 @@ def get_coil_index(zone, element, type_map):
 def read_plc(client: ModbusTcpClient) -> dict[str, dict]:
     try:
         controls = {}
-        zone = client.comm_params.host
+        if not DEBUG:
+            zone = client.comm_params.host 
+        else:
+            zone = client.comm_params.host + "" + str(client.comm_params.port)
         for name_id in ep.getLinkNameID():
             # We besturen alleen items met een zone-prefix
-            if not re.search("^z\d", name_id):
+            if not re.search("^z\\d", name_id):
                 continue
             link_index = ep.getLinkIndex(name_id)
 
             ltype = ep.getLinkType(link_index)
-            controls[link_index] = {"type": ltype}
+            controls[name_id] = {"type": ltype}
 
         # Lees genoeg coils (32)
         rr = client.read_coils(address=0, count=32)
@@ -112,7 +126,7 @@ def read_plc(client: ModbusTcpClient) -> dict[str, dict]:
 
         return controls
     except Exception as e:
-        print(f"Error in get_controls: {e}")
+        print(f"Error in read_plc: {e}")
         raise e
 
 
@@ -124,6 +138,7 @@ def set_values(controls: dict[str, dict]) -> None:
                 ltype = control.get("type")
 
                 new_status = 1 if val > 0.5 else 0
+                # name_id = ep.getLinkNameID
                 current_status = ep.getLinkStatus(element)
 
                 if new_status != current_status:
@@ -148,7 +163,10 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
         )
         print("-" * 75)
 
-        zone = client.comm_params.host
+        if not DEBUG:
+            zone = client.comm_params.host 
+        else:
+            zone = client.comm_params.host + ":" + str(client.comm_params.port)
 
         sensor_mask = 0
 
@@ -346,7 +364,7 @@ def main():
             for zone, client in clients.items():
                 # nodes, links = get_zone_items(zone)
                 new_data = read_plc(client)
-                set_values(new_data)
+                # set_values(new_data)
 
             tstep = ep.runHydraulicAnalysis()
 
@@ -366,7 +384,6 @@ def main():
 
             print(f"time step = {tstep}")
             time.sleep(1)
-            break
     except KeyboardInterrupt:
         print(">--- Program interrupted by user ---")
     except Exception as e:
