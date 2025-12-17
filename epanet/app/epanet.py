@@ -166,6 +166,7 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
         for element, props in data.items():
             if props.get("is_meter"):
                 flow_val = abs(float(props.get("flow", 0)))
+                
                 # print(
                 #     f"{zone:<6} | {element:<12} | {'METER':<6} | {flow_val:<16.2f} | Reg 700"
                 # )
@@ -176,12 +177,10 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                 except Exception:
                     pass
 
-            # --- TANKS ---
             elif props.get("type") == "TANK":
                 try:
                     tank_num = int("".join(filter(str.isdigit, element)))
-                    level = float(props.get("level", 0))
-
+                    level = props.get("level")
                     is_low, is_high = level < 5.0, level > 15.0
                     base_bit = tank_num * 2
                     if is_low:
@@ -218,9 +217,9 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                     plc_text = "AAN" if is_on else "UIT"
 
                 plc_display = f"{plc_text} (Coil {idx})"
-                # print(
-                #     f"{zone:<6} | {element:<12} | {props['type']:<6} | {epa_text:<16} | {plc_display}"
-                # )
+                print(
+                    f"{zone:<6} | {element:<12} | {props['type']:<6} | {epa_text:<16} | {plc_display}"
+                )
 
         try:
             client.write_registers(address=0, values=[sensor_mask])
@@ -270,14 +269,20 @@ def get_nodedata(nodes):
             case "TANK":
                 # h = V / (pi * r^2)
                 # V = pi * r^2 * h
+                diameter = ep.getNodeTankDiameter(node)
+                volume = ep.getNodeTankVolume(node)
 
-                node_data["level"] = round(
-                    float(
-                        ep.getNodeTankVolume(node)
-                        / (math.pi * ep.getNodeTankDiameter(node))
-                    ),
-                    3,
-                )
+                # Bereken oppervlakte van de bodem: pi * r^2
+                # (r = diameter / 2)
+                area = math.pi * ((diameter / 2) ** 2)
+
+                # Bereken level: Volume / Oppervlakte
+                if area > 0:
+                    calculated_level = volume / area
+                else:
+                    calculated_level = 0.0
+
+                node_data["level"] = round(float(calculated_level), 3)
             case "RESERVOIR":
                 pass
             case _:
@@ -357,7 +362,8 @@ def main():
             for zone, client in clients.items():
                 # nodes, links = get_zone_items(zone)
                 new_data = read_plc(client)
-                set_values(new_data)
+                # with open("new_data.json","w") as f:
+                #     json.dump(new_data,f)
 
             tstep = ep.runHydraulicAnalysis()
 

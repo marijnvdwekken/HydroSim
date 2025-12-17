@@ -30,8 +30,19 @@ PROGRAM Zone0Logica
     Valve7_Cmd AT %QX3.0 : BOOL;
     Valve8_Cmd AT %QX3.1 : BOOL;
 
-    T0_Low  AT %IX0.0 : BOOL;
+    T0_Low AT %IX0.0 : BOOL;
     T0_High AT %IX0.1 : BOOL;
+
+    T1_High AT %IX0.2 : BOOL;
+    T1_Low AT %IX0.3 : BOOL;
+
+    T2_High AT %IX0.4 : BOOL;
+    T2_Low AT %IX0.5 : BOOL;
+
+    T3_High AT %IX0.6 : BOOL;
+    T3_Low AT %IX0.7 : BOOL;
+
+
 
   END_VAR
 
