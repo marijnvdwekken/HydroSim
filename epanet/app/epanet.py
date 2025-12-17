@@ -31,23 +31,16 @@ DEBUG = os.getenv("DEBUG", True)
 ep = epanet((Path(__file__).parent.resolve() / "scenario.inp").as_posix())
 
 # --- CONFIGURATIE ---
-zone0 = "plc-zone0" if not DEBUG else "127.0.0.1:5022"
-zone1 = "plc-zone1" if not DEBUG else "127.0.0.1:5023"
-zone2 = "plc-zone2" if not DEBUG else "127.0.0.1:5024"
-zone3 = "plc-zone3" if not DEBUG else "127.0.0.1:5025"
-zone4 = "plc-zone4" if not DEBUG else "127.0.0.1:5026"
-
-
 PUMP_MAPPING = {
-    zone0: {"pump0": 0, "pump1": 1, "pump2": 2, "pump3": 3},
-    zone1: {"pump1": 0},
-    zone2: {"pump1": 0},
-    zone3: {"pump1": 0},
-    zone4: {"pump1": 0},
+    "z0": {"pump0": 0, "pump1": 1, "pump2": 2, "pump3": 3},
+    "z1": {"pump1": 0},
+    "z2": {"pump1": 0},
+    "z3": {"pump1": 0},
+    "z4": {"pump1": 0},
 }
 
 VALVE_MAPPING = {
-    zone0: {
+    "z0": {
         "valve": 8,
         "valv01": 9,
         "valve00": 10,
@@ -58,14 +51,18 @@ VALVE_MAPPING = {
         "valve30": 15,
         "valve31": 16,
     },
-    zone1: {"valve0": 2, "valve1": 4},
-    zone2: {"valve0": 2, "valve1": 4},
-    zone3: {"valve0": 2, "valve1": 4},
-    zone4: {"valve0": 2, "valve1": 4},
+    "z1": {"valve0": 2, "valve1": 4},
+    "z2": {"valve0": 2, "valve1": 4},
+    "z3": {"valve0": 2, "valve1": 4},
+    "z4": {"valve0": 2, "valve1": 4},
 }
 
 JUNCTION_FLOW_NEEDED: list[str] = [
     "z0-junction1",
+    "z1-junction1",
+    "z2-junction1",
+    "z3-junction1",
+    "z4-junction1",
     "32",
     "31",
     "30",
@@ -77,7 +74,7 @@ JUNCTION_FLOW_NEEDED: list[str] = [
 # --------------------
 
 
-def setup_clients(zones: dict[str, dict]) -> dict[str, ModbusTcpClient]:
+def setup_clients(zones: list[str]) -> dict[str, ModbusTcpClient]:
     try:
         if not DEBUG:
             clients: dict[str, ModbusTcpClient] = {
@@ -99,8 +96,16 @@ def setup_clients(zones: dict[str, dict]) -> dict[str, ModbusTcpClient]:
 
 
 def get_coil_index(zone, element, type_map):
-    if zone in type_map and element in type_map[zone]:
-        return type_map[zone][element]
+    if zone in type_map:
+        mapping = type_map[zone]
+        if element in mapping:
+            return mapping[element]
+        if "-" in element:
+            suffix = element.split("-", 1)[1]
+            if suffix in mapping:
+                return mapping[suffix]
+                
+    # Fallback
     digits = "".join(filter(str.isdigit, element))
     return int(digits) if digits else 0
 
@@ -108,11 +113,6 @@ def get_coil_index(zone, element, type_map):
 def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
     nodes, links = get_zone_items(zone)
     try:
-        if not DEBUG:
-            zone = client.comm_params.host
-        else:
-            zone = client.comm_params.host + "" + str(client.comm_params.port)
-
         nodes = {
             ep.getNodeNameID(node): {"type": ep.getNodeType(node), "index": node}
             for node in nodes
@@ -127,12 +127,17 @@ def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
         if not rr.isError():
             # links data
             for element, data in links.items():
-                check_type = "PUMP" if data["type"] == "PUMP" else "VALVE"
-                map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
-                idx = get_coil_index(zone, element, map_dict)
-                if idx < len(rr.bits):
-                    is_running = rr.bits[idx]
-                    links[element].update({"status": 1.0 if is_running else 0.0})
+                ltype = data["type"]
+                if ltype == "PUMP" or ltype in ["VALVE", "TCV"]:
+                    check_type = "PUMP" if ltype == "PUMP" else "VALVE"
+                    map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
+                    
+                    # Hier wordt nu correct "z1" gebruikt i.p.v. een IP adres
+                    idx = get_coil_index(zone, element, map_dict)
+                    
+                    if idx < len(rr.bits):
+                        is_running = rr.bits[idx]
+                        links[element].update({"status": 1.0 if is_running else 0.0})
 
         return nodes, links
     except Exception as e:
@@ -175,10 +180,19 @@ def set_linkdata(links: dict[str, dict]):
             index = link["index"]
             # variables of every node
             # the same as speed = 0 or if the pipe/valve is open of closed
-            if isinstance(
-                status := link.get("status"), str | int | float
-            ) and status != ep.getLinkStatus(index):
-                ep.setLinkStatus(index, link["status"])
+            ltype = link.get("type", "LINK")
+            
+            if "status" in link:
+                status_val = link["status"]
+                current_status = ep.getLinkStatus(index)
+                
+                new_status = 1 if status_val > 0.5 else 0
+                
+                if new_status != current_status:
+                    ep.setLinkStatus(index, new_status)
+                    
+                    if ltype == "PUMP":
+                        ep.setLinkSettings(index, 1.0 if new_status == 1 else 0.0)
 
             match ep.getLinkType(index):
                 case "PIPE":
@@ -216,10 +230,6 @@ def write_plc(
     client: ModbusTcpClient, nodes_data: dict[str, dict], links_data: dict[str, dict]
 ) -> None:
     try:
-        if not DEBUG:
-            zone = client.comm_params.host
-        else:
-            zone = client.comm_params.host + ":" + str(client.comm_params.port)
 
         sensor_mask = 0
 
@@ -230,38 +240,17 @@ def write_plc(
                 flow = data["flow"]
 
                 if DEBUG:
-                    print(
-                        f"{zone:<14} | {link:<12} | {'METER':<6} | {flow:<16.2f} | Reg 700"
-                    )
+                    pass
+                    # print(
+                    #     f"{link:<12} | {'METER':<6} | {flow:<16.2f} | Reg 700"
+                    # )
                 try:
                     client.write_registers(address=700, values=float_to_registers(flow))
                 except Exception:
                     pass
 
             if data.get("type") in ["PUMP", "VALVE"]:
-                status_val = float(data.get("status", 0))
-
-                if data["type"] == "VALVE":
-                    epa_text = "OPEN" if status_val > 0 else "DICHT"
-                else:
-                    epa_text = "AAN" if status_val > 0 else "UIT"
-
-                check_type = "PUMP" if data["type"] == "PUMP" else "VALVE"
-                map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
-                idx = get_coil_index(zone, link, map_dict)
-
-                plc_text = "?"
-                is_on = data.get("status")
-                if data["type"] == "VALVE":
-                    plc_text = "OPEN" if is_on else "DICHT"
-                else:
-                    plc_text = "AAN" if is_on else "UIT"
-
-                plc_display = f"{plc_text} (Coil {idx})"
-                if DEBUG:
-                    print(
-                        f"{zone:<12} | {link:<12} | {data['type']:<6} | {epa_text:<16} | {plc_display}"
-                    )
+                pass
 
         for node, data in nodes_data.items():
             if data.get("type") == "TANK":
@@ -285,10 +274,10 @@ def write_plc(
                 except Exception:
                     pass
 
-                try:
-                    client.write_registers(address=0, values=[sensor_mask])
-                except Exception:
-                    pass
+        try:
+            client.write_registers(address=0, values=[sensor_mask])
+        except Exception:
+            pass
 
     except Exception:
         pass
@@ -435,10 +424,7 @@ def main():
             tstep = ep.nextHydraulicAnalysisStep()
 
             if DEBUG:
-                print(
-                    f"{'ZONE':<14} | {'ELEMENT':<12} | {'TYPE':<6} | {'STATUS/VALUE':<16} | {'PLC/INFO'}"
-                )
-                print("-" * 75)
+                pass
 
             for zone, client in clients.items():
                 nodes, links = get_zone_items(zone)
