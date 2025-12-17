@@ -13,7 +13,9 @@ PROGRAM Zone3Logica
   Pump_Run   := Pump_Cmd;
   Valve0_Run := Valve0_Cmd;
   Valve1_Run := Valve1_Cmd;
-
+  IF Valve0_Run == 0 THEN
+    Pump_Cmd := 0;
+  END_IF;
 END_PROGRAM
 
 CONFIGURATION Config0

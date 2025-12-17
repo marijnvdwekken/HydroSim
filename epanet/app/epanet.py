@@ -110,7 +110,6 @@ def get_controls(clients: dict[str, ModbusTcpClient], en: epanet) -> dict:
         for zone, client in clients.items():
             if zone in controls and len(controls[zone]) > 0:
                 try:
-                    # Lees genoeg coils (32)
                     rr = client.read_coils(address=0, count=32) 
                     if not rr.isError():
                         plc_states[zone] = rr.bits[:32]

@@ -1,7 +1,5 @@
 PROGRAM Zone0Logica
   VAR
-    (* === POMPEN (Byte 0) === *)
-    (* Run: Coils 0-3, Cmd: Coils 4-7 *)
     Pump0_Run AT %QX0.0 : BOOL;
     Pump1_Run AT %QX0.1 : BOOL;
     Pump2_Run AT %QX0.2 : BOOL;
@@ -12,10 +10,6 @@ PROGRAM Zone0Logica
     Pump2_Cmd AT %QX0.6 : BOOL;
     Pump3_Cmd AT %QX0.7 : BOOL;
 
-    (* === KLEPPEN (Byte 1 & 2) === *)
-    (* We hebben 9 kleppen. We mappen ze op volgorde. *)
-    
-    (* Status Outputs (Naar EPANET) - Coils 8 t/m 16 *)
     Valve0_Run AT %QX1.0 : BOOL;
     Valve1_Run AT %QX1.1 : BOOL;
     Valve2_Run AT %QX1.2 : BOOL;
@@ -26,7 +20,6 @@ PROGRAM Zone0Logica
     Valve7_Run AT %QX1.7 : BOOL;
     Valve8_Run AT %QX2.0 : BOOL;
 
-    (* Commando Inputs (Van Scada) - Coils 17 t/m 25 *)
     Valve0_Cmd AT %QX2.1 : BOOL;
     Valve1_Cmd AT %QX2.2 : BOOL;
     Valve2_Cmd AT %QX2.3 : BOOL;
@@ -37,20 +30,13 @@ PROGRAM Zone0Logica
     Valve7_Cmd AT %QX3.0 : BOOL;
     Valve8_Cmd AT %QX3.1 : BOOL;
 
-    (* Inputs voor tanks (behoud) *)
     T0_Low  AT %IX0.0 : BOOL;
     T0_High AT %IX0.1 : BOOL;
-    (* ... (overige tank inputs weggelaten voor overzicht, maar functioneel aanwezig via Python) *)
 
   END_VAR
 
-  (* === POMP LOGICA === *)
-  Pump0_Run := Pump0_Cmd;
-  Pump1_Run := Pump1_Cmd;
-  Pump2_Run := Pump2_Cmd;
-  Pump3_Run := Pump3_Cmd;
 
-  (* === KLEP LOGICA === *)
+
   Valve0_Run := Valve0_Cmd;
   Valve1_Run := Valve1_Cmd;
   Valve2_Run := Valve2_Cmd;
@@ -60,7 +46,17 @@ PROGRAM Zone0Logica
   Valve6_Run := Valve6_Cmd;
   Valve7_Run := Valve7_Cmd;
   Valve8_Run := Valve8_Cmd;
+  IF Valve0_Run = 0 THEN
+    Pump0_Cmd := 0;
+    Pump1_Cmd := 0;
+    Pump2_Cmd := 0;
+    Pump3_Cmd := 0;
+  END_IF;
 
+  Pump0_Run := Pump0_Cmd;
+  Pump1_Run := Pump1_Cmd;
+  Pump2_Run := Pump2_Cmd;
+  Pump3_Run := Pump3_Cmd;
 END_PROGRAM
 
 CONFIGURATION Config0
