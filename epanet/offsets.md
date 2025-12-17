@@ -10,7 +10,7 @@
 | **Pomp 3** | Coil | 3 | 7 |  |
 |  |  |  |  |  |
 | **Valve** (Reservoir) | Coil | 8 | 17 | %QX1.0 / %QX2.1 |
-| **Valv01** (T0 Uit) | Coil | 9 | 18 |  |
+| **Valve01** (T0 Uit) | Coil | 9 | 18 |  |
 | **Valve00** (T0 In) | Coil | 10 | 19 |  |
 | **Valve10** (T1 In) | Coil | 11 | 20 |  |
 | **Valve11** (T1 Uit) | Coil | 12 | 21 |  |
