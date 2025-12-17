@@ -4,4 +4,5 @@ webserver/log
 epanet/app/*.txt
 epanet/app/*_temp*
 .venv
+.env
 /node_modules
