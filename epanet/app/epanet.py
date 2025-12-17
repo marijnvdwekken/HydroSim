@@ -7,6 +7,7 @@ import struct
 import time
 from pathlib import Path
 
+import numpy
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 from epyt import epanet
@@ -25,7 +26,7 @@ CA = os.getenv("MQTT_CA_CERT", "")
 KEY = os.getenv("MQTT_CLIENT_KEY", "")
 CERT = os.getenv("MQTT_CLIENT_CERT", "")
 TLS = os.getenv("MQTT_TLS_ENABLED", "true") == "true"
-DEBUG = os.getenv("DEBUG",True)
+DEBUG = os.getenv("DEBUG", True)
 
 ep = epanet((Path(__file__).parent.resolve() / "scenario.inp").as_posix())
 
@@ -63,8 +64,16 @@ VALVE_MAPPING = {
     zone4: {"valve0": 2, "valve1": 4},
 }
 
-ZONE_METERS = {"z0": "z0-valve", "z1": "16", "z2": "21", "z3": "18", "z4": "22"}
-METER_TO_ZONE = {v: k for k, v in ZONE_METERS.items()}
+JUNCTION_FLOW_NEEDED: list[str] = [
+    "z0-junction1",
+    "32",
+    "31",
+    "30",
+    "29",
+]
+
+# ZONE_METERS = {zone0: "z0-valve", "z1": "16", "z2": "21", "z3": "18", "z4": "22"}
+# METER_TO_ZONE = {v: k for k, v in ZONE_METERS.items()}
 # --------------------
 
 
@@ -96,91 +105,169 @@ def get_coil_index(zone, element, type_map):
     return int(digits) if digits else 0
 
 
-def read_plc(client: ModbusTcpClient) -> dict[str, dict]:
+def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
+    nodes, links = get_zone_items(zone)
     try:
-        controls = {}
         if not DEBUG:
-            zone = client.comm_params.host 
+            zone = client.comm_params.host
         else:
             zone = client.comm_params.host + "" + str(client.comm_params.port)
-        for name_id in ep.getLinkNameID():
-            if not re.search("^z\\d", name_id):
-                continue
-            link_index = ep.getLinkIndex(name_id)
-            ltype = ep.getLinkType(link_index)
-            controls[name_id] = {"type": ltype, "index": link_index}
+
+        nodes = {
+            ep.getNodeNameID(node): {"type": ep.getNodeType(node), "index": node}
+            for node in nodes
+        }
+
+        links = {
+            ep.getLinkNameID(link): {"type": ep.getLinkType(link), "index": link}
+            for link in links
+        }
 
         rr = client.read_coils(address=0, count=32)
         if not rr.isError():
-            for element, data in controls.items():
+            # links data
+            for element, data in links.items():
                 check_type = "PUMP" if data["type"] == "PUMP" else "VALVE"
                 map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
                 idx = get_coil_index(zone, element, map_dict)
                 if idx < len(rr.bits):
                     is_running = rr.bits[idx]
-                    controls[element]["status"] = 1.0 if is_running else 0.0
+                    links[element].update({"status": 1.0 if is_running else 0.0})
 
-        return controls
+        return nodes, links
     except Exception as e:
         print(f"Error in read_plc: {e}")
         raise e
 
 
-def set_values( values: dict) -> None:
-    try:
-        for element, control in values.items():
-            if "status" in control and control["status"] is not None:
-                idx = control["index"]
-                val = control["status"]
-                ltype = control.get("type", "LINK")
-                
-                new_status = 1 if val > 0.5 else 0
-                current_status = ep.getLinkStatus(idx)
-                
-                if new_status != current_status:
-                    ep.setLinkStatus(idx, new_status)
-                    if ltype == "PUMP":
-                        ep.setLinkSettings(idx, 1.0 if new_status==1 else 0.0)
-    except Exception as e:
-        print(f"ERROR in set_values: {e}")
+def set_nodedata(nodes: dict[str, dict]):
+    for name, node in nodes.items():
+        try:
+            index = node["index"]
+            # quality can be set
+            # ep.setNodeSourceQuality(index, node["quality"])
+
+            match ep.getNodeType(index):
+                case "JUNCTION":
+                    # changes the base demand that is multiplied by the demand curve
+                    # node_data["demand"] = ep.setNodeBaseDemands(index)
+                    pass
+                case "TANK":
+                    # you can change if the tanks can overflow but this is not implemented and/or researched
+                    # ep.setNodeTankCanOverFlow()
+
+                    # you can change the min and max water levels but we don't change these mid simulation for now
+                    # ep.setNodeTankMaximumWaterLevel(index,node["max"])
+                    # ep.setNodeTankMinimumWaterLevel(index,node["min"])
+                    pass
+                case "RESERVOIR":
+                    pass
+                case _:
+                    pass
+
+        except Exception as e:
+            print(f"setting values for node {name} returned: {e}")
+
+
+def set_linkdata(links: dict[str, dict]):
+    for name, link in links.items():
+        try:
+            index = link["index"]
+            # variables of every node
+            # the same as speed = 0 or if the pipe/valve is open of closed
+            if isinstance(
+                status := link.get("status"), str | int | float
+            ) and status != ep.getLinkStatus(index):
+                ep.setLinkStatus(index, link["status"])
+
+            match ep.getLinkType(index):
+                case "PIPE":
+                    pass
+                case "PUMP":
+                    # if power := link.get("power"):
+                    #     ep.setLinkPumpPower(index, power)
+
+                    # used to change the rotation speed. 0 = off
+                    if speed := link.get("speed"):
+                        ep.setLinkSettings(index, speed)
+                    pass
+                # there are more valve types but only the TCV is used
+                case "VALVE" | "TCV":
+                    pass
+                case _:
+                    pass
+        except Exception as e:
+            print(f"setting values for link {name} returned: {e}")
 
 
 def float_to_registers(value):
     return list(struct.unpack(">HH", struct.pack(">f", value)))
 
 
-def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None:
-    try:
-        # print(
-        #     f"{'ZONE':<6} | {'ELEMENT':<12} | {'TYPE':<6} | {'STATUS/VALUE':<16} | {'PLC/INFO'}"
-        # )
-        # print("-" * 75)
+def flow_needed(nodes_list: numpy.ndarray[list]):
+    for nodes in nodes_list:
+        if str(nodes[1]) in JUNCTION_FLOW_NEEDED:
+            return True
+    else:
+        return False
 
+
+def write_plc(
+    client: ModbusTcpClient, nodes_data: dict[str, dict], links_data: dict[str, dict]
+) -> None:
+    try:
         if not DEBUG:
-            zone = client.comm_params.host 
+            zone = client.comm_params.host
         else:
             zone = client.comm_params.host + ":" + str(client.comm_params.port)
 
         sensor_mask = 0
 
-        for element, props in data.items():
-            if props.get("is_meter"):
-                flow_val = abs(float(props.get("flow", 0)))
-                # print(
-                #     f"{zone:<6} | {element:<12} | {'METER':<6} | {flow_val:<16.2f} | Reg 700"
-                # )
-                try:
-                    client.write_registers(
-                        address=700, values=float_to_registers(flow_val)
+        for link, data in links_data.items():
+            nodes = ep.getNodesConnectingLinksID(data["index"])
+
+            if flow_needed(nodes):
+                flow = data["flow"]
+
+                if DEBUG:
+                    print(
+                        f"{zone:<14} | {link:<12} | {'METER':<6} | {flow:<16.2f} | Reg 700"
                     )
+                try:
+                    client.write_registers(address=700, values=float_to_registers(flow))
                 except Exception:
                     pass
 
-            # --- TANKS ---
-            elif props.get("type") == "TANK":
+            if data.get("type") in ["PUMP", "VALVE"]:
+                status_val = float(data.get("status", 0))
+
+                if data["type"] == "VALVE":
+                    epa_text = "OPEN" if status_val > 0 else "DICHT"
+                else:
+                    epa_text = "AAN" if status_val > 0 else "UIT"
+
+                check_type = "PUMP" if data["type"] == "PUMP" else "VALVE"
+                map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
+                idx = get_coil_index(zone, link, map_dict)
+
+                plc_text = "?"
+                is_on = data.get("status")
+                if data["type"] == "VALVE":
+                    plc_text = "OPEN" if is_on else "DICHT"
+                else:
+                    plc_text = "AAN" if is_on else "UIT"
+
+                plc_display = f"{plc_text} (Coil {idx})"
+                if DEBUG:
+                    print(
+                        f"{zone:<12} | {link:<12} | {data['type']:<6} | {epa_text:<16} | {plc_display}"
+                    )
+
+        for node, data in nodes_data.items():
+            if data.get("type") == "TANK":
                 try:
-                    tank_num = int("".join(filter(str.isdigit, element)))
-                    level = float(props.get("level", 0))
+                    tank_num = int("".join(filter(str.isdigit, node)))
+                    level = data.get("level", 0)
 
                     is_low, is_high = level < 5.0, level > 15.0
                     base_bit = tank_num * 2
@@ -198,34 +285,10 @@ def write_plc(client: ModbusTcpClient, data: dict[str, dict[str, dict]]) -> None
                 except Exception:
                     pass
 
-            elif props.get("type") in ["PUMP", "VALVE"]:
-                status_val = float(props.get("status", 0))
-
-                if props["type"] == "VALVE":
-                    epa_text = "OPEN" if status_val > 0 else "DICHT"
-                else:
-                    epa_text = "AAN" if status_val > 0 else "UIT"
-
-                check_type = "PUMP" if props["type"] == "PUMP" else "VALVE"
-                map_dict = PUMP_MAPPING if check_type == "PUMP" else VALVE_MAPPING
-                idx = get_coil_index(zone, element, map_dict)
-
-                plc_text = "?"
-                is_on = props.get("status")
-                if props["type"] == "VALVE":
-                    plc_text = "OPEN" if is_on else "DICHT"
-                else:
-                    plc_text = "AAN" if is_on else "UIT"
-
-                plc_display = f"{plc_text} (Coil {idx})"
-                # print(
-                #     f"{zone:<6} | {element:<12} | {props['type']:<6} | {epa_text:<16} | {plc_display}"
-                # )
-
-        try:
-            client.write_registers(address=0, values=[sensor_mask])
-        except Exception:
-            pass
+                try:
+                    client.write_registers(address=0, values=[sensor_mask])
+                except Exception:
+                    pass
 
     except Exception:
         pass
@@ -259,6 +322,7 @@ def get_nodedata(nodes):
     for node in nodes:
         node_data = dict()
         name = ep.getNodeNameID(node)
+        node_data["index"] = node
         node_data["type"] = ep.getNodeType(node)
         node_data["pressure"] = round(ep.getNodePressure(node), 3)
         node_data["quality"] = round(ep.getNodeActualQuality(node), 3)
@@ -293,11 +357,12 @@ def get_linkdata(links):
         link_data = dict()
         # variables of every node
         name = ep.getLinkNameID(link)
+        link_data["index"] = link
         link_data["type"] = ep.getLinkType(link)
         link_data["quality"] = float(ep.getLinkActualQuality(link))
         link_data["headloss"] = round(float(ep.getLinkHeadloss(link)), 3)
         link_data["flow"] = round(float(ep.getLinkFlows(link)), 3)
-        # the same as speed = 0 or if the pipe is open of closed
+        # the same as speed = 0 or if the pipe/valve is open of closed
         link_data["status"] = int(ep.getLinkStatus(link))
 
         match ep.getLinkType(link):
@@ -311,7 +376,7 @@ def get_linkdata(links):
                 # used to change the rotation speed. 0 = off
                 link_data["speed"] = float(ep.getLinkSettings(link))
                 link_data["energy"] = round(float(ep.getLinkEnergy(link)), 3)
-                link_data["efficeiency"] = round(ep.getLinkPumpEfficiency(link), 3)
+                link_data["efficiency"] = round(ep.getLinkPumpEfficiency(link), 3)
                 link_data["state"] = ep.getLinkPumpState(link)
             # there are more valve types but only the TCV is used
             case "VALVE" | "TCV":
@@ -344,7 +409,8 @@ def main():
         clients: dict[str, ModbusTcpClient] = setup_clients(zone_ids)
 
         ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
-        ep.setTimeHydraulicStep(5 * 60)
+        tstep = 5 * 60
+        ep.setTimeHydraulicStep(tstep)
         ep.openHydraulicAnalysis()
         ep.initializeHydraulicAnalysis(0)
 
@@ -355,26 +421,32 @@ def main():
             )
 
             for zone, client in clients.items():
-                # nodes, links = get_zone_items(zone)
-                new_data = read_plc(client)
-                set_values(new_data)
+                nodes, links = read_plc(zone, client)
+                set_nodedata(nodes)
+                set_linkdata(links)
 
-            tstep = ep.runHydraulicAnalysis()
+            t = ep.runHydraulicAnalysis()
+            tstep = ep.nextHydraulicAnalysisStep()
+
+            if DEBUG:
+                print(
+                    f"{'ZONE':<14} | {'ELEMENT':<12} | {'TYPE':<6} | {'STATUS/VALUE':<16} | {'PLC/INFO'}"
+                )
+                print("-" * 75)
 
             for zone, client in clients.items():
-                data = {}
                 nodes, links = get_zone_items(zone)
                 # there is no way as of 11-12-2025 to get the tag value of the links and nodes
                 # epyt has a way to add comments with setNodeComment() and setLinkComment()
-                data.update(get_linkdata(links))
-                data.update(get_nodedata(nodes))
+                nodes_data = get_nodedata(nodes)
+                links_data = get_linkdata(links)
 
-                write_plc(client, data)
-                # mqtt_client.publish(TOPIC, str(data))
+                write_plc(client, nodes_data, links_data)
+            # mqtt_client.publish(TOPIC, str(data))
 
-            ep.nextHydraulicAnalysisStep()
-
-            time.sleep(1)
+            time.sleep(5)
+            if tstep <= 0:
+                break
     except KeyboardInterrupt:
         print(">--- Program interrupted by user ---")
     except Exception as e:
