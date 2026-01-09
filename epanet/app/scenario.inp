@@ -188,10 +188,10 @@ HydroSim base image
 
 [TANKS]
 ;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve        	Overflow
- z0-tank0        	0           	10          	5           	15          	50          	0           	                	;
- z0-tank1        	0           	10          	5           	15          	50          	0           	                	;
- z0-tank3        	0           	10          	5           	15          	50          	0           	                	;
+ z0-tank4        	0           	10          	5           	15          	50          	0           	                	;
  z0-tank2        	0           	10          	5           	15          	50          	0           	                	;
+ z0-tank3        	0           	10          	5           	15          	50          	0           	                	;
+ z0-tank1        	0           	10          	5           	15          	50          	0           	                	;
 
 [PIPES]
 ;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
@@ -355,9 +355,9 @@ HydroSim base image
 
 [PUMPS]
 ;ID              	Node1           	Node2           	Parameters
- z0-pump0        	01              	13              	HEAD 1	;
- z0-pump1        	04              	14              	HEAD 1	;
- z0-pump2        	03              	15              	HEAD 1	;
+ z0-pump4        	01              	13              	HEAD 1	;
+ z0-pump2        	04              	14              	HEAD 1	;
+ z0-pump1        	03              	15              	HEAD 1	;
  z0-pump3        	34              	16              	HEAD 1	;
  z1-pump1        	21              	25              	HEAD 1	;
  z2-pump1        	22              	26              	HEAD 1	;
@@ -366,23 +366,23 @@ HydroSim base image
 
 [VALVES]
 ;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
- z0-valve        	z0-reservoir1   	z0-junction1    	1000        	TCV 	0           	0           	;
- z0-valve00      	20              	z0-tank0        	500         	TCV 	0           	0           	;
- z0-valve01      	z0-tank0        	33              	500         	TCV 	0           	0           	;
- z0-valve10      	19              	z0-tank1        	500         	TCV 	0           	0           	;
- z0-valve11      	z0-tank1        	06              	500         	TCV 	0           	0           	;
- z0-valve20      	18              	z0-tank2        	500         	TCV 	0           	0           	;
- z0-valve21      	z0-tank2        	02              	500         	TCV 	0           	0           	;
- z0-valve30      	17              	z0-tank3        	500         	TCV 	0           	0           	;
- z0-valve31      	z0-tank3        	05              	500         	TCV 	0           	0           	;
- z1-valve0       	02              	21              	500         	TCV 	0           	0           	;
- z1-valve1       	25              	32              	500         	TCV 	0           	0           	;
- z2-valve0       	06              	22              	500         	TCV 	0           	0           	;
- z2-valve1       	26              	31              	500         	TCV 	0           	0           	;
- z3-valve0       	05              	24              	500         	TCV 	0           	0           	;
- z3-valve1       	28              	29              	500         	TCV 	0           	0           	;
- z4-valve0       	33              	23              	500         	TCV 	0           	0           	;
- z4-valve1       	27              	30              	500         	TCV 	0           	0           	;
+ z0-valve0       	z0-reservoir1   	z0-junction1    	1000        	TCV 	0           	0           	;
+ z0-valve7       	20              	z0-tank4        	500         	TCV 	0           	0           	;
+ z0-valve8       	z0-tank4        	33              	500         	TCV 	0           	0           	;
+ z0-valve3       	19              	z0-tank2        	500         	TCV 	0           	0           	;
+ z0-valve4       	z0-tank2        	06              	500         	TCV 	0           	0           	;
+ z0-valve1       	18              	z0-tank1        	500         	TCV 	0           	0           	;
+ z0-valve2       	z0-tank1        	02              	500         	TCV 	0           	0           	;
+ z0-valve5       	17              	z0-tank3        	500         	TCV 	0           	0           	;
+ z0-valve6       	z0-tank3        	05              	500         	TCV 	0           	0           	;
+ z1-valve1       	02              	21              	500         	TCV 	0           	0           	;
+ z1-valve2       	25              	32              	500         	TCV 	0           	0           	;
+ z2-valve1       	06              	22              	500         	TCV 	0           	0           	;
+ z2-valve2       	26              	31              	500         	TCV 	0           	0           	;
+ z3-valve1       	05              	24              	500         	TCV 	0           	0           	;
+ z3-valve2       	28              	29              	500         	TCV 	0           	0           	;
+ z4-valve1       	33              	23              	500         	TCV 	0           	0           	;
+ z4-valve2       	27              	30              	500         	TCV 	0           	0           	;
 
 [TAGS]
  NODE 	z1-house01      	house
@@ -644,7 +644,7 @@ HydroSim base image
 
 [CURVES]
 ;ID              	X-Value     	Y-Value
-;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
  1               	0           	40          
  1               	10          	38          
  1               	20          	34          
@@ -665,7 +665,9 @@ HydroSim base image
 
 
 
+
 [RULES]
+
 
 
 
@@ -923,13 +925,13 @@ z4-junction6    	9813.019          	5585.180
 z4-junction7    	9107.286          	5764.612          
 z4-junction8    	8526.821          	7622.098          
 z0-reservoir1   	2361.890          	6709.367          
-z0-tank0        	3499.001          	9259.740          
-z0-tank1        	4123.874          	9272.995          
+z0-tank4        	3499.001          	9259.740          
+z0-tank2        	4123.874          	9272.995          
 z0-tank3        	3483.626          	8756.795          
-z0-tank2        	4127.876          	8756.795          
+z0-tank1        	4127.876          	8756.795          
 
 [VERTICES]
-;Link            	X-Coord           	Y-Coord    
+;Link            	X-Coord           	Y-Coord
 
 [LABELS]
 ;X-Coord             Y-Coord             Label & Anchor Node
