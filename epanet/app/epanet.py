@@ -128,7 +128,7 @@ def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
         if LOCALHOST and not DEBUG:
             zone_host = client.comm_params.host
         else:
-            zone_host = client.comm_params.host + ":" + str(client.comm_params.port)
+            zone_host = client.comm_params.host #+ ":" + str(client.comm_params.port)
 
         nodes = {
             ep.getNodeNameID(node): {"type": ep.getNodeType(node), "index": node}

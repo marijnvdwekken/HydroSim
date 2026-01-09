@@ -13,14 +13,15 @@ PROGRAM Zone4Logica
   Pump_Run := Pump_Cmd;
   Valve0_Run := Valve0_Cmd;
   Valve1_Run := Valve1_Cmd;
-  IF Valve0_Run == 0 THEN
-    Pump_Cmd := 0;
+
+  IF Valve0_Run = FALSE THEN
+    Pump_Cmd := FALSE;
   END_IF;
 END_PROGRAM
 
 CONFIGURATION Config0
   RESOURCE Res0 ON PLC
     TASK TaskMain(INTERVAL := T#50ms,PRIORITY := 0);
-    PROGRAM Inst0 WITH TaskMain : Zone4Logica;
+    PROGRAM Inst0 WITH TaskMain : Zone1Logica;
   END_RESOURCE
 END_CONFIGURATION

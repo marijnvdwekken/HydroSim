@@ -13,8 +13,9 @@ PROGRAM Zone1Logica
   Pump_Run := Pump_Cmd;
   Valve0_Run := Valve0_Cmd;
   Valve1_Run := Valve1_Cmd;
-  IF Valve0_Run == 0 THEN
-    Pump_Cmd := 0;
+
+  IF Valve0_Run = FALSE THEN
+    Pump_Cmd := FALSE;
   END_IF;
 END_PROGRAM
 
