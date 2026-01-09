@@ -50,29 +50,30 @@ zone4 = (
 )
 
 PUMP_MAPPING = {
-    zone0: {"pump0": 0, "pump1": 1, "pump2": 2, "pump3": 3},
-    zone1: {"pump1": 0},
-    zone2: {"pump1": 0},
-    zone3: {"pump1": 0},
-    zone4: {"pump1": 0},
+    zone0: {"pump4": 0, "pump2": 1, "pump1": 2, "pump3": 3},
+    zone1: {"pump1": 1},
+    zone2: {"pump1": 1},
+    zone3: {"pump1": 1},
+    zone4: {"pump1": 1},
 }
 
 VALVE_MAPPING = {
     zone0: {
-        "valve": 8,
-        "valve01": 9,
-        "valve00": 10,
-        "valve10": 11,
-        "valve11": 12,
-        "valve20": 13,
-        "valve21": 14,
-        "valve30": 15,
-        "valve31": 16,
+        "valve0": 8,
+        "valve8": 9,
+        "valve7": 10,
+        "valve3": 11,
+        "valve4": 12,
+        "valve1": 13,
+        "valve2": 14,
+        "valve5": 15,
+        "valve6": 16,
     },
-    zone1: {"valve0": 2, "valve1": 4},
-    zone2: {"valve0": 2, "valve1": 4},
-    zone3: {"valve0": 2, "valve1": 4},
-    zone4: {"valve0": 2, "valve1": 4},
+    
+    zone1: {"valve1": 1, "valve2": 3},
+    zone2: {"valve1": 1, "valve2": 3},
+    zone3: {"valve1": 1, "valve2": 3},
+    zone4: {"valve1": 1, "valve2": 3},
 }
 
 JUNCTION_FLOW_NEEDED: list[str] = [
