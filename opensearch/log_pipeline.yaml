@@ -11,7 +11,7 @@ log-pipeline:
   processor:
     - grok:
         match:
-          log: [ "%{COMMONAPACHELOG}" ]
+          log: [ "%{COMBINEDAPACHELOG}", "%{COMMONAPACHELOG}" ]
     - date:
         match:
           - key: "timestamp"
@@ -37,6 +37,17 @@ epanet-pipeline:
     bounded_blocking:
       buffer_size: 50000
       batch_size: 200
+  processor:
+    - grok:
+        match:
+          log: [ "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} %{DATA:logger}: %{GREEDYDATA:message}" ]
+    - date:
+        match:
+          - key: "timestamp"
+            patterns:
+              - "yyyy-MM-dd HH:mm:ss,SSS"
+        destination: "@timestamp"
+        from_time_received: false
   sink:
     - opensearch:
         hosts: [ "https://opensearch-node1:9200" ]
