@@ -470,7 +470,9 @@ def main():
                 links_data = get_linkdata(links)
 
                 write_plc(client, nodes_data, links_data)
-            # mqtt_client.publish(TOPIC, str(data))
+                mqtt_client.publish(TOPIC, str(nodes_data))
+                mqtt_client.publish(TOPIC, str(links_data))
+            
 
             time.sleep(5)
             if tstep <= 0:
