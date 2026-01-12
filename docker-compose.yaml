@@ -265,6 +265,7 @@ services:
     volumes:
       - ./webserver/log/apache2:/var/log/webserver
       - ./scadalts/tomcat_log:/var/log/scadalts
+      - ./epanet/app:/var/log/epanet:ro
       - fluent-bit-buffer:/var/fluent-bit/buffer
     depends_on:
       - data-prepper
@@ -275,8 +276,10 @@ services:
     build:
       context: ./opensearch/.
       dockerfile: Dockerfile
+    restart: "always"
     ports:
       - 2021:2021
+      - 2022:2022
     depends_on:
       - opensearch-node
     networks:
