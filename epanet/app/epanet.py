@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import math
+import logging
 import os
 import re
 import struct
@@ -29,6 +30,17 @@ TLS = os.getenv("MQTT_TLS_ENABLED", "true")
 DEBUG = os.getenv("DEBUG", False)
 PRINTING = os.getenv("PRINTING", False)
 LOCALHOST = os.getenv("LOCALHOST", False)
+LOG_FILE = os.getenv(
+    "LOG_FILE", (Path(__file__).parent.resolve() / "epanet.log").as_posix()
+)
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    handlers=[logging.FileHandler(LOG_FILE)],
+)
+logger = logging.getLogger(__name__)
 
 ep = epanet((Path(__file__).parent.resolve() / "scenario.inp").as_posix())
 
@@ -92,6 +104,7 @@ JUNCTION_FLOW_NEEDED: list[str] = [
 
 def setup_clients(zones: list[str]) -> dict[str, ModbusTcpClient]:
     try:
+        logger.info("Setting up Modbus clients for zones: %s", zones)
         if not DEBUG:
             clients: dict[str, ModbusTcpClient] = {
                 zone: ModbusTcpClient(host=f"plc-{zone.replace('z', 'zone')}", port=502)
@@ -108,10 +121,11 @@ def setup_clients(zones: list[str]) -> dict[str, ModbusTcpClient]:
         for client in clients.values():
             while not client.connect():
                 time.sleep(1)
+        logger.info("Modbus clients connected")
         return clients
     except Exception as e:
-        print(f"ERROR in setup_clients: {e}")
-        raise e
+        logger.exception("ERROR in setup_clients: %s", e)
+        raise
 
 
 def get_coil_index(zone, element: str, type_map):
@@ -125,6 +139,7 @@ def get_coil_index(zone, element: str, type_map):
 def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
     nodes, links = get_zone_items(zone)
     try:
+        logger.info("Reading PLC for zone %s", zone)
         if LOCALHOST and not DEBUG:
             zone_host = client.comm_params.host
         else:
@@ -154,13 +169,20 @@ def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
                         is_running = rr.bits[idx]
                         links[element].update({"status": 1.0 if is_running else 0.0})
 
+        logger.info(
+            "Finished reading PLC for %s (nodes=%d, links=%d)",
+            zone_host,
+            len(nodes),
+            len(links),
+        )
         return nodes, links
     except Exception as e:
-        print(f"Error in read_plc: {e}")
-        raise e
+        logger.exception("Error in read_plc: %s", e)
+        raise
 
 
 def set_nodedata(nodes: dict[str, dict]):
+    logger.info("Applying node updates (%d)", len(nodes))
     for name, node in nodes.items():
         try:
             index = node["index"]
@@ -186,10 +208,11 @@ def set_nodedata(nodes: dict[str, dict]):
                     pass
 
         except Exception as e:
-            print(f"setting values for node {name} returned: {e}")
+            logger.exception("setting values for node %s returned: %s", name, e)
 
 
 def set_linkdata(links: dict[str, dict]):
+    logger.info("Applying link updates (%d)", len(links))
     for name, link in links.items():
         try:
             index = link["index"]
@@ -221,7 +244,7 @@ def set_linkdata(links: dict[str, dict]):
                 case _:
                     pass
         except Exception as e:
-            print(f"setting values for link {name} returned: {e}")
+            logger.exception("setting values for link %s returned: %s", name, e)
 
 
 def float_to_registers(value):
@@ -245,6 +268,12 @@ def write_plc(
         else:
             zone_host = client.comm_params.host + ":" + str(client.comm_params.port)
 
+        logger.info(
+            "Writing PLC data for %s (nodes=%d, links=%d)",
+            zone_host,
+            len(nodes_data),
+            len(links_data),
+        )
         sensor_mask = 0
 
         for link, data in links_data.items():
@@ -254,12 +283,18 @@ def write_plc(
                 flow = data["flow"]
 
                 if PRINTING:
-                    print(
+                    logger.info(
                         f"{zone_host:<14} | {link:<12} | {'METER':<6} | {f'FLOW {flow}':<16} | Reg 700"
                     )
                 try:
                     client.write_registers(address=700, values=float_to_registers(flow))
-                except Exception:
+                except Exception as e:
+                    logger.debug(
+                        "Failed writing flow registers for %s %s: %s",
+                        zone_host,
+                        link,
+                        e,
+                    )
                     pass
 
             if data.get("type") in ["PUMP", "VALVE", "TCV"]:
@@ -276,7 +311,7 @@ def write_plc(
                     idx = get_coil_index(zone_host, link, map_dict)
 
                     plc_display = f"{plc_text} (Coil {idx})"
-                    print(
+                    logger.info(
                         f"{zone_host:<14} | {link:<12} | {data['type']:<6} | {epa_text:<16} | {plc_display}"
                     )
 
@@ -299,20 +334,38 @@ def write_plc(
                             values=float_to_registers(level),
                         )
                         if PRINTING:
-                            print(
+                            logger.info(
                                 f"{zone_host:<14} | {node:<12} | {'TANK':<6} | {f'LEVEL {level}':<16} | Reg {reg_address}"
                             )
-                    except Exception:
+                    except Exception as e:
+                        logger.debug(
+                            "Failed writing tank register for %s %s: %s",
+                            zone_host,
+                            node,
+                            e,
+                        )
                         pass
-                except Exception:
+                except Exception as e:
+                    logger.debug(
+                        "Failed processing tank data for %s %s: %s",
+                        zone_host,
+                        node,
+                        e,
+                    )
                     pass
 
         try:
             client.write_registers(address=0, values=[sensor_mask])
-        except Exception:
+        except Exception as e:
+            logger.debug(
+                "Failed writing sensor mask for %s: %s",
+                zone_host,
+                e,
+            )
             pass
 
     except Exception:
+        logger.exception("Unexpected error in write_plc")
         pass
 
 
@@ -335,12 +388,19 @@ def get_zone_items(zone_id: str) -> tuple[list, list]:
         for id, name in zip(ep.getLinkIndex(), ep.getLinkNameID())
         if name.startswith(zone_id)
     ]
+    logger.info(
+        "Zone %s items resolved (nodes=%d, links=%d)",
+        zone_id,
+        len(nodes),
+        len(links),
+    )
     return nodes, links
 
 
 def get_nodedata(nodes):
     zone_data = {}
 
+    logger.info("Collecting node data for %d nodes", len(nodes))
     for node in nodes:
         node_data = dict()
         name = ep.getNodeNameID(node)
@@ -381,6 +441,7 @@ def get_nodedata(nodes):
 
 def get_linkdata(links):
     zone_data = {}
+    logger.info("Collecting link data for %d links", len(links))
     for link in links:
         link_data = dict()
         # variables of every node
@@ -420,6 +481,7 @@ def get_linkdata(links):
 def main():
     mqtt_client = mqtt.Client(client_id=f"mqtt-{os.urandom(4).hex()}")
     try:
+        logger.info("Initializing MQTT client")
         if TLS and CA and KEY and CERT:
             mqtt_client.tls_set(ca_certs=CA, certfile=CERT, keyfile=KEY)
             mqtt_client.tls_insecure_set(True)
@@ -428,12 +490,14 @@ def main():
         else:
             mqtt_client.connect(BROKER.split("://")[-1])
         mqtt_client.loop_start()
+        logger.info("MQTT connected")
     except Exception:
         pass
 
     try:
         zone_ids = ["z0", "z1", "z2", "z3", "z4"]
 
+        logger.info("Starting EPANET simulation")
         clients: dict[str, ModbusTcpClient] = setup_clients(zone_ids)
 
         ep.setTimeSimulationDuration(24 * 3600)  # bv. 1 dag in seconden
@@ -442,6 +506,7 @@ def main():
         ep.openHydraulicAnalysis()
         ep.initializeHydraulicAnalysis(0)
 
+        logger.info("Hydraulic analysis initialized (tstep=%s)", tstep)
         while True:
             # this way the duration is set to infinite.
             ep.setTimeSimulationDuration(
@@ -455,6 +520,7 @@ def main():
 
             t = ep.runHydraulicAnalysis()
             tstep = ep.nextHydraulicAnalysisStep()
+            logger.info("Hydraulic step complete (t=%s, next_step=%s)", t, tstep)
 
             if PRINTING:
                 print(
@@ -476,11 +542,15 @@ def main():
 
             time.sleep(5)
             if tstep <= 0:
+                logger.info("Hydraulic analysis complete")
                 break
     except KeyboardInterrupt:
-        print(">--- Program interrupted by user ---")
+        logger.info("Program interrupted by user")
     except Exception as e:
-        print(f"Failed to run EPANET simulation due to an unexpected error: {e}")
+        logger.exception(
+            "Failed to run EPANET simulation due to an unexpected error: %s",
+            e,
+        )
     finally:
         local_variables = locals()
         if "clients" in local_variables:
