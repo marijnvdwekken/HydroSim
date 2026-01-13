@@ -6,4 +6,4 @@ epanet/app/*_temp*
 .venv
 .env
 /node_modules
-epanet/epanet.log
+epanet/app/epanet.log

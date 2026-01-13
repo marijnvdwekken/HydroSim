@@ -168,6 +168,7 @@ def read_plc(zone, client: ModbusTcpClient) -> dict[str, dict]:
                     if idx < len(rr.bits):
                         is_running = rr.bits[idx]
                         links[element].update({"status": 1.0 if is_running else 0.0})
+            
 
         logger.info(
             "Finished reading PLC for %s (nodes=%d, links=%d)",
