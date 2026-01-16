@@ -7,7 +7,7 @@ FROM python:3.12-slim
 RUN pip install epyt
 
 # Install pymodbus
-RUN pip install pymodbus
+RUN pip install pymodbus paho-mqtt python-dotenv
 
 # Copy the entrypoint script into the container
 COPY entrypoint.sh /entrypoint.sh

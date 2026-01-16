@@ -19,6 +19,23 @@ The script consists of the following functions:
 - `def write_data(clients: dict[str, ModbusTcpClient], data: dict) -> None:`
 - `def main():`
 
+### Modbus control toggles
+
+Controls coming from the PLCs can be enabled/disabled independently through environment variables on the `epanet` container/service:
+
+- `USE_MODBUS_PUMP_SPEED` (default `false`): when `true`, pump speeds are read from the PLC. When `false`, EPANET keeps using the pump curve defined inside the `.inp`.
+- `USE_MODBUS_VALVE_SETTINGS` (default `true`): when `true`, valve settings (PRV/FCV/etc.) are overwritten with the PLC register values. Set to `false` when you want EPANET to keep the configuration from the `.inp`.
+
+Example:
+
+```yaml
+environment:
+  - USE_MODBUS_PUMP_SPEED=false
+  - USE_MODBUS_VALVE_SETTINGS=false
+```
+
+With both flags set to `false`, the script becomes read-only towards EPANET (no Modbus-based controls are applied), which is useful for validating the hydraulic model against the original GUI simulation.
+
 Later on, we'll explain each function in depth and how they work under the hood.
 
 ## Before we start
@@ -224,8 +241,10 @@ If any error occurs during this process, the function prints an error message an
 
 Below is an example of the controls dictionary when printed out.
 
+> Note: Pump speeds are published by the OpenPLC programs as 32-bit floats (two consecutive registers) so the bridge now sees clean numeric values instead of the tiny denormalised numbers that appeared when single 16-bit registers were reinterpreted as floats. EPANET writes the low word first when pushing data to the PLCs so that ScadaLTS’s Modbus driver (which expects little-endian word order) interprets the values correctly.
+
 ```
-{'zone0': {'valve1': {'setting': 1.8367379491291107e-40}, 'valve2': {'setting': 1.8367379491291107e-40}, 'valve3': {'setting': 1.8367379491291107e-40}, 'valve4': {'setting': 1.8367379491291107e-40}}, 'zone3': {'pump1': {'speed': 9.183689745645554e-41}, 'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}}, 'zone1': {'pump1': {'speed': 9.183689745645554e-41}, 'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}}, 'zone4': {'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}, 'pump1': {'speed': 9.183689745645554e-41}}, 'zone2': {'pump2': {'speed': 9.183689745645554e-41}, 'pump3': {'speed': 9.183689745645554e-41}, 'pump1': {'speed': 9.183689745645554e-41}}}
+{'zone0': {'valve1': {'setting': 0.0}, 'valve2': {'setting': 0.0}, 'valve3': {'setting': 0.0}, 'valve4': {'setting': 0.0}}, 'zone3': {'pump1': {'speed': 1.0}, 'pump2': {'speed': 1.0}, 'pump3': {'speed': 1.0}}, 'zone1': {'pump1': {'speed': 1.0}, 'pump2': {'speed': 1.0}, 'pump3': {'speed': 1.0}}, 'zone4': {'pump2': {'speed': 0.0}, 'pump3': {'speed': 0.0}, 'pump1': {'speed': 0.0}}, 'zone2': {'pump2': {'speed': 0.0}, 'pump3': {'speed': 0.0}, 'pump1': {'speed': 0.0}}}
 ```
 
 Formatted with JSON:
@@ -234,60 +253,60 @@ Formatted with JSON:
 {
     "zone0": {
         "valve1": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         },
         "valve2": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         },
         "valve3": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         },
         "valve4": {
-            "setting": 1.8367379491291107e-40
+            "setting": 0.0
         }
     },
     "zone3": {
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         }
     },
     "zone1": {
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 1.0
         }
     },
     "zone4": {
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         }
     },
     "zone2": {
         "pump2": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump3": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         },
         "pump1": {
-            "speed": 9.183689745645554e-41
+            "speed": 0.0
         }
     }
 }

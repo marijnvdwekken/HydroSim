@@ -1,23 +1,34 @@
 services:
-
   # Simulation
   epanet:
     container_name: epanet
     depends_on:
-      - plc-zone0
+      plc-zone0:
+        condition: service_started
+      mosquitto:
+        condition: service_started
+        restart: true
     build:
       context: ./epanet/.
       dockerfile: Dockerfile
+    restart: "always"
     volumes:
       - ./epanet/app:/app
+      - ./mqtt/certs:/certs
+      - ./.env:/.env
+      - ./zone-registers.txt:/zone-registers.txt
     networks:
       - plc_network
+    # environment:
+    #   DEBUG: ""
+    #   PRINTING: "true"
+    #   LOCALHOST: ""
 
   # Central systems
   webserver:
     container_name: webserver
     build:
-      context: ./webserver/. 
+      context: ./webserver/.
       dockerfile: Dockerfile
     ports:
       - "80:80"
@@ -33,31 +44,47 @@ services:
     networks:
       - intranet
       - database
+    restart: "always"
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+    environment:
+      - WORDPRESS_DB_HOST=database:3306
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=root
+      - WORDPRESS_DB_NAME=scadalts
 
   scadalts:
     container_name: scadalts
     image: scadalts/scadalts:v2.7.5.2
+    restart: "always"
     environment:
       - CATALINA_OPTS=-Xmx2G -Xms2G
     ports:
-      - "8081:8080" # Used for external access and debugging
+      - "8081:8080"
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+        restart: true
     expose:
       - "8080"
     volumes:
       - ./scadalts/tomcat_log:/usr/local/tomcat/logs:rw
-      - ./scadalts/config.zip:/config.zip
+      - ./scadalts/config:/config.zip
+      - ./scadalts/config/uploads:/usr/local/tomcat/webapps/Scada-LTS/uploads:ro
+      # - ./scadalts/config/uploads:/usr/local/tomcat/webapps/ScadaBR/graphics/uploads:ro
+      # - ./scadalts/config/uploads:/usr/local/tomcat/webapps/ScadaBR/graphics/view_uploads:ro
+      # - ./scadalts/config/uploads:/usr/local/tomcat/webapps/ScadaBR/WEB-INF/filedata/view_uploads:ro
     command:
       [
         "/usr/bin/wait-for-it",
         "--host=database",
         "--port=3306",
-        "--timeout=30",
         "--strict",
         "--",
         "/usr/local/tomcat/bin/catalina.sh",
-        "run"
+        "run",
       ]
     networks:
       - intranet
@@ -67,6 +94,7 @@ services:
   database:
     container_name: database
     image: mysql/mysql-server:8.0.32
+    restart: "always"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
@@ -84,15 +112,19 @@ services:
   plc-zone0:
     container_name: plc-zone0
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: watertanklogica.st
+        script: zone_0.st
         database: database.sh
     ports:
-      - "8082:8080" # Used for external access and debugging
+      - "8082:8080"
+      - "5022:502"
+
     expose:
       - "502"
       - "8080"
@@ -102,15 +134,19 @@ services:
   plc-zone1:
     container_name: plc-zone1
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_1.st
         database: database.sh
     ports:
-      - "8083:8080" # Used for external access and debugging
+      - "8083:8080"
+      - "5023:502"
+
     expose:
       - "502"
       - "8080"
@@ -120,15 +156,19 @@ services:
   plc-zone2:
     container_name: plc-zone2
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_2.st
         database: database.sh
     ports:
-      - "8084:8080" # Used for external access and debugging
+      - "8084:8080"
+      - "5024:502"
+
     expose:
       - "502"
       - "8080"
@@ -138,15 +178,18 @@ services:
   plc-zone3:
     container_name: plc-zone3
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_3.st
         database: database.sh
     ports:
-      - "8085:8080" # Used for external access and debugging
+      - "8085:8080"
+      - "5025:502"
     expose:
       - "502"
       - "8080"
@@ -156,15 +199,19 @@ services:
   plc-zone4:
     container_name: plc-zone4
     depends_on:
-      - scadalts
+      scadalts:
+        condition: service_started
+        restart: true
     build:
       context: ./openplc/.
       dockerfile: Dockerfile
       args:
-        script: waterwijklogica.st
+        script: zone_4.st
         database: database.sh
     ports:
-      - "8086:8080" # Used for external access and debugging
+      - "8086:8080"
+      - "5026:502"
+
     expose:
       - "502"
       - "8080"
@@ -201,35 +248,62 @@ services:
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:latest
     container_name: opensearch-dashboards
+    depends_on:
+      - opensearch-node
     ports:
       - 5601:5601
     expose:
-      - '5601'
+      - "5601"
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200"]'
+      OPENSEARCH_USERNAME: admin
+      OPENSEARCH_PASSWORD: Patat123!
+      OPENSEARCH_SSL_VERIFICATION_MODE: none
+      OPENSEARCH_SECURITYMULTITENANCY_ENABLED: "false"
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
     networks:
       - opensearch-net
   fluent-bit:
     container_name: fluent-bit
-    image: docker.io/fluent/fluent-bit
+    build:
+      context: ./fluent-bit/.
+      dockerfile: Dockerfile
+    user: "0:0"
     volumes:
-      - ./opensearch/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-      - ./webserver/log/apache2/access.log:/var/log/test.log
+      - ./webserver/log/apache2:/var/log/webserver
+      - ./scadalts/tomcat_log:/var/log/scadalts
+      - ./epanet/app:/var/log/epanet:ro
+      - fluent-bit-buffer:/var/fluent-bit/buffer
+    depends_on:
+      - data-prepper
     networks:
       - opensearch-net
   data-prepper:
-    image: opensearchproject/data-prepper:2
     container_name: data-prepper
-    volumes:
-      - ./opensearch/log_pipeline.yaml:/usr/share/data-prepper/pipelines/log_pipeline.yaml
-      - ./opensearch/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
+    build:
+      context: ./opensearch/.
+      dockerfile: Dockerfile
+    restart: "always"
     ports:
       - 2021:2021
+      - 2022:2022
+    depends_on:
+      - opensearch-node
     networks:
-    - opensearch-net
-
+      - opensearch-net
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "8883:8883"
+    volumes:
+      - ./mqtt/conf:/mosquitto/config
+      - ./mqtt/certs:/mosquitto/certs
+    user: "1883"
 volumes:
   opensearch-data1:
+  fluent-bit-buffer:
 
 networks:
   intranet:

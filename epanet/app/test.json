@@ -1,0 +1,2615 @@
+{
+  "z0": {
+    "z0-pipe0": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe1": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe2": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe3": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe4": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe5": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe6": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pipe7": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 0.00013791779929306358,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527086857706308,
+      "length": 1000.0
+    },
+    "z0-pump0": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -10.000275611877441,
+      "flow": 53.333,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.11617982387542725,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z0-pump1": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -10.000275611877441,
+      "flow": 53.333,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.11617982387542725,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z0-pump2": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -10.000275611877441,
+      "flow": 53.333,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.11617982387542725,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z0-pump3": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -10.000275611877441,
+      "flow": 53.333,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.11617982387542725,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z0-valve": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 3.8271792845989694e-08,
+      "flow": 213.333,
+      "status": 1,
+      "velocity": 0.004527086857706308
+    },
+    "z0-valve00": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.567945546962164e-09,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527085926383734
+    },
+    "z0-valve01": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.5697458610741677e-10,
+      "flow": 0.875,
+      "status": 1,
+      "velocity": 7.427272794302553e-05
+    },
+    "z0-valve10": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.567945546962164e-09,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527085926383734
+    },
+    "z0-valve11": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.418561763840927e-11,
+      "flow": 0.525,
+      "status": 1,
+      "velocity": 4.456404712982476e-05
+    },
+    "z0-valve20": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.567945546962164e-09,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527085926383734
+    },
+    "z0-valve21": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.0763916147293884e-10,
+      "flow": 0.6,
+      "status": 1,
+      "velocity": 5.0929607823491096e-05
+    },
+    "z0-valve30": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.567949987854263e-09,
+      "flow": 53.333,
+      "status": 1,
+      "velocity": 0.004527087789028883
+    },
+    "z0-valve31": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.8388383871137393e-10,
+      "flow": 1.025,
+      "status": 1,
+      "velocity": 8.700487524038181e-05
+    },
+    "z0-junction1": {
+      "type": "JUNCTION",
+      "pressure": -0.0,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.0,
+      "head": -3.8271792845989694e-08
+    },
+    "z0-reservoir1": {
+      "type": "RESERVOIR",
+      "pressure": 0.0,
+      "quality": 0.0,
+      "elevation": 0.0
+    },
+    "z0-tank0": {
+      "type": "TANK",
+      "pressure": 10.0,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "level": 125.0
+    },
+    "z0-tank1": {
+      "type": "TANK",
+      "pressure": 10.0,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "level": 125.0
+    },
+    "z0-tank3": {
+      "type": "TANK",
+      "pressure": 10.0,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "level": 125.0
+    },
+    "z0-tank2": {
+      "type": "TANK",
+      "pressure": 10.0,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "level": 125.0
+    }
+  },
+  "z1": {
+    "z1-pipe01": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe02": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe03": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe04": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe05": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe06": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe07": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe08": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe09": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe10": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe11": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe12": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe13": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe14": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe15": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe16": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe17": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe18": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe19": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe20": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe21": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe22": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe23": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pipe24": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z1-pump1": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -39.880001068115234,
+      "flow": 0.6,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.005212236661463976,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z1-valve0": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.0763916147293884e-10,
+      "flow": 0.6,
+      "status": 1,
+      "velocity": 5.0929607823491096e-05
+    },
+    "z1-valve1": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.0763698959914691e-10,
+      "flow": 0.6,
+      "status": 1,
+      "velocity": 5.09285819134675e-05
+    },
+    "z1-house01": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house02": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house03": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house04": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house05": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house06": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house07": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house08": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house09": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house10": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house11": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house12": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house13": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house14": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house15": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house16": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house17": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house18": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house19": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house20": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house21": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house22": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house23": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-house24": {
+      "type": "JUNCTION",
+      "pressure": 49.88,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.880001068115234
+    },
+    "z1-junction1": {
+      "type": "JUNCTION",
+      "pressure": 50.88,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.880001068115234
+    },
+    "z1-junction2": {
+      "type": "JUNCTION",
+      "pressure": 50.88,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.880001068115234
+    },
+    "z1-junction3": {
+      "type": "JUNCTION",
+      "pressure": 50.88,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.880001068115234
+    },
+    "z1-junction4": {
+      "type": "JUNCTION",
+      "pressure": 50.88,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.880001068115234
+    },
+    "z1-junction5": {
+      "type": "JUNCTION",
+      "pressure": 50.88,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.880001068115234
+    }
+  },
+  "z2": {
+    "z2-pipe01": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe02": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe03": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe04": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe05": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe06": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe07": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe08": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe09": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe10": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe11": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe12": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe13": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe14": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe15": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe16": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe17": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe18": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe19": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe20": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pipe21": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z2-pump1": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -39.89500045776367,
+      "flow": 0.525,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.0045624165795743465,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z2-valve0": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.418345270351125e-11,
+      "flow": 0.525,
+      "status": 1,
+      "velocity": 4.456302121980116e-05
+    },
+    "z2-valve1": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 9.418345270351125e-11,
+      "flow": 0.525,
+      "status": 1,
+      "velocity": 4.456302121980116e-05
+    },
+    "z2-house01": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house02": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house03": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house04": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house05": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house06": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house07": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house08": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house09": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house10": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house11": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house12": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house13": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house14": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house15": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house16": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house17": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house18": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house19": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house20": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-house21": {
+      "type": "JUNCTION",
+      "pressure": 49.895,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.89500045776367
+    },
+    "z2-junction1": {
+      "type": "JUNCTION",
+      "pressure": 50.895,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.89500045776367
+    },
+    "z2-junction2": {
+      "type": "JUNCTION",
+      "pressure": 50.895,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.89500045776367
+    },
+    "z2-junction3": {
+      "type": "JUNCTION",
+      "pressure": 50.895,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.89500045776367
+    },
+    "z2-junction4": {
+      "type": "JUNCTION",
+      "pressure": 50.895,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.89500045776367
+    },
+    "z2-junction5": {
+      "type": "JUNCTION",
+      "pressure": 50.895,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.89500045776367
+    }
+  },
+  "z3": {
+    "z3-pipe01": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe02": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe03": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe04": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe05": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe06": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe07": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe08": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe09": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe10": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe11": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe12": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe13": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe14": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe15": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe16": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe17": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe18": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe19": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe20": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe21": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe22": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe23": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe24": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe25": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe26": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe27": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe28": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe29": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe30": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z3-pipe31": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe32": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe33": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe34": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe35": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe36": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe37": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe38": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe39": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe40": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pipe41": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z3-pump1": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -39.79500198364258,
+      "flow": 1.025,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.008885291405022144,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z3-valve0": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.8388383871137393e-10,
+      "flow": 1.025,
+      "status": 1,
+      "velocity": 8.700487524038181e-05
+    },
+    "z3-valve1": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.8388816858116996e-10,
+      "flow": 1.025,
+      "status": 1,
+      "velocity": 8.700692706042901e-05
+    },
+    "z3-house01": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house02": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house03": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house04": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house05": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house06": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house07": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house08": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house09": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house10": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house11": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house12": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house13": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house14": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house15": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house16": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house17": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house18": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house19": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house20": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house21": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house22": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house23": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house24": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house25": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house26": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house27": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house28": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house29": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house30": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house31": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house32": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house33": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house34": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house35": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house36": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house37": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house38": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house39": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house40": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-house41": {
+      "type": "JUNCTION",
+      "pressure": 49.795,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.79500198364258
+    },
+    "z3-junction1": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    },
+    "z3-junction2": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    },
+    "z3-junction3": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    },
+    "z3-junction4": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    },
+    "z3-junction5": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    },
+    "z3-junction6": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    },
+    "z3-junction7": {
+      "type": "JUNCTION",
+      "pressure": 50.795,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.79500198364258
+    }
+  },
+  "z4": {
+    "z4-pipe01": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe02": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe03": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe04": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe05": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe06": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe07": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe08": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe09": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe10": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe11": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe12": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe13": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe14": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe15": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe16": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe17": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe18": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe19": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe20": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe21": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe22": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe23": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe24": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe25": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z4-pipe26": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z4-pipe27": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z4-pipe28": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z4-pipe29": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z4-pipe30": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.3051986469654366e-05,
+      "length": 1000.0
+    },
+    "z4-pipe31": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe32": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe33": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe34": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pipe35": {
+      "type": "PIPE",
+      "quality": 0.0,
+      "headloss": 2.392705482634483e-07,
+      "flow": 0.025,
+      "status": 1,
+      "velocity": 5.305198283167556e-05,
+      "length": 1000.0
+    },
+    "z4-pump1": {
+      "type": "PUMP",
+      "quality": 0.0,
+      "headloss": -39.82500076293945,
+      "flow": 0.875,
+      "status": 1,
+      "power": 0.0,
+      "speed": 1.0,
+      "energy": 0.007590716239064932,
+      "efficeiency": 0.75,
+      "state": 3
+    },
+    "z4-valve0": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.5697458610741677e-10,
+      "flow": 0.875,
+      "status": 1,
+      "velocity": 7.427272794302553e-05
+    },
+    "z4-valve1": {
+      "type": "TCV",
+      "quality": 0.0,
+      "headloss": 1.5698108091211083e-10,
+      "flow": 0.875,
+      "status": 1,
+      "velocity": 7.427580567309633e-05
+    },
+    "z4-house01": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house02": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house03": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house04": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house05": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house06": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house07": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house08": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house09": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house10": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house11": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house12": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house13": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house14": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house15": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house16": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house17": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house18": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house19": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house20": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house21": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house22": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house23": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house24": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house25": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house26": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house27": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house28": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house29": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house30": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house31": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house32": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house33": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house34": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-house35": {
+      "type": "JUNCTION",
+      "pressure": 49.825,
+      "quality": 0.0,
+      "elevation": 0.0,
+      "demand": 0.025,
+      "head": 49.82500076293945
+    },
+    "z4-junction1": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction2": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction3": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction4": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction5": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction6": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction7": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    },
+    "z4-junction8": {
+      "type": "JUNCTION",
+      "pressure": 50.825,
+      "quality": 0.0,
+      "elevation": -1.0,
+      "demand": 0.0,
+      "head": 49.82500076293945
+    }
+  }
+}

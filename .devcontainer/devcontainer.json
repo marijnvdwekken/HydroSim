@@ -1,0 +1,21 @@
+{
+	"name": "HydroSim EPANET",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"workspaceFolder": "/workspaces/HydroSim",
+	"remoteUser": "vscode",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.debugpy"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.envFile": "/workspaces/HydroSim/.env"
+			}
+		}
+	}
+}

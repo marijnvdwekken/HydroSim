@@ -1,3 +1,10 @@
 scadalts/db*
 scadalts/tomcat_log
 webserver/log
+epanet/app/*.txt
+epanet/app/*_temp*
+.venv
+.env
+/node_modules
+epanet/app/epanet.logepanet/app/epanet.log
+*.log

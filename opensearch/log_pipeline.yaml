@@ -2,10 +2,23 @@ log-pipeline:
   source:
     http:
       ssl: false
+      port: 2021
+      path: /log/ingest
+  buffer:
+    bounded_blocking:
+      buffer_size: 50000
+      batch_size: 200
   processor:
     - grok:
         match:
-          log: [ "%{COMMONAPACHELOG}" ]
+          log: [ "%{COMBINEDAPACHELOG}", "%{COMMONAPACHELOG}" ]
+    - date:
+        match:
+          - key: "timestamp"
+            patterns:
+              - "dd/MMM/yyyy:HH:mm:ss Z"
+        destination: "@timestamp"
+        from_time_received: false
   sink:
     - opensearch:
         hosts: [ "https://opensearch-node1:9200" ]
@@ -13,3 +26,32 @@ log-pipeline:
         username: admin
         password: Patat123!
         index: apache_logs
+
+epanet-pipeline:
+  source:
+    http:
+      ssl: false
+      port: 2022
+      path: /log/epanet
+  buffer:
+    bounded_blocking:
+      buffer_size: 50000
+      batch_size: 200
+  processor:
+    - grok:
+        match:
+          log: [ "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} %{DATA:logger}: %{GREEDYDATA:message}" ]
+    - date:
+        match:
+          - key: "timestamp"
+            patterns:
+              - "yyyy-MM-dd HH:mm:ss,SSS"
+        destination: "@timestamp"
+        from_time_received: false
+  sink:
+    - opensearch:
+        hosts: [ "https://opensearch-node1:9200" ]
+        insecure: true
+        username: admin
+        password: Patat123!
+        index: epanet_logs

@@ -5,11 +5,13 @@ import time
 
 from pyModbusTCP.server import ModbusServer
 
+reg_size = 750
+
 
 def start_server(host, port):
     try:
         server = ModbusServer(host=host, port=port, no_block=True)
-        server.data_bank.set_holding_registers(0, [0] * 100)
+        server.data_bank.set_holding_registers(0, [0] * reg_size)
 
         server.start()
 
@@ -18,9 +20,9 @@ def start_server(host, port):
             time.sleep(1)
 
             while True:
-                hr = server.data_bank.get_holding_registers(0, 100)
+                hr = server.data_bank.get_holding_registers(0, reg_size)
                 print(f"\nholding registers ({port}): {hr}")
-                time.sleep(3)
+                time.sleep(5)
     except Exception as e:
         print(f"ERROR on server {port}: {e}")
         sys.exit(1)
@@ -32,18 +34,18 @@ def start_server(host, port):
 def main():
     try:
         servers_config = [
-            ("127.0.0.1", 502),
-            ("127.0.0.1", 503),
-            ("127.0.0.1", 504),
-            ("127.0.0.1", 505),
-            ("127.0.0.1", 506),
+            ("127.0.0.1", 5022),
+            ("127.0.0.1", 5023),
+            ("127.0.0.1", 5024),
+            ("127.0.0.1", 5025),
+            ("127.0.0.1", 5026),
         ]
 
         threads = []
 
         for host, port in servers_config:
             thread = threading.Thread(target=start_server, args=(host, port))
-            thread.daemon = True 
+            thread.daemon = True
             threads.append(thread)
             thread.start()
 
