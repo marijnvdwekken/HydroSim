@@ -4,7 +4,13 @@ model {
             description '- Subscribeert op de MQTT-topics
                 - Zet JSON-data om naar data voor de PLC
             '
+<<<<<<< HEAD
             -> plc0 'Geeft omgezette data door aan'
+=======
+            style {
+                color green
+            }
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
 
         container plc0 'PLC' {
@@ -12,6 +18,12 @@ model {
                 - S7-300 of S7-1200 series PLC.
                 - Idealiter interchangable. 
             '
+<<<<<<< HEAD
+=======
+            style {
+                color green
+            }
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
     }
 }

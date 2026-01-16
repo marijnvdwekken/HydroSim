@@ -1,0 +1,13 @@
+  Page 1                                    Fri May 09 09:20:49 2025
+
+  ******************************************************************
+  *                           E P A N E T                          *
+  *                   Hydraulic and Water Quality                  *
+  *                   Analysis for Pipe Networks                   *
+  *                         Version 2.2                            *
+  ******************************************************************
+  
+  Error 213: invalid option value 20 in [TIMES] section:
+   Start ClockTime    	20 PM
+
+  Error 200: one or more errors in input file

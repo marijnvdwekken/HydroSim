@@ -4,15 +4,34 @@ model {
             description 'Interfaces voor het aansturen van de virtuele OT omgeving.'
             style {}       
 
+<<<<<<< HEAD
             -> server.plc-zone 'Update Simulator'
             -> server.hwconnectie 'Update Hardware'
             -> server.db 'Updates status'
             -> server.log 'Log acties'
+=======
+            // -> server.plc-zone 'Update Simulator'
+            // -> server.hwconnectie 'Update Hardware'
+            // -> server.db 'Updates status'
+            // -> server.log 'Log acties'
+        }
+
+        container epanet 'EPAnet' {
+
+
+            -> plc-zone 'Watersimulatie data doorsturen'
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
         
         container plc-zone 'PLC-zone 0-4' {
             description 'Virtuele PLC\'s waarmee de waterdistributieplant gesimuleerd aangestuurd kan worden.'
             style {}
+<<<<<<< HEAD
+=======
+
+            -> ui.SCADA-LTS 'EPANET watersimulatie data doorsturen'
+            -> epanet 'Veranderingen in actuatoren doorsturen'
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
 
         container db 'Database' {
@@ -31,7 +50,11 @@ model {
         }
 
         container hwconnectie 'Hardware connectie' {
+<<<<<<< HEAD
             description '- Zelf toe te voegen connectie naar de fysieke hardware.
+=======
+            description '- Zelf te implementeren connectie naar de fysieke hardware.
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
                 - MQTT
             '
             style {}
@@ -46,8 +69,17 @@ views {
         title 'Server / Overview'
         include *
 
+<<<<<<< HEAD
         style user, hacker, hardware {
             color muted
         }
+=======
+        style user, hacker {
+            color muted
+        }
+        style hardware {
+            color green
+        }
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
     }
 }

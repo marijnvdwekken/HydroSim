@@ -5,7 +5,11 @@ model {
             style {
             }
             
+<<<<<<< HEAD
             -> hardware.gateway 'Stuurt MQTT-berichten naar'
+=======
+            -> hardware.gateway.mqttclient 'Stuurt MQTT-berichten naar'
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
 
         component MQTT-Client {
@@ -32,7 +36,11 @@ views {
         include 
             *
 
+<<<<<<< HEAD
         style server.db, server.fb, server.plc-zone, user, hacker, server.log {
+=======
+        style server.ui {
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
             color muted
         }
     }

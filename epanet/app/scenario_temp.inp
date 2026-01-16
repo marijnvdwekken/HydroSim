@@ -1,0 +1,945 @@
+[TITLE]
+HydroSim base image
+
+[JUNCTIONS]
+;ID              	Elev        	Demand      	Pattern         
+ 01              	0           	0           	                	;
+ 02              	-1          	0           	                	;
+ 03              	0           	0           	                	;
+ 04              	0           	0           	                	;
+ 05              	-1          	0           	                	;
+ 06              	-1          	0           	                	;
+ 07              	-1          	0           	                	;
+ 08              	-1          	0           	                	;
+ 09              	-1          	0           	                	;
+ 13              	0           	0           	                	;
+ 14              	0           	0           	                	;
+ 15              	0           	0           	                	;
+ 16              	0           	0           	                	;
+ 17              	0           	0           	                	;
+ 18              	0           	0           	                	;
+ 19              	0           	0           	                	;
+ 20              	0           	0           	                	;
+ 21              	-1          	0           	                	;
+ 22              	-1          	0           	                	;
+ 23              	-1          	0           	                	;
+ 24              	-1          	0           	                	;
+ 25              	-1          	0           	                	;
+ 26              	-1          	0           	                	;
+ 27              	-1          	0           	                	;
+ 28              	-1          	0           	                	;
+ 29              	-1          	0           	                	;
+ 30              	-1          	0           	                	;
+ 31              	-1          	0           	                	;
+ 32              	-1          	0           	                	;
+ 33              	-1          	0           	                	;
+ 34              	0           	0           	                	;
+ z0-junction1    	0           	0           	                	;
+ z1-house01      	0           	.5          	1               	;
+ z1-house02      	0           	.5          	1               	;
+ z1-house03      	0           	.5          	1               	;
+ z1-house04      	0           	.5          	1               	;
+ z1-house05      	0           	.5          	1               	;
+ z1-house06      	0           	.5          	1               	;
+ z1-house07      	0           	.5          	1               	;
+ z1-house08      	0           	.5          	1               	;
+ z1-house09      	0           	.5          	1               	;
+ z1-house10      	0           	.5          	1               	;
+ z1-house11      	0           	.5          	1               	;
+ z1-house12      	0           	.5          	1               	;
+ z1-house13      	0           	.5          	1               	;
+ z1-house14      	0           	.5          	1               	;
+ z1-house15      	0           	.5          	1               	;
+ z1-house16      	0           	.5          	1               	;
+ z1-house17      	0           	.5          	1               	;
+ z1-house18      	0           	.5          	1               	;
+ z1-house19      	0           	.5          	1               	;
+ z1-house20      	0           	.5          	1               	;
+ z1-house21      	0           	.5          	1               	;
+ z1-house22      	0           	.5          	1               	;
+ z1-house23      	0           	.5          	1               	;
+ z1-house24      	0           	.5          	1               	;
+ z1-junction1    	-1          	0           	                	;
+ z1-junction2    	-1          	0           	                	;
+ z1-junction3    	-1          	0           	                	;
+ z1-junction4    	-1          	0           	                	;
+ z1-junction5    	-1          	0           	                	;
+ z2-house01      	0           	.5          	1               	;
+ z2-house02      	0           	.5          	1               	;
+ z2-house03      	0           	.5          	1               	;
+ z2-house04      	0           	.5          	1               	;
+ z2-house05      	0           	.5          	1               	;
+ z2-house06      	0           	.5          	1               	;
+ z2-house07      	0           	.5          	1               	;
+ z2-house08      	0           	.5          	1               	;
+ z2-house09      	0           	.5          	1               	;
+ z2-house10      	0           	.5          	1               	;
+ z2-house11      	0           	.5          	1               	;
+ z2-house12      	0           	.5          	1               	;
+ z2-house13      	0           	.5          	1               	;
+ z2-house14      	0           	.5          	1               	;
+ z2-house15      	0           	.5          	1               	;
+ z2-house16      	0           	.5          	1               	;
+ z2-house17      	0           	.5          	1               	;
+ z2-house18      	0           	.5          	1               	;
+ z2-house19      	0           	.5          	1               	;
+ z2-house20      	0           	.5          	1               	;
+ z2-house21      	0           	.5          	1               	;
+ z2-junction1    	-1          	0           	                	;
+ z2-junction2    	-1          	0           	                	;
+ z2-junction3    	-1          	0           	                	;
+ z2-junction4    	-1          	0           	                	;
+ z2-junction5    	-1          	0           	                	;
+ z3-house01      	0           	.5          	1               	;
+ z3-house02      	0           	.5          	1               	;
+ z3-house03      	0           	.5          	1               	;
+ z3-house04      	0           	.5          	1               	;
+ z3-house05      	0           	.5          	1               	;
+ z3-house06      	0           	.5          	1               	;
+ z3-house07      	0           	.5          	1               	;
+ z3-house08      	0           	.5          	1               	;
+ z3-house09      	0           	.5          	1               	;
+ z3-house10      	0           	.5          	1               	;
+ z3-house11      	0           	.5          	1               	;
+ z3-house12      	0           	.5          	1               	;
+ z3-house13      	0           	.5          	1               	;
+ z3-house14      	0           	.5          	1               	;
+ z3-house15      	0           	.5          	1               	;
+ z3-house16      	0           	.5          	1               	;
+ z3-house17      	0           	.5          	1               	;
+ z3-house18      	0           	.5          	1               	;
+ z3-house19      	0           	.5          	1               	;
+ z3-house20      	0           	.5          	1               	;
+ z3-house21      	0           	.5          	1               	;
+ z3-house22      	0           	.5          	                	;
+ z3-house23      	0           	.5          	1               	;
+ z3-house24      	0           	.5          	1               	;
+ z3-house25      	0           	.5          	1               	;
+ z3-house26      	0           	.5          	1               	;
+ z3-house27      	0           	.5          	1               	;
+ z3-house28      	0           	.5          	1               	;
+ z3-house29      	0           	.5          	1               	;
+ z3-house30      	0           	.5          	1               	;
+ z3-house31      	0           	.5          	1               	;
+ z3-house32      	0           	.5          	1               	;
+ z3-house33      	0           	.5          	1               	;
+ z3-house34      	0           	.5          	1               	;
+ z3-house35      	0           	.5          	1               	;
+ z3-house36      	0           	.5          	1               	;
+ z3-house37      	0           	.5          	1               	;
+ z3-house38      	0           	.5          	1               	;
+ z3-house39      	0           	.5          	1               	;
+ z3-house40      	0           	.5          	1               	;
+ z3-house41      	0           	.5          	1               	;
+ z3-junction1    	-1          	0           	                	;
+ z3-junction2    	-1          	0           	                	;
+ z3-junction3    	-1          	0           	                	;
+ z3-junction4    	-1          	0           	                	;
+ z3-junction5    	-1          	0           	                	;
+ z3-junction6    	-1          	0           	                	;
+ z3-junction7    	-1          	0           	                	;
+ z4-house01      	0           	.5          	1               	;
+ z4-house02      	0           	.5          	1               	;
+ z4-house03      	0           	.5          	1               	;
+ z4-house04      	0           	.5          	1               	;
+ z4-house05      	0           	.5          	1               	;
+ z4-house06      	0           	.5          	1               	;
+ z4-house07      	0           	.5          	1               	;
+ z4-house08      	0           	.5          	1               	;
+ z4-house09      	0           	.5          	1               	;
+ z4-house10      	0           	.5          	1               	;
+ z4-house11      	0           	.5          	1               	;
+ z4-house12      	0           	.5          	1               	;
+ z4-house13      	0           	.5          	1               	;
+ z4-house14      	0           	.5          	1               	;
+ z4-house15      	0           	.5          	1               	;
+ z4-house16      	0           	.5          	1               	;
+ z4-house17      	0           	.5          	1               	;
+ z4-house18      	0           	.5          	1               	;
+ z4-house19      	0           	.5          	1               	;
+ z4-house20      	0           	.5          	1               	;
+ z4-house21      	0           	.5          	1               	;
+ z4-house22      	0           	.5          	1               	;
+ z4-house23      	0           	.5          	1               	;
+ z4-house24      	0           	.5          	1               	;
+ z4-house25      	0           	.5          	1               	;
+ z4-house26      	0           	.5          	1               	;
+ z4-house27      	0           	.5          	                	;
+ z4-house28      	0           	.5          	1               	;
+ z4-house29      	0           	.5          	                	;
+ z4-house30      	0           	.5          	1               	;
+ z4-house31      	0           	.5          	1               	;
+ z4-house32      	0           	.5          	1               	;
+ z4-house33      	0           	.5          	1               	;
+ z4-house34      	0           	.5          	1               	;
+ z4-house35      	0           	.5          	1               	;
+ z4-junction1    	-1          	0           	                	;
+ z4-junction2    	-1          	0           	                	;
+ z4-junction3    	-1          	0           	                	;
+ z4-junction4    	-1          	0           	                	;
+ z4-junction5    	-1          	0           	                	;
+ z4-junction6    	-1          	0           	                	;
+ z4-junction7    	-1          	0           	                	;
+ z4-junction8    	-1          	0           	                	;
+
+[RESERVOIRS]
+;ID              	Head        	Pattern         
+ z0-reservoir1   	0           	                	;
+
+[TANKS]
+;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve        	Overflow
+ z0-tank4        	0           	10          	5           	15          	50          	0           	                	;
+ z0-tank2        	0           	10          	5           	15          	50          	0           	                	;
+ z0-tank3        	0           	10          	5           	15          	50          	0           	                	;
+ z0-tank1        	0           	10          	5           	15          	50          	0           	                	;
+
+[PIPES]
+;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
+ 02              	z3-junction2    	z3-junction4    	1000        	300         	100         	0           	Open  	;
+ 03              	z3-junction4    	z3-junction5    	1000        	300         	100         	0           	Open  	;
+ 04              	z1-junction2    	z1-junction3    	1000        	300         	100         	0           	Open  	;
+ 05              	z1-junction2    	z1-junction4    	1000        	300         	100         	0           	Open  	;
+ 06              	z1-junction2    	z1-junction5    	1000        	300         	100         	0           	Open  	;
+ 07              	z1-junction1    	z1-junction2    	1000        	300         	100         	0           	Open  	;
+ 08              	z3-junction1    	z3-junction2    	1000        	500         	100         	0           	Open  	;
+ 12              	z2-junction3    	z2-junction4    	1000        	300         	100         	0           	Open  	;
+ 13              	z4-junction5    	z4-junction6    	1000        	300         	100         	0           	Open  	;
+ 14              	z4-junction1    	z4-junction2    	1000        	500         	100         	0           	Open  	;
+ 15              	z2-junction1    	z2-junction2    	1000        	500         	100         	0           	Open  	;
+ 16              	32              	z1-junction1    	1000        	500         	100         	0           	Open  	;
+ 17              	29              	07              	1000        	500         	100         	0           	Open  	;
+ 18              	07              	z3-junction1    	1000        	500         	100         	0           	Open  	;
+ 19              	30              	08              	1000        	500         	100         	0           	Open  	;
+ 20              	31              	09              	1000        	500         	100         	0           	Open  	;
+ 21              	09              	z2-junction1    	1000        	500         	100         	0           	Open  	;
+ 22              	08              	z4-junction1    	1000        	500         	100         	0           	Open  	;
+ 23              	z3-junction2    	z3-junction7    	1000        	300         	100         	0           	Open  	;
+ 24              	z3-junction2    	z3-junction3    	1000        	300         	100         	0           	Open  	;
+ 25              	z2-junction2    	z2-junction3    	1000        	300         	100         	0           	Open  	;
+ 26              	z2-junction3    	z2-junction5    	1000        	300         	100         	0           	Open  	;
+ 39              	z3-junction2    	z3-junction6    	1000        	300         	100         	0           	Open  	;
+ 40              	z4-junction2    	z4-junction8    	1000        	300         	100         	0           	Open  	;
+ 41              	z4-junction2    	z4-junction3    	1000        	300         	100         	0           	Open  	;
+ 42              	z4-junction2    	z4-junction4    	1000        	300         	100         	0           	Open  	;
+ 43              	z4-junction4    	z4-junction5    	1000        	300         	100         	0           	Open  	;
+ 44              	z4-junction4    	z4-junction7    	1000        	300         	100         	0           	Open  	;
+ z0-pipe0        	z0-junction1    	01              	1000        	500         	100         	0           	Open  	;
+ z0-pipe1        	z0-junction1    	04              	1000        	500         	100         	0           	Open  	;
+ z0-pipe2        	z0-junction1    	03              	1000        	500         	100         	0           	Open  	;
+ z0-pipe3        	z0-junction1    	34              	1000        	500         	100         	0           	Open  	;
+ z0-pipe4        	13              	20              	1000        	500         	100         	0           	Open  	;
+ z0-pipe5        	14              	19              	1000        	500         	100         	0           	Open  	;
+ z0-pipe6        	15              	18              	1000        	500         	100         	0           	Open  	;
+ z0-pipe7        	16              	17              	1000        	500         	100         	0           	Open  	;
+ z1-pipe01       	z1-junction3    	z1-house01      	1000        	100         	100         	0           	Open  	;
+ z1-pipe02       	z1-junction3    	z1-house02      	1000        	100         	100         	0           	Open  	;
+ z1-pipe03       	z1-junction3    	z1-house03      	1000        	100         	100         	0           	Open  	;
+ z1-pipe04       	z1-junction3    	z1-house04      	1000        	100         	100         	0           	Open  	;
+ z1-pipe05       	z1-junction3    	z1-house05      	1000        	100         	100         	0           	Open  	;
+ z1-pipe06       	z1-junction3    	z1-house06      	1000        	100         	100         	0           	Open  	;
+ z1-pipe07       	z1-junction3    	z1-house07      	1000        	100         	100         	0           	Open  	;
+ z1-pipe08       	z1-junction3    	z1-house08      	1000        	100         	100         	0           	Open  	;
+ z1-pipe09       	z1-junction3    	z1-house09      	1000        	100         	100         	0           	Open  	;
+ z1-pipe10       	z1-junction4    	z1-house10      	1000        	100         	100         	0           	Open  	;
+ z1-pipe11       	z1-junction4    	z1-house11      	1000        	100         	100         	0           	Open  	;
+ z1-pipe12       	z1-junction4    	z1-house12      	1000        	100         	100         	0           	Open  	;
+ z1-pipe13       	z1-junction4    	z1-house13      	1000        	100         	100         	0           	Open  	;
+ z1-pipe14       	z1-junction4    	z1-house14      	1000        	100         	100         	0           	Open  	;
+ z1-pipe15       	z1-junction4    	z1-house15      	1000        	100         	100         	0           	Open  	;
+ z1-pipe16       	z1-junction4    	z1-house16      	1000        	100         	100         	0           	Open  	;
+ z1-pipe17       	z1-junction5    	z1-house17      	1000        	100         	100         	0           	Open  	;
+ z1-pipe18       	z1-junction5    	z1-house18      	1000        	100         	100         	0           	Open  	;
+ z1-pipe19       	z1-junction5    	z1-house19      	1000        	100         	100         	0           	Open  	;
+ z1-pipe20       	z1-junction5    	z1-house20      	1000        	100         	100         	0           	Open  	;
+ z1-pipe21       	z1-junction5    	z1-house21      	1000        	100         	100         	0           	Open  	;
+ z1-pipe22       	z1-junction5    	z1-house22      	1000        	100         	100         	0           	Open  	;
+ z1-pipe23       	z1-junction5    	z1-house23      	1000        	100         	100         	0           	Open  	;
+ z1-pipe24       	z1-junction5    	z1-house24      	1000        	100         	100         	0           	Open  	;
+ z2-pipe01       	z2-junction2    	z2-house01      	1000        	100         	100         	0           	Open  	;
+ z2-pipe02       	z2-junction2    	z2-house02      	1000        	100         	100         	0           	Open  	;
+ z2-pipe03       	z2-junction2    	z2-house03      	1000        	100         	100         	0           	Open  	;
+ z2-pipe04       	z2-junction2    	z2-house04      	1000        	100         	100         	0           	Open  	;
+ z2-pipe05       	z2-junction2    	z2-house05      	1000        	100         	100         	0           	Open  	;
+ z2-pipe06       	z2-junction2    	z2-house06      	1000        	100         	100         	0           	Open  	;
+ z2-pipe07       	z2-junction3    	z2-house07      	1000        	100         	100         	0           	Open  	;
+ z2-pipe08       	z2-junction3    	z2-house08      	1000        	100         	100         	0           	Open  	;
+ z2-pipe09       	z2-junction3    	z2-house09      	1000        	100         	100         	0           	Open  	;
+ z2-pipe10       	z2-junction4    	z2-house10      	1000        	100         	100         	0           	Open  	;
+ z2-pipe11       	z2-junction4    	z2-house11      	1000        	100         	100         	0           	Open  	;
+ z2-pipe12       	z2-junction4    	z2-house12      	1000        	100         	100         	0           	Open  	;
+ z2-pipe13       	z2-junction4    	z2-house13      	1000        	100         	100         	0           	Open  	;
+ z2-pipe14       	z2-junction4    	z2-house14      	1000        	100         	100         	0           	Open  	;
+ z2-pipe15       	z2-junction4    	z2-house15      	1000        	100         	100         	0           	Open  	;
+ z2-pipe16       	z2-junction4    	z2-house16      	1000        	100         	100         	0           	Open  	;
+ z2-pipe17       	z2-junction4    	z2-house17      	1000        	100         	100         	0           	Open  	;
+ z2-pipe18       	z2-junction5    	z2-house18      	1000        	100         	100         	0           	Open  	;
+ z2-pipe19       	z2-junction5    	z2-house19      	1000        	100         	100         	0           	Open  	;
+ z2-pipe20       	z2-junction5    	z2-house20      	1000        	100         	100         	0           	Open  	;
+ z2-pipe21       	z2-junction5    	z2-house21      	1000        	100         	100         	0           	Open  	;
+ z3-pipe01       	z3-junction3    	z3-house01      	1000        	100         	100         	0           	Open  	;
+ z3-pipe02       	z3-junction3    	z3-house02      	1000        	100         	100         	0           	Open  	;
+ z3-pipe03       	z3-junction3    	z3-house03      	1000        	100         	100         	0           	Open  	;
+ z3-pipe04       	z3-junction3    	z3-house04      	1000        	100         	100         	0           	Open  	;
+ z3-pipe05       	z3-junction3    	z3-house05      	1000        	100         	100         	0           	Open  	;
+ z3-pipe06       	z3-junction3    	z3-house06      	1000        	100         	100         	0           	Open  	;
+ z3-pipe07       	z3-junction3    	z3-house07      	1000        	100         	100         	0           	Open  	;
+ z3-pipe08       	z3-junction4    	z3-house08      	1000        	100         	100         	0           	Open  	;
+ z3-pipe09       	z3-junction4    	z3-house09      	1000        	100         	100         	0           	Open  	;
+ z3-pipe10       	z3-junction4    	z3-house10      	1000        	100         	100         	0           	Open  	;
+ z3-pipe11       	z3-junction4    	z3-house11      	1000        	100         	100         	0           	Open  	;
+ z3-pipe12       	z3-junction4    	z3-house12      	1000        	100         	100         	0           	Open  	;
+ z3-pipe13       	z3-junction4    	z3-house13      	1000        	100         	100         	0           	Open  	;
+ z3-pipe14       	z3-junction4    	z3-house14      	1000        	100         	100         	0           	Open  	;
+ z3-pipe15       	z3-junction4    	z3-house15      	1000        	100         	100         	0           	Open  	;
+ z3-pipe16       	z3-junction4    	z3-house16      	1000        	100         	100         	0           	Open  	;
+ z3-pipe17       	z3-junction4    	z3-house17      	1000        	100         	100         	0           	Open  	;
+ z3-pipe18       	z3-junction4    	z3-house18      	1000        	100         	100         	0           	Open  	;
+ z3-pipe19       	z3-junction5    	z3-house19      	1000        	100         	100         	0           	Open  	;
+ z3-pipe20       	z3-junction5    	z3-house20      	1000        	100         	100         	0           	Open  	;
+ z3-pipe21       	z3-junction5    	z3-house21      	1000        	100         	100         	0           	Open  	;
+ z3-pipe22       	z3-junction5    	z3-house22      	1000        	100         	100         	0           	Open  	;
+ z3-pipe23       	z3-junction6    	z3-house23      	1000        	100         	100         	0           	Open  	;
+ z3-pipe24       	z3-junction6    	z3-house24      	1000        	100         	100         	0           	Open  	;
+ z3-pipe25       	z3-junction6    	z3-house25      	1000        	100         	100         	0           	Open  	;
+ z3-pipe26       	z3-junction6    	z3-house26      	1000        	100         	100         	0           	Open  	;
+ z3-pipe27       	z3-junction6    	z3-house27      	1000        	100         	100         	0           	Open  	;
+ z3-pipe28       	z3-junction6    	z3-house28      	1000        	100         	100         	0           	Open  	;
+ z3-pipe29       	z3-junction6    	z3-house29      	1000        	100         	100         	0           	Open  	;
+ z3-pipe30       	z3-junction6    	z3-house30      	1000        	100         	100         	0           	Open  	;
+ z3-pipe31       	z3-junction7    	z3-house31      	1000        	100         	100         	0           	Open  	;
+ z3-pipe32       	z3-junction7    	z3-house32      	1000        	100         	100         	0           	Open  	;
+ z3-pipe33       	z3-junction7    	z3-house33      	1000        	100         	100         	0           	Open  	;
+ z3-pipe34       	z3-junction7    	z3-house34      	1000        	100         	100         	0           	Open  	;
+ z3-pipe35       	z3-junction7    	z3-house35      	1000        	100         	100         	0           	Open  	;
+ z3-pipe36       	z3-junction7    	z3-house36      	1000        	100         	100         	0           	Open  	;
+ z3-pipe37       	z3-junction7    	z3-house37      	1000        	100         	100         	0           	Open  	;
+ z3-pipe38       	z3-junction7    	z3-house38      	1000        	100         	100         	0           	Open  	;
+ z3-pipe39       	z3-junction7    	z3-house39      	1000        	100         	100         	0           	Open  	;
+ z3-pipe40       	z3-junction7    	z3-house40      	1000        	100         	100         	0           	Open  	;
+ z3-pipe41       	z3-junction7    	z3-house41      	1000        	100         	100         	0           	Open  	;
+ z4-pipe01       	z4-junction3    	z4-house01      	1000        	100         	100         	0           	Open  	;
+ z4-pipe02       	z4-junction3    	z4-house02      	1000        	100         	100         	0           	Open  	;
+ z4-pipe03       	z4-junction3    	z4-house03      	1000        	100         	100         	0           	Open  	;
+ z4-pipe04       	z4-junction3    	z4-house04      	1000        	100         	100         	0           	Open  	;
+ z4-pipe05       	z4-junction3    	z4-house05      	1000        	100         	100         	0           	Open  	;
+ z4-pipe06       	z4-junction4    	z4-house06      	1000        	100         	100         	0           	Open  	;
+ z4-pipe07       	z4-junction4    	z4-house07      	1000        	100         	100         	0           	Open  	;
+ z4-pipe08       	z4-junction4    	z4-house08      	1000        	100         	100         	0           	Open  	;
+ z4-pipe09       	z4-junction4    	z4-house09      	1000        	100         	100         	0           	Open  	;
+ z4-pipe10       	z4-junction4    	z4-house10      	1000        	100         	100         	0           	Open  	;
+ z4-pipe11       	z4-junction4    	z4-house11      	1000        	100         	100         	0           	Open  	;
+ z4-pipe12       	z4-junction4    	z4-house12      	1000        	100         	100         	0           	Open  	;
+ z4-pipe13       	z4-junction5    	z4-house13      	1000        	100         	100         	0           	Open  	;
+ z4-pipe14       	z4-junction5    	z4-house14      	1000        	100         	100         	0           	Open  	;
+ z4-pipe15       	z4-junction5    	z4-house15      	1000        	100         	100         	0           	Open  	;
+ z4-pipe16       	z4-junction5    	z4-house16      	1000        	100         	100         	0           	Open  	;
+ z4-pipe17       	z4-junction5    	z4-house17      	1000        	100         	100         	0           	Open  	;
+ z4-pipe18       	z4-junction5    	z4-house18      	1000        	100         	100         	0           	Open  	;
+ z4-pipe19       	z4-junction5    	z4-house19      	1000        	100         	100         	0           	Open  	;
+ z4-pipe20       	z4-junction5    	z4-house20      	1000        	100         	100         	0           	Open  	;
+ z4-pipe21       	z4-junction6    	z4-house21      	1000        	100         	100         	0           	Open  	;
+ z4-pipe22       	z4-junction6    	z4-house22      	1000        	100         	100         	0           	Open  	;
+ z4-pipe23       	z4-junction6    	z4-house23      	1000        	100         	100         	0           	Open  	;
+ z4-pipe24       	z4-junction6    	z4-house24      	1000        	100         	100         	0           	Open  	;
+ z4-pipe25       	z4-junction7    	z4-house25      	1000        	100         	100         	0           	Open  	;
+ z4-pipe26       	z4-junction7    	z4-house26      	1000        	100         	100         	0           	Open  	;
+ z4-pipe27       	z4-junction7    	z4-house27      	1000        	100         	100         	0           	Open  	;
+ z4-pipe28       	z4-junction7    	z4-house28      	1000        	100         	100         	0           	Open  	;
+ z4-pipe29       	z4-junction7    	z4-house29      	1000        	100         	100         	0           	Open  	;
+ z4-pipe30       	z4-junction7    	z4-house30      	1000        	100         	100         	0           	Open  	;
+ z4-pipe31       	z4-junction8    	z4-house31      	1000        	100         	100         	0           	Open  	;
+ z4-pipe32       	z4-junction8    	z4-house32      	1000        	100         	100         	0           	Open  	;
+ z4-pipe33       	z4-junction8    	z4-house33      	1000        	100         	100         	0           	Open  	;
+ z4-pipe34       	z4-junction8    	z4-house34      	1000        	100         	100         	0           	Open  	;
+ z4-pipe35       	z4-junction8    	z4-house35      	1000        	100         	100         	0           	Open  	;
+
+[PUMPS]
+;ID              	Node1           	Node2           	Parameters
+ z0-pump4        	01              	13              	HEAD 1	;
+ z0-pump2        	04              	14              	HEAD 1	;
+ z0-pump1        	03              	15              	HEAD 1	;
+ z0-pump3        	34              	16              	HEAD 1	;
+ z1-pump1        	21              	25              	HEAD 1	;
+ z2-pump1        	22              	26              	HEAD 1	;
+ z4-pump1        	23              	27              	HEAD 1	;
+ z3-pump1        	24              	28              	HEAD 1	;
+
+[VALVES]
+;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
+ z0-valve0       	z0-reservoir1   	z0-junction1    	1000        	TCV 	0           	0           	;
+ z0-valve7       	20              	z0-tank4        	500         	TCV 	0           	0           	;
+ z0-valve8       	z0-tank4        	33              	500         	TCV 	0           	0           	;
+ z0-valve3       	19              	z0-tank2        	500         	TCV 	0           	0           	;
+ z0-valve4       	z0-tank2        	06              	500         	TCV 	0           	0           	;
+ z0-valve1       	18              	z0-tank1        	500         	TCV 	0           	0           	;
+ z0-valve2       	z0-tank1        	02              	500         	TCV 	0           	0           	;
+ z0-valve5       	17              	z0-tank3        	500         	TCV 	0           	0           	;
+ z0-valve6       	z0-tank3        	05              	500         	TCV 	0           	0           	;
+ z1-valve1       	02              	21              	500         	TCV 	0           	0           	;
+ z1-valve2       	25              	32              	500         	TCV 	0           	0           	;
+ z2-valve1       	06              	22              	500         	TCV 	0           	0           	;
+ z2-valve2       	26              	31              	500         	TCV 	0           	0           	;
+ z3-valve1       	05              	24              	500         	TCV 	0           	0           	;
+ z3-valve2       	28              	29              	500         	TCV 	0           	0           	;
+ z4-valve1       	33              	23              	500         	TCV 	0           	0           	;
+ z4-valve2       	27              	30              	500         	TCV 	0           	0           	;
+
+[TAGS]
+ NODE 	z1-house01      	house
+ NODE 	z1-house02      	house
+ NODE 	z1-house03      	house
+ NODE 	z1-house04      	house
+ NODE 	z1-house05      	house
+ NODE 	z1-house06      	house
+ NODE 	z1-house07      	house
+ NODE 	z1-house08      	house
+ NODE 	z1-house09      	house
+ NODE 	z1-house10      	house
+ NODE 	z1-house11      	house
+ NODE 	z1-house12      	house
+ NODE 	z1-house13      	house
+ NODE 	z1-house14      	house
+ NODE 	z1-house15      	house
+ NODE 	z1-house16      	house
+ NODE 	z1-house17      	house
+ NODE 	z1-house18      	house
+ NODE 	z1-house19      	house
+ NODE 	z1-house20      	house
+ NODE 	z1-house21      	house
+ NODE 	z1-house22      	house
+ NODE 	z1-house23      	house
+ NODE 	z1-house24      	house
+ NODE 	z2-house01      	house
+ NODE 	z2-house02      	house
+ NODE 	z2-house03      	house
+ NODE 	z2-house04      	house
+ NODE 	z2-house05      	house
+ NODE 	z2-house06      	house
+ NODE 	z2-house07      	house
+ NODE 	z2-house08      	house
+ NODE 	z2-house09      	house
+ NODE 	z2-house10      	house
+ NODE 	z2-house11      	house
+ NODE 	z2-house12      	house
+ NODE 	z2-house13      	house
+ NODE 	z2-house14      	house
+ NODE 	z2-house15      	house
+ NODE 	z2-house16      	house
+ NODE 	z2-house17      	house
+ NODE 	z2-house18      	house
+ NODE 	z2-house19      	house
+ NODE 	z2-house20      	house
+ NODE 	z2-house21      	house
+ NODE 	z3-house01      	house
+ NODE 	z3-house02      	house
+ NODE 	z3-house03      	house
+ NODE 	z3-house04      	house
+ NODE 	z3-house05      	house
+ NODE 	z3-house06      	house
+ NODE 	z3-house07      	house
+ NODE 	z3-house08      	house
+ NODE 	z3-house09      	house
+ NODE 	z3-house10      	house
+ NODE 	z3-house11      	house
+ NODE 	z3-house12      	house
+ NODE 	z3-house13      	house
+ NODE 	z3-house14      	house
+ NODE 	z3-house15      	house
+ NODE 	z3-house16      	house
+ NODE 	z3-house17      	house
+ NODE 	z3-house18      	house
+ NODE 	z3-house19      	house
+ NODE 	z3-house20      	house
+ NODE 	z3-house21      	house
+ NODE 	z3-house22      	house
+ NODE 	z3-house23      	house
+ NODE 	z3-house24      	house
+ NODE 	z3-house25      	house
+ NODE 	z3-house26      	house
+ NODE 	z3-house27      	house
+ NODE 	z3-house28      	house
+ NODE 	z3-house29      	house
+ NODE 	z3-house30      	house
+ NODE 	z3-house31      	house
+ NODE 	z3-house32      	house
+ NODE 	z3-house33      	house
+ NODE 	z3-house34      	house
+ NODE 	z3-house35      	house
+ NODE 	z3-house36      	house
+ NODE 	z3-house37      	house
+ NODE 	z3-house38      	house
+ NODE 	z3-house39      	house
+ NODE 	z3-house40      	house
+ NODE 	z3-house41      	house
+ NODE 	z4-house01      	house
+ NODE 	z4-house02      	house
+ NODE 	z4-house03      	house
+ NODE 	z4-house04      	house
+ NODE 	z4-house05      	house
+ NODE 	z4-house06      	house
+ NODE 	z4-house07      	house
+ NODE 	z4-house08      	house
+ NODE 	z4-house09      	house
+ NODE 	z4-house10      	house
+ NODE 	z4-house11      	house
+ NODE 	z4-house12      	house
+ NODE 	z4-house13      	house
+ NODE 	z4-house14      	house
+ NODE 	z4-house15      	house
+ NODE 	z4-house16      	house
+ NODE 	z4-house17      	house
+ NODE 	z4-house18      	house
+ NODE 	z4-house19      	house
+ NODE 	z4-house20      	house
+ NODE 	z4-house21      	house
+ NODE 	z4-house22      	house
+ NODE 	z4-house23      	house
+ NODE 	z4-house24      	house
+ NODE 	z4-house25      	house
+ NODE 	z4-house26      	house
+ NODE 	z4-house27      	house
+ NODE 	z4-house28      	house
+ NODE 	z4-house29      	house
+ NODE 	z4-house30      	house
+ NODE 	z4-house31      	house
+ NODE 	z4-house32      	house
+ NODE 	z4-house33      	house
+ NODE 	z4-house34      	house
+ NODE 	z4-house35      	house
+ LINK 	z0-pipe0        	manual-shutoff
+ LINK 	z0-pipe1        	manual-shutoff
+ LINK 	z0-pipe2        	manual-shutoff
+ LINK 	z0-pipe3        	manual-shutoff
+ LINK 	z0-pipe4        	manual-shutoff
+ LINK 	z0-pipe5        	manual-shutoff
+ LINK 	z0-pipe6        	manual-shutoff
+ LINK 	z0-pipe7        	manual-shutoff
+ LINK 	z1-pipe01       	manual-shutoff
+ LINK 	z1-pipe02       	manual-shutoff
+ LINK 	z1-pipe03       	manual-shutoff
+ LINK 	z1-pipe04       	manual-shutoff
+ LINK 	z1-pipe05       	manual-shutoff
+ LINK 	z1-pipe06       	manual-shutoff
+ LINK 	z1-pipe07       	manual-shutoff
+ LINK 	z1-pipe08       	manual-shutoff
+ LINK 	z1-pipe09       	manual-shutoff
+ LINK 	z1-pipe10       	manual-shutoff
+ LINK 	z1-pipe11       	manual-shutoff
+ LINK 	z1-pipe12       	manual-shutoff
+ LINK 	z1-pipe13       	manual-shutoff
+ LINK 	z1-pipe14       	manual-shutoff
+ LINK 	z1-pipe15       	manual-shutoff
+ LINK 	z1-pipe16       	manual-shutoff
+ LINK 	z1-pipe17       	manual-shutoff
+ LINK 	z1-pipe18       	manual-shutoff
+ LINK 	z1-pipe19       	manual-shutoff
+ LINK 	z1-pipe20       	manual-shutoff
+ LINK 	z1-pipe21       	manual-shutoff
+ LINK 	z1-pipe22       	manual-shutoff
+ LINK 	z1-pipe23       	manual-shutoff
+ LINK 	z1-pipe24       	manual-shutoff
+ LINK 	z2-pipe01       	manual-shutoff
+ LINK 	z2-pipe02       	manual-shutoff
+ LINK 	z2-pipe03       	manual-shutoff
+ LINK 	z2-pipe04       	manual-shutoff
+ LINK 	z2-pipe05       	manual-shutoff
+ LINK 	z2-pipe06       	manual-shutoff
+ LINK 	z2-pipe07       	manual-shutoff
+ LINK 	z2-pipe08       	manual-shutoff
+ LINK 	z2-pipe09       	manual-shutoff
+ LINK 	z2-pipe10       	manual-shutoff
+ LINK 	z2-pipe11       	manual-shutoff
+ LINK 	z2-pipe12       	manual-shutoff
+ LINK 	z2-pipe13       	manual-shutoff
+ LINK 	z2-pipe14       	manual-shutoff
+ LINK 	z2-pipe15       	manual-shutoff
+ LINK 	z2-pipe16       	manual-shutoff
+ LINK 	z2-pipe17       	manual-shutoff
+ LINK 	z2-pipe20       	manual-shutoff
+ LINK 	z2-pipe21       	manual-shutoff
+ LINK 	z3-pipe01       	manual-shutoff
+ LINK 	z3-pipe02       	manual-shutoff
+ LINK 	z3-pipe03       	manual-shutoff
+ LINK 	z3-pipe04       	manual-shutoff
+ LINK 	z3-pipe05       	manual-shutoff
+ LINK 	z3-pipe06       	manual-shutoff
+ LINK 	z3-pipe07       	manual-shutoff
+ LINK 	z3-pipe08       	100
+ LINK 	z3-pipe09       	100
+ LINK 	z3-pipe10       	100
+ LINK 	z3-pipe11       	100
+ LINK 	z3-pipe12       	100
+ LINK 	z3-pipe13       	100
+ LINK 	z3-pipe14       	100
+ LINK 	z3-pipe15       	100
+ LINK 	z3-pipe16       	100
+ LINK 	z3-pipe17       	100
+ LINK 	z3-pipe18       	100
+ LINK 	z3-pipe23       	manual-shutoff
+ LINK 	z3-pipe24       	manual-shutoff
+ LINK 	z3-pipe25       	manual-shutoff
+ LINK 	z3-pipe26       	100
+ LINK 	z3-pipe27       	100
+ LINK 	z3-pipe28       	100
+ LINK 	z3-pipe29       	manual-shutoff
+ LINK 	z3-pipe30       	manual-shutoff
+ LINK 	z3-pipe31       	manual-shutoff
+ LINK 	z3-pipe32       	manual-shutoff
+ LINK 	z3-pipe33       	manual-shutoff
+ LINK 	z3-pipe34       	manual-shutoff
+ LINK 	z3-pipe35       	manual-shutoff
+ LINK 	z3-pipe36       	manual-shutoff
+ LINK 	z3-pipe37       	manual-shutoff
+ LINK 	z3-pipe38       	manual-shutoff
+ LINK 	z3-pipe39       	manual-shutoff
+ LINK 	z3-pipe40       	manual-shutoff
+ LINK 	z3-pipe41       	manual-shutoff
+ LINK 	z4-pipe01       	manual-shutoff
+ LINK 	z4-pipe02       	manual-shutoff
+ LINK 	z4-pipe03       	manual-shutoff
+ LINK 	z4-pipe04       	manual-shutoff
+ LINK 	z4-pipe05       	manual-shutoff
+ LINK 	z4-pipe06       	manual-shutoff
+ LINK 	z4-pipe07       	manual-shutoff
+ LINK 	z4-pipe08       	manual-shutoff
+ LINK 	z4-pipe09       	100
+ LINK 	z4-pipe10       	manual-shutoff
+ LINK 	z4-pipe11       	manual-shutoff
+ LINK 	z4-pipe12       	manual-shutoff
+ LINK 	z4-pipe13       	manual-shutoff
+ LINK 	z4-pipe14       	manual-shutoff
+ LINK 	z4-pipe15       	manual-shutoff
+ LINK 	z4-pipe16       	manual-shutoff
+ LINK 	z4-pipe17       	manual-shutoff
+ LINK 	z4-pipe18       	100
+ LINK 	z4-pipe19       	100
+ LINK 	z4-pipe20       	manual-shutoff
+ LINK 	z4-pipe21       	100
+ LINK 	z4-pipe23       	100
+ LINK 	z4-pipe24       	100
+ LINK 	z4-pipe25       	100
+ LINK 	z4-pipe26       	100
+ LINK 	z4-pipe27       	100
+ LINK 	z4-pipe29       	100
+ LINK 	z4-pipe30       	100
+ LINK 	z4-pipe31       	manual-shutoff
+ LINK 	z4-pipe32       	manual-shutoff
+ LINK 	z4-pipe33       	manual-shutoff
+ LINK 	z4-pipe34       	manual-shutoff
+ LINK 	z4-pipe35       	manual-shutoff
+
+[DEMANDS]
+;Junction        	Demand      	Pattern         	Category
+
+[STATUS]
+;ID              	Status/Setting
+
+[PATTERNS]
+;ID              	Multipliers
+;Water Usage per Hour
+ 1               	0.05        	0.05        	0.05        	0.1         	0.2         	0.5         
+ 1               	1.5         	1.8         	1.2         	0.8         	0.9         	1           
+ 1               	1.1         	0.9         	0.8         	0.9         	1.2         	1.6         
+ 1               	2.0         	1.8         	1.5         	1.0         	0.6         	0.1         
+
+[CURVES]
+;ID              	X-Value     	Y-Value
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+ 1               	0           	40          
+ 1               	10          	38          
+ 1               	20          	34          
+ 1               	40          	25          
+ 1               	50          	15          
+ 1               	60          	0           
+
+[CONTROLS]
+
+
+
+
+
+
+
+
+
+
+
+
+
+[RULES]
+
+
+
+
+
+
+
+
+
+
+
+
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+;Junction        	Coefficient
+
+[QUALITY]
+;Node            	InitQual
+
+[SOURCES]
+;Node            	Type        	Quality     	Pattern
+
+[REACTIONS]
+;Type     	Pipe/Tank       	Coefficient
+
+
+[REACTIONS]
+ Order Bulk            	1
+ Order Tank            	1
+ Order Wall            	1
+ Global Bulk           	0
+ Global Wall           	0
+ Limiting Potential    	0
+ Roughness Correlation 	0
+
+[MIXING]
+;Tank            	Model
+
+[TIMES]
+ Duration           	12:00 
+ Hydraulic Timestep 	0:05 
+ Quality Timestep   	0:05 
+ Pattern Timestep   	0:05 
+ Pattern Start      	0:00 
+ Report Timestep    	0:05 
+ Report Start       	0:00 
+ Start ClockTime    	12 am
+ Statistic          	NONE
+
+[REPORT]
+ Status             	Yes
+ Summary            	No
+ Page               	0
+
+[OPTIONS]
+ Units              	LPM
+ Headloss           	H-W
+ Specific Gravity   	1
+ Viscosity          	1
+ Trials             	40
+ Accuracy           	0.001
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Continue 10
+ Pattern            	1
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5
+ Quality            	None mg/L
+ Diffusivity        	1
+ Tolerance          	0.01
+
+[COORDINATES]
+;Node            	X-Coord           	Y-Coord
+01              	2631.004          	9250.667          
+02              	4111.380          	8003.912          
+03              	2632.407          	8971.329          
+04              	2629.600          	9122.929          
+05              	3711.998          	7687.261          
+06              	3903.117          	7884.001          
+07              	5651.291          	7726.609          
+08              	8012.169          	7983.287          
+09              	8374.565          	8150.617          
+13              	2899.112          	9259.089          
+14              	2896.304          	9121.526          
+15              	2900.515          	8961.503          
+16              	2903.323          	8797.269          
+17              	3216.350          	8783.232          
+18              	3209.331          	8967.118          
+19              	3221.964          	9132.755          
+20              	3207.927          	9266.108          
+21              	4406.693          	8025.230          
+22              	4402.482          	7914.338          
+23              	4403.886          	7820.289          
+24              	4399.675          	7700.974          
+25              	4781.483          	8030.845          
+26              	4781.483          	7928.375          
+27              	4777.272          	7817.482          
+28              	4777.272          	7703.782          
+29              	5195.577          	7700.974          
+30              	5187.154          	7844.152          
+31              	5191.365          	7957.853          
+32              	5187.154          	8061.727          
+33              	3796.626          	7789.142          
+34              	2631.004          	8818.325          
+z0-junction1    	2364.071          	8985.605          
+z1-house01      	6343.490          	8569.945          
+z1-house02      	6317.054          	8158.527          
+z1-house03      	5996.797          	8286.629          
+z1-house04      	5916.733          	8694.956          
+z1-house05      	5924.740          	9087.270          
+z1-house06      	6084.868          	9279.424          
+z1-house07      	6429.143          	9391.513          
+z1-house08      	6573.259          	8975.180          
+z1-house09      	6454.294          	8833.102          
+z1-house10      	6980.609          	9047.784          
+z1-house11      	6885.508          	9431.545          
+z1-house12      	7197.758          	9463.571          
+z1-house13      	7461.970          	9503.603          
+z1-house14      	7854.283          	9527.622          
+z1-house15      	7814.251          	9055.244          
+z1-house16      	7413.931          	9031.225          
+z1-house17      	6890.582          	8590.720          
+z1-house18      	7141.713          	8718.975          
+z1-house19      	7526.021          	8783.026          
+z1-house20      	7894.315          	8718.975          
+z1-house21      	7870.296          	8374.700          
+z1-house22      	7590.072          	8342.674          
+z1-house23      	7261.809          	8278.623          
+z1-house24      	6869.496          	8222.578          
+z1-junction1    	6491.291          	8092.265          
+z1-junction2    	6525.220          	8438.751          
+z1-junction3    	6188.951          	8967.174          
+z1-junction4    	7333.867          	9223.379          
+z1-junction5    	7317.854          	8534.828          
+z2-house01      	9851.882          	8546.837          
+z2-house02      	9507.606          	8518.815          
+z2-house03      	9071.257          	8470.777          
+z2-house04      	8951.161          	8787.030          
+z2-house05      	9267.414          	8963.171          
+z2-house06      	9563.651          	9047.238          
+z2-house07      	9840.720          	9345.568          
+z2-house08      	9632.964          	9719.529          
+z2-house09      	9939.952          	9623.699          
+z2-house10      	9383.657          	9539.474          
+z2-house11      	9255.404          	9231.385          
+z2-house12      	8955.164          	9231.385          
+z2-house13      	8947.368          	9484.072          
+z2-house14      	8959.167          	9795.837          
+z2-house15      	8935.148          	10260.208         
+z2-house16      	9255.404          	10436.349         
+z2-house17      	9363.491          	10108.086         
+z2-house18      	9607.686          	10572.458         
+z2-house19      	9819.856          	10596.477         
+z2-house20      	9891.914          	10260.208         
+z2-house21      	9896.122          	9968.837          
+z2-junction1    	9719.776          	8262.610          
+z2-junction2    	9707.766          	8799.039          
+z2-junction3    	9779.824          	9583.667          
+z2-junction4    	9171.337          	9715.773          
+z2-junction5    	9747.798          	10260.208         
+z3-house01      	7167.590          	7358.033          
+z3-house02      	7313.851          	7746.197          
+z3-house03      	7570.056          	7790.232          
+z3-house04      	7842.274          	7818.255          
+z3-house05      	7942.354          	7445.957          
+z3-house06      	7706.165          	7289.832          
+z3-house07      	7393.915          	7157.726          
+z3-house08      	7758.207          	6829.464          
+z3-house09      	7978.383          	6957.566          
+z3-house10      	8170.536          	6773.419          
+z3-house11      	8314.652          	6585.268          
+z3-house12      	8414.732          	6393.114          
+z3-house13      	8462.770          	6164.932          
+z3-house14      	8230.584          	5968.775          
+z3-house15      	7958.367          	5940.753          
+z3-house16      	7774.219          	6064.852          
+z3-house17      	7578.062          	6293.034          
+z3-house18      	7610.088          	6537.230          
+z3-house19      	8386.709          	5676.541          
+z3-house20      	8466.773          	5192.154          
+z3-house21      	7998.399          	5144.115          
+z3-house22      	7906.325          	5544.436          
+z3-house23      	7073.659          	6925.540          
+z3-house24      	7317.854          	6905.524          
+z3-house25      	7345.877          	6661.329          
+z3-house26      	7205.765          	6381.105          
+z3-house27      	6925.540          	6333.066          
+z3-house28      	6525.220          	6337.070          
+z3-house29      	6669.335          	6729.384          
+z3-house30      	6893.515          	6885.508          
+z3-house31      	6665.332          	7157.726          
+z3-house32      	6485.188          	6997.598          
+z3-house33      	6361.089          	6825.460          
+z3-house34      	6084.868          	6549.239          
+z3-house35      	6004.804          	6893.515          
+z3-house36      	6004.804          	7285.829          
+z3-house37      	6048.839          	7542.034          
+z3-house38      	6373.098          	7662.130          
+z3-house39      	6697.358          	7694.155          
+z3-house40      	6945.556          	7690.152          
+z3-house41      	6937.550          	7329.864          
+z3-junction1    	7117.694          	7862.450          
+z3-junction2    	7013.611          	7117.694          
+z3-junction3    	7578.062          	7506.005          
+z3-junction4    	8014.412          	6349.079          
+z3-junction5    	8150.520          	5444.355          
+z3-junction6    	6953.563          	6553.243          
+z3-junction7    	6297.038          	7401.922          
+z4-house01      	9343.475          	8002.402          
+z4-house02      	9707.766          	8030.424          
+z4-house03      	9951.962          	8082.466          
+z4-house04      	9951.962          	7754.203          
+z4-house05      	9447.558          	7530.024          
+z4-house06      	9279.424          	7289.832          
+z4-house07      	9327.462          	7005.604          
+z4-house08      	9189.751          	6727.839          
+z4-house09      	8911.129          	6421.137          
+z4-house10      	8759.007          	6693.355          
+z4-house11      	8510.809          	6965.572          
+z4-house12      	8895.116          	7233.787          
+z4-house13      	9591.673          	6901.521          
+z4-house14      	9615.693          	7209.768          
+z4-house15      	10000.000         	7153.723          
+z4-house16      	10024.019         	6873.499          
+z4-house17      	9983.987          	6469.175          
+z4-house18      	9983.987          	6236.990          
+z4-house19      	9563.651          	6321.057          
+z4-house20      	9555.645          	6497.198          
+z4-house21      	10012.010         	5824.660          
+z4-house22      	9923.823          	5315.097          
+z4-house23      	9575.661          	5648.519          
+z4-house24      	9660.665          	5910.665          
+z4-house25      	9227.382          	6253.002          
+z4-house26      	9339.472          	5936.749          
+z4-house27      	9327.462          	5620.496          
+z4-house28      	9195.356          	5236.189          
+z4-house29      	8907.126          	5592.474          
+z4-house30      	8839.071          	5932.746          
+z4-house31      	9055.244          	7562.050          
+z4-house32      	8755.004          	7461.970          
+z4-house33      	8270.616          	7526.021          
+z4-house34      	8446.757          	7878.303          
+z4-house35      	8875.100          	7906.325          
+z4-junction1    	9111.289          	8090.552          
+z4-junction2    	9187.350          	7718.175          
+z4-junction3    	9687.750          	7786.229          
+z4-junction4    	8867.094          	6913.531          
+z4-junction5    	9787.830          	6649.319          
+z4-junction6    	9813.019          	5585.180          
+z4-junction7    	9107.286          	5764.612          
+z4-junction8    	8526.821          	7622.098          
+z0-reservoir1   	2361.890          	6709.367          
+z0-tank4        	3499.001          	9259.740          
+z0-tank2        	4123.874          	9272.995          
+z0-tank3        	3483.626          	8756.795          
+z0-tank1        	4127.876          	8756.795          
+
+[VERTICES]
+;Link            	X-Coord           	Y-Coord
+
+[LABELS]
+;X-Coord             Y-Coord             Label & Anchor Node
+
+[BACKDROP]
+  DIMENSIONS  	0.000             	0.000             	10000.000         	10000.000         
+ UNITS          	None
+ FILE           	
+ OFFSET         	0.00            	0.00            
+
+[END]

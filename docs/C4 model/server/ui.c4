@@ -4,6 +4,7 @@ model {
             description 'SCADA visuele interface voor het aansturen van de waterdistributieplant.'
             style {}
             
+<<<<<<< HEAD
         }
 
         component EPA "EPAnet" {
@@ -11,6 +12,11 @@ model {
             style {}       
 
             -> SCADA-LTS 'Simuleert waterdistributie-systeem'
+=======
+            -> server.log 'Al het verkeer loggen'
+            -> server.db 'Configuratie aanpassen'
+            -> server.plc-zone 'Actuatoren aansturen'
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
 
         component Webserver {
@@ -21,6 +27,11 @@ model {
             }
 
             hacker -> Webserver 'Probeert in de OT omgeving binnen te breken via de' 
+<<<<<<< HEAD
+=======
+            -> server.log 'Al het verkeer loggen'
+            -> server.db 'Dynamisch data opslaan'
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
         }
     }
 }

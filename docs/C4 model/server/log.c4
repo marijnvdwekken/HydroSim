@@ -37,5 +37,12 @@ views {
             *,
             server.ui,
 
+<<<<<<< HEAD
+=======
+        style server.ui, user, server.db {
+            color muted
+        }
+
+>>>>>>> c3d4c9ae6ca439efa72f112d8c4c6a677c826915
     }
 }

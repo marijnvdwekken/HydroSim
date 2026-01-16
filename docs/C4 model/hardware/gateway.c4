@@ -1,0 +1,29 @@
+model {
+    extend hardware.gateway {
+        component msgprepper 'Message prepper' {
+            description 'Zet JSON-berichten om naar Modbus-berichten'
+            style {
+                color green
+            }
+
+            -> hardware.plc0 'Geeft omgezette data door aan'
+        }
+
+        component mqttclient 'MQTT-client' {
+            description 'Subscribeert op de topics van de HydroSim-server'
+            style {
+                color green
+            }
+
+            -> msgprepper 'Geeft binnengekomen JSON-berichten door aan'
+        }
+    }
+}
+
+views {
+    view gateway of hardware.gateway{
+        title 'Hardware / Hardware connectie'
+        description 'Benodigde onderdelen voor de verbinding vanaf de HydroSim-server naar de fysieke hardware'
+        include server.hwconnectie, hardware.plc0, *
+    }
+}
